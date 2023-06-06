@@ -6,23 +6,22 @@ section{
 
 button{
     border: none;
-    .forward{
-        @extend .button;
-        display: flex;
-        width: 5rem;
-        transform: rotate(-90deg);
-    }
-    .return{
-        @extend .button;
-        display: flex;
-        width: 5rem;
-        transform: rotate(90deg);
-    }
-}
-
-.button{
+    cursor: pointer;
     color: var(--color_secondary);
+    transition: var(--standard_animation);
     &:hover{
         color: var(--color_accent);
+    }
+    .forward{
+        display: flex;
+        width: 5rem;
+        height: auto;
+        transform: rotate(90deg);
+    }
+    .return{
+        display: flex;
+        width: 5rem;
+        height: auto;
+        transform: rotate(-90deg);
     }
 }

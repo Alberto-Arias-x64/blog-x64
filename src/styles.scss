@@ -44,13 +44,36 @@ h6{
     font-size: 3rem;
 }
 
-
 /* Buttons */
 button{
     border: 1px solid white;
     padding: 2rem;
     background-color: transparent;
     @extend .standard_padding;
+}
+
+/* images */
+picture{
+    position: relative;
+    overflow: hidden;
+    &:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 300%;
+        background: linear-gradient(65deg, rgba(147,147,147,1) 35%, rgb(202, 202, 202) 50%, rgba(147,147,147,1) 65%);
+        animation: loading 1.5s forwards infinite;
+    }
+}
+@keyframes loading{
+    0%{
+        left: -200%;
+    }
+    80%,100%{
+        left: 0;
+    }
 }
 
 /* Layout */
@@ -84,15 +107,15 @@ button{
     border: var(--color_secondary) .2rem solid;
     &.blog{
         @extend .standard_gap;
-        max-height: 40rem;
-        max-width: 30rem;
+        max-height: 50rem;
+        max-width: 40rem;
         height: 100%;
         width: 100%;
         display: grid;
         grid-template-rows: max-content auto;
         picture{
             width: 100%;
-            aspect-ratio: 19/9;
+            aspect-ratio: 16/9;
         }
     }
 }
