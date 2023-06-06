@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from 'src/app/components/header/header.component';
-import { RouterModule } from '@angular/router';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-principal',
@@ -11,7 +11,7 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
     CommonModule,
     HeaderComponent,
     FooterComponent,
-    RouterModule
+    RouterOutlet
 ],
   templateUrl: './principal.component.html',
   styleUrls: ['./principal.component.scss']

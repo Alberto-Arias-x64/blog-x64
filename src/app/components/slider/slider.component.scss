@@ -1,0 +1,28 @@
+section{
+    width: 100%;
+    display: grid;
+    grid-template-columns: max-content auto max-content;
+}
+
+button{
+    border: none;
+    .forward{
+        @extend .button;
+        display: flex;
+        width: 5rem;
+        transform: rotate(-90deg);
+    }
+    .return{
+        @extend .button;
+        display: flex;
+        width: 5rem;
+        transform: rotate(90deg);
+    }
+}
+
+.button{
+    color: var(--color_secondary);
+    &:hover{
+        color: var(--color_accent);
+    }
+}

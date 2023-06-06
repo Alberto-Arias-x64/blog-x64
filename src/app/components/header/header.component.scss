@@ -1,3 +1,15 @@
 header{
-    position: fixed;
+    position: sticky;
+    height: max-content;
+}
+.active{
+    color: var(--color_accent);
+}
+
+a{
+    text-decoration: none;
+    transition: var(--standard_animation);
+    &:hover{
+        opacity: 0.6;
+    }
 }
