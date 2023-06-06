@@ -49,13 +49,28 @@ button{
     border: 1px solid white;
     padding: 2rem;
     background-color: transparent;
+    cursor: pointer;
+    transition: var(--standard_animation);
     @extend .standard_padding;
+    &:disabled{
+        cursor: default;
+        opacity: 0.5;
+    }
+    &:hover:not(:disabled){
+        color: var(--color_accent);
+        border-color: var(--color_accent);
+    }
 }
 
 /* images */
 picture{
     position: relative;
     overflow: hidden;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
     &:after{
         content: '';
         position: absolute;
@@ -83,7 +98,7 @@ picture{
 }
 .f_column{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 .centred{
     justify-content: center;

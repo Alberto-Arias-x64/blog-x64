@@ -1,19 +1,12 @@
-import { NgModule, TransferState } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import routes from "./router"
 
 import { AppComponent } from './app.component';
-import { PreloadAllModules, RouterModule, Routes, } from '@angular/router';
+import { RouterModule, } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
-
-const routes: Routes = [
-    {
-        path: "", loadComponent: () => import('./templates/principal/principal.component').then(c => c.PrincipalComponent), children: [
-            { path: "", loadComponent: () => import('./views/main/main.component').then(c => c.MainComponent), },
-            { path: "about", loadComponent: () => import('./views/about/about.component').then(c => c.AboutComponent), },
-        ]
-    },
-]
+import { QuicklinkStrategy } from 'ngx-quicklink';
 @NgModule({
     declarations: [
         AppComponent
@@ -21,7 +14,7 @@ const routes: Routes = [
     imports: [
         BrowserModule,
         HttpClientModule,
-        RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+        RouterModule.forRoot(routes, { preloadingStrategy: QuicklinkStrategy  }),
         AngularSvgIconModule.forRoot()
     ],
     providers: [],
