@@ -1,0 +1,35 @@
+<section>
+    <h1>Contact me</h1>
+    <form [formGroup]="form" (ngSubmit)="sendForm(form)" class="f_column gap_standard padding_standard">
+        <div class="input_decorator">
+            <label for="name">Name</label>
+            <div class="f_row gap_small">
+                <svg-icon svgClass="icon" src="assets/icons/user.svg"/>
+                <input type="text" id="name" name="name" formControlName="name" placeholder="John Doe">
+            </div>
+        </div>
+        <div class="c_half gap_standard">
+            <div class="input_decorator">
+                <label for="phone">Phone</label>
+                <div class="f_row gap_small">
+                    <svg-icon svgClass="icon" src="assets/icons/user.svg"/>
+                    <input type="number" id="phone" name="phone" formControlName="phone" placeholder="+57 300...">
+                </div>
+            </div>
+            <div class="input_decorator">
+                <label for="email">Email</label>
+                <div class="f_row gap_small centred-v">
+                    <svg-icon svgClass="icon" src="assets/icons/user.svg"/>
+                    <input type="email" id="email" name="email" formControlName="email" placeholder="johndoe@mail.com">
+                </div>
+            </div>
+        </div>
+        <div class="input_decorator">
+            <label for="message">Message</label>
+            <div class="f_row gap_small">
+                <svg-icon svgClass="icon" src="assets/icons/user.svg"/>
+                <textarea formControlName="message" id="message" name="message" cols="30" rows="10" maxlength="300" placeholder="Hey"></textarea>
+            </div>
+        </div>
+    </form>
+</section>

@@ -44,6 +44,41 @@ h6{
     font-size: 3rem;
 }
 
+/* Inputs */
+input{
+    background-color: transparent;
+    color: var(--color_secondary);
+    padding: 1rem;
+    border: none;
+    outline: none;
+    &[type = number]{
+        &::-webkit-inner-spin-button {display: none;}
+        &::-webkit-outer-spin-button {display: none;}
+    }
+}
+textarea{
+    @extend input;
+    resize: none;
+}
+.input_decorator{
+    border-bottom: .2rem var(--color_secondary) solid;
+    transition: var(--standard_animation);
+    &:focus-within{
+        border-color: var(--color_accent);
+        .icon{
+            color: var(--color_accent);
+        }
+    }
+    .icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        width: auto;
+        color: var(--color_secondary);
+    }
+}
+
 /* Buttons */
 button{
     border: 1px solid white;
@@ -51,7 +86,7 @@ button{
     background-color: transparent;
     cursor: pointer;
     transition: var(--standard_animation);
-    @extend .standard_padding;
+    @extend .padding_standard;
     &:disabled{
         cursor: default;
         opacity: 0.5;
@@ -62,7 +97,7 @@ button{
     }
 }
 
-/* images */
+/* Images */
 picture{
     position: relative;
     overflow: hidden;
@@ -91,7 +126,7 @@ picture{
     }
 }
 
-/* Layout */
+/* Layout flex */
 .f_row{
     display: flex;
     flex-direction: row;
@@ -104,24 +139,54 @@ picture{
     justify-content: center;
     align-items: center;
 }
+.centred-v{
+    align-items: center;
+}
+.centred-h{
+    justify-content: center;
+}
+
+/* Layout grid */
+.c_half{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
 /* Spacing */
-.standard_margin{
+.margin_big{
+    margin: 3rem;
+}
+.margin_standard{
     margin: 2rem;
 }
-.standard_padding{
+.margin_small{
+    margin: 1rem;
+}
+.padding_big{
+    padding: 3rem;
+}
+.padding_standard{
     padding: 2rem;
 }
-.standard_gap{
+.padding_small{
+    padding: 1rem;
+}
+.gap_big{
+    gap: 3rem;
+}
+.gap_standard{
     gap: 2rem;
+}
+.gap_small{
+    gap: 1rem;
 }
 
 /* Shared elements */
 .card{
-    @extend .standard_padding;
+    @extend .padding_standard;
     border: var(--color_secondary) .2rem solid;
     &.blog{
-        @extend .standard_gap;
+        @extend .gap_standard;
         max-height: 50rem;
         max-width: 40rem;
         height: 100%;
