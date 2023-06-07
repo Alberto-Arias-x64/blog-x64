@@ -46,6 +46,7 @@ h6{
 
 /* Inputs */
 input{
+    width: 100%;
     background-color: transparent;
     color: var(--color_secondary);
     padding: 1rem;
@@ -61,6 +62,7 @@ textarea{
     resize: none;
 }
 .input_decorator{
+    width: 100%;
     border-bottom: .2rem var(--color_secondary) solid;
     transition: var(--standard_animation);
     &:focus-within{
@@ -94,6 +96,11 @@ button{
     &:hover:not(:disabled){
         color: var(--color_accent);
         border-color: var(--color_accent);
+    }
+    &:active:not(:disabled){
+        color: var(--color_principal);
+        border-color: var(--color_principal);
+        background-color: var(--color_accent);
     }
 }
 
@@ -179,6 +186,16 @@ picture{
 }
 .gap_small{
     gap: 1rem;
+}
+
+/* Object size */
+.full{
+    width: 100%;
+    height: 100%;
+}
+.fit{
+    width: fit-content;
+    height: fit-content;
 }
 
 /* Shared elements */
