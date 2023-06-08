@@ -8,6 +8,7 @@ const routes: Routes = [
             { path: "contact", loadComponent: () => import('./views/contact/contact.component').then(c => c.ContactComponent), },
         ]
     },
+    { path: "admiñ", loadComponent: () => import("./templates/admin/admin.component").then(c => c.AdminComponent) },
     { path: "**", loadComponent: () => import("./templates/error/error.component").then(c => c.ErrorComponent) }
 ]
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,5 +11,5 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent {
-
+    @Input() list!:any[]
 }
