@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule,FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { AngularSvgIconModule } from 'angular-svg-icon';
 import { PhoneDirective } from 'src/app/directives/phone.directive';
+import { SvgLoaderComponent } from 'src/app/components/svg-loader/svg-loader.component';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AngularSvgIconModule, PhoneDirective],
+  imports: [CommonModule, ReactiveFormsModule, PhoneDirective, SvgLoaderComponent],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })

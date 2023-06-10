@@ -1,13 +1,12 @@
 import { Component, HostListener, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
-import { AngularSvgIconModule } from 'angular-svg-icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, AngularSvgIconModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

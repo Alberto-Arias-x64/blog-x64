@@ -1,12 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-import { HttpClientModule } from '@angular/common/http';
+import { SvgLoaderComponent } from '../svg-loader/svg-loader.component';
 
 @Component({
   selector: 'app-slider',
   standalone: true,
-  imports: [CommonModule, AngularSvgIconModule],
+  imports: [CommonModule, SvgLoaderComponent],
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
