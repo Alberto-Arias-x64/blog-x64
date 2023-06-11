@@ -1,3 +1,15 @@
+.badge{
+    width: 7rem;
+    aspect-ratio: 1/1;
+    background-color: whitesmoke;
+    border-radius: .5rem;
+    padding: .2rem;
+    img{
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+}
 .project{
     width: 1000px;
 }

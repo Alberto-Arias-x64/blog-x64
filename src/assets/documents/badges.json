@@ -1,0 +1,86 @@
+[
+    {
+        "src": "/assets/icons/badges/html.png",
+        "alt": "Html"
+    },
+    {
+        "src": "/assets/icons/badges/css.png",
+        "alt": "Css"
+    },
+    {
+        "src": "/assets/icons/badges/scss.png",
+        "alt": "Scss"
+    },
+    {
+        "src": "/assets/icons/badges/js.png",
+        "alt": "JavaScript"
+    },
+    {
+        "src": "/assets/icons/badges/ts.png",
+        "alt": "TypeScript"
+    },
+    {
+        "src": "/assets/icons/badges/angular.png",
+        "alt": "Angular"
+    },
+    {
+        "src": "/assets/icons/badges/react.png",
+        "alt": "React"
+    },
+    {
+        "src": "/assets/icons/badges/vue.png",
+        "alt": "Vue"
+    },
+    {
+        "src": "/assets/icons/badges/wordpress.png",
+        "alt": "WordPress"
+    },
+    {
+        "src": "/assets/icons/badges/node.png",
+        "alt": "Node"
+    },
+    {
+        "src": "/assets/icons/badges/express.png",
+        "alt": "Express"
+    },
+    {
+        "src": "/assets/icons/badges/python.png",
+        "alt": "Python"
+    },
+    {
+        "src": "/assets/icons/badges/git.png",
+        "alt": "Git"
+    },
+    {
+        "src": "/assets/icons/badges/github.png",
+        "alt": "GitHub"
+    },
+    {
+        "src": "/assets/icons/badges/azure.png",
+        "alt": "Azure"
+    },
+    {
+        "src": "/assets/icons/badges/mysql.png",
+        "alt": "MySql"
+    },
+    {
+        "src": "/assets/icons/badges/firebase.png",
+        "alt": "Firebase"
+    },
+    {
+        "src": "/assets/icons/badges/supabase.png",
+        "alt": "SupaBase"
+    },
+    {
+        "src": "/assets/icons/badges/vercel.png",
+        "alt": "Vercel"
+    },
+    {
+        "src": "/assets/icons/badges/heroku.png",
+        "alt": "Heroku"
+    },
+    {
+        "src": "/assets/icons/badges/railway.png",
+        "alt": "RailWay"
+    }
+]

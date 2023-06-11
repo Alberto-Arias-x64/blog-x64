@@ -15,73 +15,10 @@
     <article>
         <h3>Stack de tecnologías</h3>
         <p>Estas son unas de las herramientas que he utilizado a lo largo de mi carrera profesional</p>
-        <div>
-            <picture>
-                <img src="" alt="Html">
-            </picture>
-            <picture>
-                <img src="" alt="css">
-            </picture>
-            <picture>
-                <img src="" alt="scss">
-            </picture>
-            <picture>
-                <img src="" alt="js">
-            </picture>
-            <picture>
-                <img src="" alt="jsx">
-            </picture>
-            <picture>
-                <img src="" alt="Ts">
-            </picture>
-            <picture>
-                <img src="" alt="Angular">
-            </picture>
-            <picture>
-                <img src="" alt="React">
-            </picture>
-            <picture>
-                <img src="" alt="Vue">
-            </picture>
-            <picture>
-                <img src="" alt="WordPress">
-            </picture>
-            <picture>
-                <img src="" alt="Node">
-            </picture>
-            <picture>
-                <img src="" alt="Express">
-            </picture>
-            <picture>
-                <img src="" alt="Python">
-            </picture>
-            <picture>
-                <img src="" alt="Git">
-            </picture>
-            <picture>
-                <img src="" alt="GitHub">
-            </picture>
-            <picture>
-                <img src="" alt="Azure">
-            </picture>
-            <picture>
-                <img src="" alt="MySql">
-            </picture>
-            <picture>
-                <img src="" alt="Firebase">
-            </picture>
-            <picture>
-                <img src="" alt="Supabase">
-            </picture>
-            <picture>
-                <img src="" alt="Vercell">
-            </picture>
-            <picture>
-                <img src="" alt="Heroku">
-            </picture>
-            <picture>
-                <img src="" alt="RailWay">
-            </picture>
+        <div class="f_row centred gap_small">
+            <div class="badge f_column centred" *ngFor="let item of Badges">
+                <img load="lazy" decoding="async" [src]="item.src" [alt]="item.alt">
+            </div>
         </div>
     </article>
     <article>
