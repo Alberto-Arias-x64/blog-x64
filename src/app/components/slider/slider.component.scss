@@ -1,5 +1,6 @@
 section{
     display: grid;
+    margin: 0 auto;
     grid-template-columns: max-content auto max-content;
 }
 
@@ -31,4 +32,37 @@ button{
 .contend{
     overflow: hidden;
     height: max-content;
+}
+
+.blog{
+    height: 40rem;
+    width: 30rem;
+    display: grid;
+    grid-template-rows: max-content auto;
+    picture{
+        width: 100%;
+        aspect-ratio: 16/9;
+    }
+    div{
+        position: relative;
+        border: var(--color_secondary) .2rem solid;
+        border-top: none;
+        overflow: hidden;
+        &::after{
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 3rem;
+            background-image: linear-gradient(rgba(0, 0, 0, 0), black);
+            bottom: 0;
+            left: 0;
+        }
+        h6,p{
+            width: 100%;
+            height: fit-content;
+        }
+        p{
+            color: var(--color_tertiary);
+        }
+    }
 }

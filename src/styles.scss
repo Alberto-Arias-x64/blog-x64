@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global */
 @font-face {
     font-family: 'Montserrat';
     src: url('assets/fonts/Montserrat-VariableFont_wght.ttf');
@@ -7,7 +7,8 @@
 :root{
     --color_principal: #000;
     --color_secondary: #fff;
-    --color_accent: #E31952;
+    --color_tertiary: #5c5c5c;
+    --color_accent: #e31952;
     --standard_animation: all ease 200ms;
 }
 html{
@@ -24,28 +25,28 @@ html{
 
 /* Titles & texts */
 h1{
-    font-size: 8rem;
+    font-size: 7rem;
     font-weight: lighter;
     color: var(--color_secondary);
 }
 h2{
-    font-size: 7rem;
-    color: var(--color_secondary);
-}
-h3{
     font-size: 6rem;
     color: var(--color_secondary);
 }
-h4{
+h3{
     font-size: 5rem;
     color: var(--color_secondary);
 }
-h5{
+h4{
     font-size: 4rem;
     color: var(--color_secondary);
 }
-h6{
+h5{
     font-size: 3rem;
+    color: var(--color_secondary);
+}
+h6{
+    font-size: 2rem;
     color: var(--color_secondary);
 }
 p,a{
@@ -130,16 +131,27 @@ picture{
 
 /* Loader */
 .loading{
+    position: relative;
     height: 100%;
     width: 100%;
-    animation: loading 1.5s forwards infinite;
+    overflow: hidden;
+    &::after{
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 300%;
+        top: 0;
+        right: 0;
+        background-image: linear-gradient(100deg, #ececec 46%, #f4f4f4 50%, #ececec 54%);
+        animation: loading 3s forwards infinite;
+    }
 }
 @keyframes loading{
-    0%,100%{
-        background-color: rgb(87, 87, 87);
+    0%{
+        right: 0;
     }
-    50%{
-        background-color: rgb(233, 233, 233);
+    80%,100%{
+        right: -200%;
     }
 }
 
@@ -211,15 +223,4 @@ picture{
 /* Shared elements */
 .card{
     border: var(--color_secondary) .2rem solid;
-    &.blog{
-        @extend .gap_standard;
-        height: 40rem;
-        width: 30rem;
-        display: grid;
-        grid-template-rows: max-content auto;
-        picture{
-            width: 100%;
-            aspect-ratio: 16/9;
-        }
-    }
 }
