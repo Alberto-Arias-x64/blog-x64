@@ -23,6 +23,11 @@ html{
     font-size: 1.8rem;
 }
 
+main{
+    max-width: 180rem;
+    margin: 0 auto;
+}
+
 /* Titles & texts */
 h1{
     font-size: 7rem;
@@ -179,6 +184,10 @@ picture{
 .c_half{
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+.c_DT{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
 }
 
 /* Spacing */

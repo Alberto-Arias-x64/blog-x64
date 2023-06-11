@@ -1,4 +1,23 @@
+.project{
+    width: 1000px;
+}
 .card{
     border-right: none;
-    cursor: pointer;
+}
+.status{
+    height: 1rem;
+    width: 1rem;
+    border-radius: 1rem;
+    &.ok{
+        background-color: greenyellow;
+    }
+    &.development{
+        background-color: blue
+    }
+    &.pending{
+        background-color: yellow;
+    }
+    &.down{
+        background-color: red;
+    }
 }
