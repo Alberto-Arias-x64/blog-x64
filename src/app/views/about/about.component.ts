@@ -9,5 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
-
+    sendTo(URL: string) {
+        window.open(URL);
+    }
 }
