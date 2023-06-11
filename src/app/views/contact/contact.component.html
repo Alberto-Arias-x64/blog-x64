@@ -4,22 +4,22 @@
         <div class="input_decorator">
             <label for="name">Name</label>
             <div class="f_row gap_small">
-                <app-svg-loader class="icon" src="assets/icons/user.svg"/>
-                <input type="text" id="name" name="name" formControlName="name" placeholder="John Doe">
+                <svg-icon class="icon" src="assets/icons/user.svg"/>
+                <input type="text" id="name" name="name" formControlName="name" placeholder="John Doe" maxlength="20">
             </div>
         </div>
         <div class="c_half gap_standard full">
             <div class="input_decorator">
                 <label for="phone">Phone</label>
                 <div class="f_row gap_small">
-                    <app-svg-loader  class="icon" src="assets/icons/whatsapp.svg"/>
+                    <svg-icon  class="icon" src="assets/icons/whatsapp.svg"/>
                     <input type="text" id="phone" name="phone" formControlName="phone" placeholder="+57 300..." appPhone>
                 </div>
             </div>
             <div class="input_decorator">
                 <label for="email">Email</label>
                 <div class="f_row gap_small centred-v">
-                    <app-svg-loader  class="icon" src="assets/icons/mail.svg"/>
+                    <svg-icon  class="icon" src="assets/icons/mail.svg"/>
                     <input type="email" id="email" name="email" formControlName="email" placeholder="johndoe@mail.com">
                 </div>
             </div>
@@ -27,7 +27,7 @@
         <div class="input_decorator">
             <label for="message">Message</label>
             <div class="f_row gap_small">
-                <app-svg-loader  class="icon" src="assets/icons/message.svg"/>
+                <svg-icon class="icon" src="assets/icons/message.svg"/>
                 <textarea formControlName="message" id="message" name="message" cols="30" rows="10" maxlength="300" placeholder="Hey"></textarea>
             </div>
         </div>

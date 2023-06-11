@@ -1,16 +1,16 @@
-<section>
-    <button>
-        <app-svg-loader src="/assets/icons/arrow.svg" class="return"/>
+<section class="gap_small fit padding_small">
+    <button class="padding_small">
+        <svg-icon src="/assets/icons/arrow.svg" class="return"/>
     </button>
-    <div class="f_row centred gap_standard">
-        <article class="card blog" *ngFor="let item of list">
-            <picture>
-                <img src="/assets/images/placeholder.png" alt="placeholder">
+    <div class="f_row centred gap_standard contend">
+        <article class="card blog padding_standard" *ngFor="let item of list">
+            <picture class="loading">
+                <!-- <img src="/assets/images/placeholder.png" alt="placeholder" > -->
             </picture>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil cum dolorem doloremque quos, ab ratione. Natus adipisci id eius in, reiciendis dolores explicabo eaque, dolore, autem amet excepturi illum. Consectetur.</p>
         </article>
     </div>
-    <button>
-        <app-svg-loader src="/assets/icons/arrow.svg" class="forward"/>
+    <button class="padding_small">
+        <svg-icon src="/assets/icons/arrow.svg" class="forward"/>
     </button>
 </section>

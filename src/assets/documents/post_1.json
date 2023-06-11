@@ -1,4 +1,12 @@
 {
-    "title": "lorem",
-    "body": "lorem"
+    "title": "3 maneras de centrar un Div",
+    "body": [
+        {
+            "type": "text",
+            "data": "Para centrar un <div> horizontalmente dentro de su contenedor, puedes aplicar las siguientes opciones de estilo CSS: "
+        },
+        {
+
+        }
+    ]
 }

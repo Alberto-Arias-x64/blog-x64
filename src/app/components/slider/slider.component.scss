@@ -1,6 +1,4 @@
 section{
-    width: 100%;
-    height: fit-content;
     display: grid;
     grid-template-columns: max-content auto max-content;
 }
@@ -13,16 +11,24 @@ button{
     &:hover{
         color: var(--color_accent);
     }
+    &:active{
+        background-color: var(--color_secondary);
+    }
     .forward{
         display: flex;
         width: 5rem;
         height: auto;
-        transform: rotate(90deg);
+        rotate: 90deg;
     }
     .return{
         display: flex;
         width: 5rem;
         height: auto;
-        transform: rotate(-90deg);
+        rotate: -90deg;
     }
+}
+
+.contend{
+    overflow: hidden;
+    height: max-content;
 }
