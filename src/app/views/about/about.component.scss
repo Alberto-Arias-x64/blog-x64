@@ -33,3 +33,14 @@
         background-color: red;
     }
 }
+.icon{
+    display: flex;
+    height: 5rem;
+    width: 5rem;
+    color: var(--color_secondary);
+    transition: var(--standard_animation);
+    cursor: pointer;
+    &:hover{
+        color: var(--color_accent);
+    }
+}

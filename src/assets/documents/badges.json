@@ -82,5 +82,9 @@
     {
         "src": "/assets/icons/badges/railway.png",
         "alt": "RailWay"
+    },
+    {
+        "src": "/assets/icons/badges/figma.png",
+        "alt": "Figma"
     }
 ]
