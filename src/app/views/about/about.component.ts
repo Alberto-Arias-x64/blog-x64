@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { BadgeModel } from 'src/app/models/http.models';
+import { BadgeInterface } from 'src/app/interfaces/http.interface';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @Component({
@@ -14,10 +14,10 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 export class AboutComponent implements OnInit{
 
     private Http = inject(HttpClient)
-    public Badges:BadgeModel[] = []
+    public Badges:BadgeInterface[] = []
 
     ngOnInit(): void {
-        this.Http.get<BadgeModel[]>('/assets/documents/badges.json').subscribe(res => this.Badges = res)
+        this.Http.get<BadgeInterface[]>('/assets/documents/badges.json').subscribe(res => this.Badges = res)
     }
 
     sendTo(URL: string) {

@@ -1,4 +1,4 @@
-<section class="padding_standard">
+<section>
     <h1>Alberto Arias</h1>
     <h4>Web Developer</h4>
     <article>
@@ -15,9 +15,10 @@
     <article>
         <h3>Stack de tecnologías</h3>
         <p>Estas son unas de las herramientas que he utilizado a lo largo de mi carrera profesional</p>
-        <div class="f_row centred gap_small">
+        <div class="f_row centred gap_small badge_container">
             <div class="badge f_column centred" *ngFor="let item of Badges">
                 <img load="lazy" decoding="async" [src]="item.src" [alt]="item.alt">
+                <p class="badge_name">{{item.alt}}</p>
             </div>
         </div>
     </article>
@@ -48,15 +49,15 @@
     </article>
     <article>
         <h3>Información de contacto</h3>
-        <div class="card">
-            <h6>Por favor siéntase libre de enviarme una carta o contactarme directamente y le responderé lo mas pronto posible.</h6>
-            <br>
+        <p>Por favor siéntase libre de enviarme un correo o contactarme directamente y le responderé lo mas pronto posible.</p>
+        <br>
+        <div class="card padding_standard fit f_column gap_small">
             <p>Email: <strong>alberto.arias.x64@gmail.com</strong></p>
             <p>Whatsapp: <strong>+57 321 498 6813</strong></p>
             <div class="f_row centred gap_standard fit">
                 <svg-icon src="/assets/icons/linkedin.svg" class="icon" (click)="sendTo('https://www.linkedin.com/in/alberto-arias-629128211/')"/>
                 <svg-icon src="/assets/icons/github.svg" class="icon" (click)="sendTo('https://github.com/Alberto-Arias-x64')" />
-                <svg-icon src="/assets/icons/discord.svg" class="icon" />
+                <svg-icon src="/assets/icons/stackoverflow.svg" class="icon" (click)="sendTo('https://stackoverflow.com/users/18924077/alberto-x64')"/>
                 <svg-icon src="/assets/icons/instagram.svg" class="icon" (click)="sendTo('https://www.instagram.com/alberto_arias_x64/')"/>
             </div>
         </div>

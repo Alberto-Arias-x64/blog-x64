@@ -1,20 +1,42 @@
+.badge_container{
+    max-width: 180rem;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-bottom: 2rem;
+}
 .badge{
+    position: relative;
     width: 7rem;
     aspect-ratio: 1/1;
-    background-color: whitesmoke;
-    border-radius: .5rem;
     padding: .2rem;
+    border-radius: .2rem;
+    background-color: whitesmoke;
+    transition: var(--standard_animation);
     img{
         max-height: 100%;
         max-width: 100%;
         object-fit: contain;
     }
+    &:hover{
+        background-color: var(--color_accent);
+        .badge_name{
+            color: var(--color_secondary);
+        }
+    }
+    .badge_name{
+        position: absolute;
+        bottom: -2rem;
+        font-size: smaller;
+        color: transparent;
+        transition: var(--standard_animation);
+    }
 }
 .project{
     width: 1000px;
-}
-.card{
-    border-right: none;
+    .card{
+        border-right: none;
+    }
 }
 .status{
     height: 1rem;

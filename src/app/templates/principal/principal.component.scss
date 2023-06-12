@@ -1,6 +1,9 @@
 main{
-    width: 100%;
     display: grid;
     grid-template-rows: max-content auto max-content;
     min-height: 100vh;
+    max-width: 180rem;
+    width: 100vw;
+    overflow-x: hidden;
+    margin: 0 auto;
 }

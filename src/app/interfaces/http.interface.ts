@@ -1,4 +1,4 @@
-export interface BadgeModel {
+export interface BadgeInterface {
     src: string
     alt: string
 }
