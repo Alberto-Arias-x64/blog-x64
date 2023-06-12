@@ -12,7 +12,7 @@
         <h3>Stack de tecnologías</h3>
         <p>Estas son unas de las herramientas que he utilizado a lo largo de mi carrera profesional</p>
         <section class="badge_container">
-            <article class="f_row gap_small">
+            <article class="f_row gap_small" #BadgeContainer>
                 <div class="badge f_column centred" *ngFor="let item of Badges">
                     <img load="lazy" decoding="async" [src]="item.src" [alt]="item.alt">
                     <p class="badge_name">{{item.alt}}</p>

@@ -8,15 +8,7 @@
     article{
         position: absolute;
         width: 100%;
-        animation: autoMove 10s infinite linear;
-    }
-}
-@keyframes autoMove {
-    0%{
-        transform: translateX(0);
-    }
-    100%{
-        transform: translateX(-100%);
+        animation: autoMove 60s infinite linear;
     }
 }
 
