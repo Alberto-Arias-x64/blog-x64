@@ -1,11 +1,28 @@
 .badge_container{
-    max-width: 180rem;
-    width: 100%;
+    position: relative;
     padding-bottom: 2rem;
+    overflow: hidden;
+    margin: 0 auto;
+    height: 8rem;
+    width: 100%;
+    article{
+        position: absolute;
+        width: 100%;
+        animation: autoMove 10s infinite linear;
+    }
 }
+@keyframes autoMove {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
 .badge{
     position: relative;
-    width: 7rem;
+    height: 7rem;
     aspect-ratio: 1/1;
     padding: .2rem;
     border-radius: .2rem;
@@ -31,7 +48,8 @@
     }
 }
 .project{
-    width: 1000px;
+    max-width: 1000px;
+    width: 100%;
     .card{
         border-right: none;
     }

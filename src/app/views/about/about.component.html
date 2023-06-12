@@ -1,4 +1,4 @@
-<section class="padding_standard">
+<section class="full">
     <h1>Alberto Arias</h1>
     <h4>Web Developer</h4>
     <article class="f_column gap_standard">
@@ -11,12 +11,18 @@
     <article class="f_column gap_standard">
         <h3>Stack de tecnologías</h3>
         <p>Estas son unas de las herramientas que he utilizado a lo largo de mi carrera profesional</p>
-        <div class="f_row centred gap_small badge_container">
-            <div class="badge f_column centred" *ngFor="let item of Badges">
-                <img load="lazy" decoding="async" [src]="item.src" [alt]="item.alt">
-                <p class="badge_name">{{item.alt}}</p>
-            </div>
-        </div>
+        <section class="badge_container">
+            <article class="f_row gap_small">
+                <div class="badge f_column centred" *ngFor="let item of Badges">
+                    <img load="lazy" decoding="async" [src]="item.src" [alt]="item.alt">
+                    <p class="badge_name">{{item.alt}}</p>
+                </div>
+                <div class="badge f_column centred" *ngFor="let item of Badges">
+                    <img load="lazy" decoding="async" [src]="item.src" [alt]="item.alt">
+                    <p class="badge_name">{{item.alt}}</p>
+                </div>
+            </article>
+        </section>
     </article>
     <article class="f_column gap_standard">
         <h3>Proyectos</h3>
