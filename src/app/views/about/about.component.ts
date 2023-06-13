@@ -31,7 +31,7 @@ export class AboutComponent implements OnInit {
                 stylesheet.insertRule(rule, stylesheet.cssRules.length)
             }, 10)
         })
-        this.Http.get<ProjectsInterface[]>('/assets/documents/badges.json').subscribe(res => {
+        this.Http.get<ProjectsInterface[]>('/assets/documents/projects.json').subscribe(res => {
             this.Projects = res
         })
     }
