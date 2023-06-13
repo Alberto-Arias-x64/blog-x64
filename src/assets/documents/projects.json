@@ -1,0 +1,63 @@
+[
+    {
+        "title": "Landing page",
+        "status": "OK",
+        "frontend": "HTML + CSS + JS",
+        "backend": "Express",
+        "deploy": "Vercell",
+        "description": "Landing pague para un Artista Colombiano con diseño responsive",
+        "link": "https://matthewlopz-a4bdj55uh-x64.vercel.app",
+        "image": {
+            "src": "https://alberto-arias-x64.github.io/Pagina-web/Media/img20.png",
+            "alt": "imagen landing page"
+        }
+    },
+    {
+        "title": "Página de publicaciones de LinkedIn",
+        "status": "En construcción",
+        "frontend": "HTML + CSS + JS",
+        "backend": "Node.js + Express",
+        "deploy": "Heroku",
+        "description": "Página de publicaciones de LinkedIn con diseño responsivo",
+        "link": "https://www.linkedin.com/in/alberto-arias-garcia/posts",
+        "image": {
+            "src": "https://alberto-arias-x64.github.io/Pagina-web/Media/img3.png",
+            "alt": "Imagen de la página de publicaciones de LinkedIn"
+        }
+    },
+    {
+        "title": "Página de grupos de LinkedIn",
+        "status": "En construcción",
+        "frontend": "HTML + CSS + JS",
+        "backend": "Node.js + Express",
+        "deploy": "Heroku",
+        "description": "Página de grupos de LinkedIn con diseño responsivo",
+        "link": "https://www.linkedin.com/groups/13877673",
+        "image": {
+            "src": "https://alberto-arias-x64.github.io/Pagina-web/Media/img4.png",
+            "alt": "Imagen de la página de grupos de LinkedIn"
+        }
+    },
+    {
+        "title": "Página de eventos de LinkedIn",
+        "status": "En construcción",
+        "frontend": "HTML + CSS + JS",
+        "backend": "Node.js + Express",
+        "deploy": "Heroku",
+        "description": "Página de eventos de LinkedIn con diseño responsivo",
+        "link": "https://www.linkedin.com/events/6827277777777777",
+        "image": {
+            "src": "https://alberto-arias-x64.github.io/Pagina-web/Media/img5.png",
+            "alt": "Imagen de la página de eventos de LinkedIn"
+        }
+    },
+    {
+        "title": "Página de carreras de LinkedIn",
+        "status": "En construcción",
+        "frontend": "HTML + CSS + JS",
+        "backend": "Node.js + Express",
+        "deploy": "Heroku",
+        "description": "Página de carreras de LinkedIn con diseño responsivo",
+        "link": "https://www.linkedin.com/jobs/search/?currentJobId=24232323232323232323232323232323232323232323232323232323232323232323232323"
+    }
+]

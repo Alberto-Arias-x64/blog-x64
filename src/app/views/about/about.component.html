@@ -34,24 +34,24 @@
         <h3>Proyectos</h3>
         <p>Muestra de mi talento y esfuerzo, si te interesa ver mas en mi GitHub tengo mas, la mayoría son públicos</p>
         <br>
-        <section class="c_DT project">
+        <section class="c_DT project" *ngFor="let item of Projects">
             <article class="card padding_standard f_column gap_small">
-                <h5>Landing page</h5>
+                <h5>{{ item.title }}</h5>
                 <div class="f_row gap_small centred-v">
                     <p>Status: <strong>OK</strong></p>
                     <div class="status ok"></div>
                 </div>
-                <p>Frontend: <strong>HTML + CSS + JS</strong></p>
-                <p>Backend: <strong>Express</strong></p>
-                <p>Despliegue: <strong>Vercell</strong></p>
-                <p>Descripción: <strong>Landing pague para un Artista Colombiano con diseño responsive</strong></p>
+                <p>Frontend: <strong>{{ item.frontend }}</strong></p>
+                <p>Backend: <strong>{{ item.backend }}</strong></p>
+                <p>Despliegue: <strong>{{ item.deploy }}</strong></p>
+                <p>Descripción: <strong>{{ item.description }}</strong></p>
                 <br>
                 <div class="f_column centred">
-                    <button (click)="sendTo('https://matthewlopz-a4bdj55uh-x64.vercel.app')">Visitar</button>
+                    <button (click)="sendTo(item.link)">Visitar</button>
                 </div>
             </article>
             <picture>
-                <img src="https://alberto-arias-x64.github.io/Pagina-web/Media/img20.png" alt="">
+                <img [src]="item.image.src" [alt]="item.image.alt">
             </picture>
         </section>
     </article>

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { BadgeInterface } from 'src/app/interfaces/http.interface';
+import { BadgeInterface, ProjectsInterface } from 'src/app/interfaces/http.interface';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @Component({
@@ -17,6 +17,7 @@ export class AboutComponent implements OnInit {
 
     private Http = inject(HttpClient)
     public Badges: BadgeInterface[] = []
+    public Projects: ProjectsInterface[] = []
 
     ngOnInit(): void {
         this.Http.get<BadgeInterface[]>('/assets/documents/badges.json').subscribe(res => {
@@ -29,6 +30,9 @@ export class AboutComponent implements OnInit {
                 var rule = "@keyframes " + animationName + " { " + keyframes + " }"
                 stylesheet.insertRule(rule, stylesheet.cssRules.length)
             }, 10)
+        })
+        this.Http.get<ProjectsInterface[]>('/assets/documents/badges.json').subscribe(res => {
+            this.Projects = res
         })
     }
 
