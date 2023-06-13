@@ -1,3 +1,7 @@
+.portrait{
+    filter: drop-shadow(transparentize($color: #e31952, $amount: .4) .2rem -.2rem .2rem);
+}
+
 .badge_container{
     position: relative;
     padding-bottom: 2rem;
