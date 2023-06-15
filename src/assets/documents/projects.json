@@ -4,7 +4,7 @@
         "status": "OK",
         "frontend": "HTML + CSS + JS",
         "backend": "Express",
-        "deploy": "Vercell",
+        "deploy": "Vercel",
         "description": "Landing pague para un Artista Colombiano con diseño responsive",
         "link": "https://matthewlopz-a4bdj55uh-x64.vercel.app",
         "image": {
