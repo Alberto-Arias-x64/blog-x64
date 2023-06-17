@@ -20,7 +20,7 @@ export class HeaderComponent {
 			|| document.documentElement.scrollTop
 			|| document.body.scrollTop
 			|| 0
-		if (number > 115) {
+		if (number > 60) {
 			this.isMenuScrolling = true
 		} else {
 			this.isMenuScrolling = false

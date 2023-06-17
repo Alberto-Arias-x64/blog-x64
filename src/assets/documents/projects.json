@@ -1,11 +1,89 @@
 [
     {
+        "title": "Administrador Ucolis Demo",
+        "status": "OK",
+        "frontend": "Angular 15",
+        "backend": "Express + Supabase",
+        "deploy": "Railway",
+        "description": "Desarrollo full stack para la administracion y gestion de inventarios de recoleccion de aceite usado, se integro con una app en Kotlin",
+        "link": "https://aceite-admin-production.up.railway.app",
+        "image": {
+            "src": "assets/images/ucolis.png",
+            "alt": "imagen ucolis"
+        }
+    },
+    {
+        "title": "Service Worker Template",
+        "status": "OK",
+        "frontend": "JS",
+        "backend": "NA",
+        "deploy": "Github",
+        "description": "plantilla en JavaScript que te permite crear y configurar un Service Worker para aplicación web",
+        "link": "https://github.com/Alberto-Arias-x64/service-worker",
+        "image": {
+            "src": "assets/images/service_worker.png",
+            "alt": "imagen Rclock"
+        }
+    },
+    {
+        "title": "Rclock",
+        "status": "OK",
+        "frontend": "HTML + CSS + JS",
+        "backend": "Electron js",
+        "deploy": "Github",
+        "description": "aplicación de Windows construida con HTML, CSS y JavaScript utilizando Electron.js. Su función es mostrar un reloj con la hora invertida para mejorar la productividad diaria.",
+        "link": "https://github.com/Alberto-Arias-x64/Rclock",
+        "image": {
+            "src": "assets/images/r_clock.png",
+            "alt": "imagen Rclock"
+        }
+    },
+    {
+        "title": "File inspector",
+        "status": "OK",
+        "frontend": "JS",
+        "backend": "Node",
+        "deploy": "Github",
+        "description": "Script que verifica los cambios en una carpeta y subcarpetas, extrae únicamente los archivos que han cambiado para facilitar los despliegues a producción.",
+        "link": "https://github.com/Alberto-Arias-x64/File_Inspector",
+        "image": {
+            "src": "assets/images/file_inspector.png",
+            "alt": "imagen file inspector"
+        }
+    },
+    {
+        "title": "Vlox",
+        "status": "Desarrollo",
+        "frontend": "Angular 14",
+        "backend": "Express",
+        "deploy": "Github",
+        "description": "Pagina de muestra para luxury presence.",
+        "link": "https://github.com/Alberto-Arias-x64/vlox_frontend",
+        "image": {
+            "src": "assets/images/vlox.png",
+            "alt": "imagen vlox"
+        }
+    },
+    {
+        "title": "Carrousel",
+        "status": "OK",
+        "frontend": "HTML + CSS + JS",
+        "backend": "NA",
+        "deploy": "Github",
+        "description": "Este proyecto consiste en un carrousel (slider) reutilizable desarrollado utilizando HTML, CSS y JavaScript. Proporciona una manera sencilla de agregar un carrousel interactivo a sitios web.",
+        "link": "https://github.com/Alberto-Arias-x64/carrousell",
+        "image": {
+            "src": "assets/images/carrousel.png",
+            "alt": "imagen componente carrousel"
+        }
+    },
+    {
         "title": "Prueba Luxury",
         "status": "OK",
         "frontend": "HTML + CSS + JS",
         "backend": "NA",
         "deploy": "Vercel",
-        "description": "Pagina de muestra para luxury presence",
+        "description": "Pagina de muestra para luxury presence.",
         "link": "https://luxury-presence-assignment.vercel.app",
         "image": {
             "src": "https://camo.githubusercontent.com/60ae1e5c6a07c3fcddcea038eb8806bac3cb642d84e84bd663e708b9caabc7c5/687474703a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d3144693038545a4c43456a477375485545536a2d5043437a46364861456e454574",
@@ -18,7 +96,7 @@
         "frontend": "HTML + CSS + JS",
         "backend": "NA",
         "deploy": "Github",
-        "description": "Pagina de muestra para Banco Finandina",
+        "description": "Pagina de muestra para Banco Finandina.",
         "link": "https://github.com/Alberto-Arias-x64/Prueba_Finandina",
         "image": {
             "src": "https://camo.githubusercontent.com/bb9fb9b71dd8d103323ce54765b9c9463f115661529c98d968f2c49bf7d860ec/687474703a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d31367565636e76695731714f494c69684f567379634e38516555545567574e6847",
@@ -31,7 +109,7 @@
         "frontend": "React",
         "backend": "Express",
         "deploy": "Vercel",
-        "description": "Portafolio inspirado en la interface de usuario de Vs Code",
+        "description": "Portafolio inspirado en la interface de usuario de Vs Code.",
         "link": "https://matthewlopz-a4bdj55uh-x64.vercel.app",
         "image": {
             "src": "assets/images/porfolio.png",
@@ -44,7 +122,7 @@
         "frontend": "HTML + CSS + JS",
         "backend": "Express",
         "deploy": "Vercel",
-        "description": "Pagina web para un Artista Colombiano con diseño responsive e imágenes dinámicas",
+        "description": "Pagina web para un Artista Colombiano con diseño responsive e imágenes dinámicas.",
         "link": "https://matthewlopz-a4bdj55uh-x64.vercel.app",
         "image": {
             "src": "assets/images/lading_mattew.png",
@@ -57,7 +135,7 @@
         "frontend": "React",
         "backend": "Express + MySql",
         "deploy": "Heroku",
-        "description": "Aplicación Full-stack con administración, usuarios y comunicación en tiempo real",
+        "description": "Aplicación Full-stack con administración, usuarios y comunicación en tiempo real.",
         "link": "https://matthewlopz-a4bdj55uh-x64.vercel.app",
         "image": {
             "src": "assets/images/react_chat.png",
@@ -70,7 +148,7 @@
         "frontend": "Vue",
         "backend": "NA",
         "deploy": "Vercel",
-        "description": "Aplicación con diseño inspirado en instagram utilizado vue 3 aplicando técnicas de lazy loading y interjection observer",
+        "description": "Aplicación con diseño inspirado en instagram utilizado vue 3 aplicando técnicas de lazy loading y interjection observer.",
         "link": "pokegram-qjz53fpng-x64.vercel.app",
         "image": {
             "src": "assets/images/pokegram.png",
@@ -82,8 +160,8 @@
         "status": "Pendiente de despliegue",
         "frontend": "HTML + CSS + JS",
         "backend": "Django + Mysql",
-        "deploy": "Vercel",
-        "description": "Aplicación que nace de la necesidad de mantener de forma segura todas las contraseñas en un solo lugar",
+        "deploy": "NA",
+        "description": "Aplicación que nace de la necesidad de mantener de forma segura todas las contraseñas en un solo lugar.",
         "link": "https://github.com/Alberto-Arias-x64/Password_manager",
         "image": {
             "src": "assets/images/password_manager.png",
@@ -96,7 +174,7 @@
         "frontend": "Python",
         "backend": "Python",
         "deploy": "Github",
-        "description": "Script en python para disparar a una velocidad mas alta que ningun se humano puede alcanzar",
+        "description": "Script en python para disparar a una velocidad mas alta que ningun se humano puede alcanzar.",
         "link": "https://github.com/Alberto-Arias-x64/Rapid_fire",
         "image": {
             "src": "assets/images/rapid_fire.png",

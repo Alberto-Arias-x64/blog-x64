@@ -2,8 +2,8 @@
     <h1>Dev Blog</h1>
     <article>
         <h3>Últimos</h3>
-        <ng-container *ngFor="let item of posts">
-            <app-slider [list]="item" />
+        <ng-container>
+            <app-slider [list]="posts" />
         </ng-container>
     </article>
 </section>

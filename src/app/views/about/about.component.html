@@ -11,7 +11,7 @@
         </div>
         <div class="f_column centred gap_big">
             <img class="portrait" src="/assets/images/portrait.png" alt="mi retrató con Inteligencia artificial">
-            <button>cv</button>
+            <button (click)="sendTo('https://drive.google.com/file/d/1894WsCmCQczVxnmx7xEwi3LWheEQq2Lt/view')">cv</button>
         </div>
     </article>
     <article class="f_column gap_standard">
@@ -39,7 +39,7 @@
                 <h5>{{ item.title }}</h5>
                 <div class="f_row gap_small centred-v">
                     <p>Estatus: <strong>{{item.status}}</strong></p>
-                    <div class="status" [class.ok]="item.status === 'OK'" [class.pending]="item.status !== 'OK'"></div>
+                    <div class="status" [class.ok]="item.status === 'OK'" [class.development]="item.status === 'Desarrollo'" [class.pending]="item.status !== 'OK' && item.status !== 'Desarrollo'"></div>
                 </div>
                 <p>Frontend: <strong>{{ item.frontend }}</strong></p>
                 <p>Backend: <strong>{{ item.backend }}</strong></p>
@@ -47,7 +47,7 @@
                 <p>Descripción: <strong>{{ item.description }}</strong></p>
                 <br>
                 <div class="f_column centred">
-                    <button (click)="sendTo(item.link)">Visitar</button>
+                    <button (click)="sendTo(item.link)" class="full">Visitar</button>
                 </div>
             </article>
             <picture>
