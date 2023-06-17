@@ -1,63 +1,106 @@
 [
     {
-        "title": "Landing page",
+        "title": "Prueba Luxury",
+        "status": "OK",
+        "frontend": "HTML + CSS + JS",
+        "backend": "NA",
+        "deploy": "Vercel",
+        "description": "Pagina de muestra para luxury presence",
+        "link": "https://luxury-presence-assignment.vercel.app",
+        "image": {
+            "src": "https://camo.githubusercontent.com/60ae1e5c6a07c3fcddcea038eb8806bac3cb642d84e84bd663e708b9caabc7c5/687474703a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d3144693038545a4c43456a477375485545536a2d5043437a46364861456e454574",
+            "alt": "imagen pagina luxury"
+        }
+    },
+    {
+        "title": "Prueba Finandina",
+        "status": "OK",
+        "frontend": "HTML + CSS + JS",
+        "backend": "NA",
+        "deploy": "Github",
+        "description": "Pagina de muestra para Banco Finandina",
+        "link": "https://github.com/Alberto-Arias-x64/Prueba_Finandina",
+        "image": {
+            "src": "https://camo.githubusercontent.com/bb9fb9b71dd8d103323ce54765b9c9463f115661529c98d968f2c49bf7d860ec/687474703a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d766965772669643d31367565636e76695731714f494c69684f567379634e38516555545567574e6847",
+            "alt": "imagen pagina Finandina"
+        }
+    },
+    {
+        "title": "VS code Porfolio",
+        "status": "OK",
+        "frontend": "React",
+        "backend": "Express",
+        "deploy": "Vercel",
+        "description": "Portafolio inspirado en la interface de usuario de Vs Code",
+        "link": "https://matthewlopz-a4bdj55uh-x64.vercel.app",
+        "image": {
+            "src": "assets/images/porfolio.png",
+            "alt": "imagen portafolio"
+        }
+    },
+    {
+        "title": "Matthew landing page",
         "status": "OK",
         "frontend": "HTML + CSS + JS",
         "backend": "Express",
         "deploy": "Vercel",
-        "description": "Landing pague para un Artista Colombiano con diseño responsive",
+        "description": "Pagina web para un Artista Colombiano con diseño responsive e imágenes dinámicas",
         "link": "https://matthewlopz-a4bdj55uh-x64.vercel.app",
         "image": {
-            "src": "https://alberto-arias-x64.github.io/Pagina-web/Media/img20.png",
+            "src": "assets/images/lading_mattew.png",
             "alt": "imagen landing page"
         }
     },
     {
-        "title": "Página de publicaciones de LinkedIn",
-        "status": "En construcción",
-        "frontend": "HTML + CSS + JS",
-        "backend": "Node.js + Express",
+        "title": "React live Chat",
+        "status": "Pendiente de Redespliegue",
+        "frontend": "React",
+        "backend": "Express + MySql",
         "deploy": "Heroku",
-        "description": "Página de publicaciones de LinkedIn con diseño responsivo",
-        "link": "https://www.linkedin.com/in/alberto-arias-garcia/posts",
+        "description": "Aplicación Full-stack con administración, usuarios y comunicación en tiempo real",
+        "link": "https://matthewlopz-a4bdj55uh-x64.vercel.app",
         "image": {
-            "src": "https://alberto-arias-x64.github.io/Pagina-web/Media/img3.png",
-            "alt": "Imagen de la página de publicaciones de LinkedIn"
+            "src": "assets/images/react_chat.png",
+            "alt": "imagen aplicación chat React"
         }
     },
     {
-        "title": "Página de grupos de LinkedIn",
-        "status": "En construcción",
-        "frontend": "HTML + CSS + JS",
-        "backend": "Node.js + Express",
-        "deploy": "Heroku",
-        "description": "Página de grupos de LinkedIn con diseño responsivo",
-        "link": "https://www.linkedin.com/groups/13877673",
+        "title": "Pokegram",
+        "status": "OK",
+        "frontend": "Vue",
+        "backend": "NA",
+        "deploy": "Vercel",
+        "description": "Aplicación con diseño inspirado en instagram utilizado vue 3 aplicando técnicas de lazy loading y interjection observer",
+        "link": "pokegram-qjz53fpng-x64.vercel.app",
         "image": {
-            "src": "https://alberto-arias-x64.github.io/Pagina-web/Media/img4.png",
-            "alt": "Imagen de la página de grupos de LinkedIn"
+            "src": "assets/images/pokegram.png",
+            "alt": "Pokegram app"
         }
     },
     {
-        "title": "Página de eventos de LinkedIn",
-        "status": "En construcción",
+        "title": "Password manager Demo",
+        "status": "Pendiente de despliegue",
         "frontend": "HTML + CSS + JS",
-        "backend": "Node.js + Express",
-        "deploy": "Heroku",
-        "description": "Página de eventos de LinkedIn con diseño responsivo",
-        "link": "https://www.linkedin.com/events/6827277777777777",
+        "backend": "Django + Mysql",
+        "deploy": "Vercel",
+        "description": "Aplicación que nace de la necesidad de mantener de forma segura todas las contraseñas en un solo lugar",
+        "link": "https://github.com/Alberto-Arias-x64/Password_manager",
         "image": {
-            "src": "https://alberto-arias-x64.github.io/Pagina-web/Media/img5.png",
-            "alt": "Imagen de la página de eventos de LinkedIn"
+            "src": "assets/images/password_manager.png",
+            "alt": "imagen password manager"
         }
     },
     {
-        "title": "Página de carreras de LinkedIn",
-        "status": "En construcción",
-        "frontend": "HTML + CSS + JS",
-        "backend": "Node.js + Express",
-        "deploy": "Heroku",
-        "description": "Página de carreras de LinkedIn con diseño responsivo",
-        "link": "https://www.linkedin.com/jobs/search/?currentJobId=24232323232323232323232323232323232323232323232323232323232323232323232323"
+        "title": "Rapid Fire Script",
+        "status": "OK",
+        "frontend": "Python",
+        "backend": "Python",
+        "deploy": "Github",
+        "description": "Script en python para disparar a una velocidad mas alta que ningun se humano puede alcanzar",
+        "link": "https://github.com/Alberto-Arias-x64/Rapid_fire",
+        "image": {
+            "src": "assets/images/rapid_fire.png",
+            "alt": "imagen rapid fire"
+        }
     }
 ]

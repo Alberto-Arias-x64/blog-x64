@@ -38,8 +38,8 @@
             <article class="card padding_standard f_column gap_small">
                 <h5>{{ item.title }}</h5>
                 <div class="f_row gap_small centred-v">
-                    <p>Status: <strong>OK</strong></p>
-                    <div class="status ok"></div>
+                    <p>Estatus: <strong>{{item.status}}</strong></p>
+                    <div class="status" [class.ok]="item.status === 'OK'" [class.pending]="item.status !== 'OK'"></div>
                 </div>
                 <p>Frontend: <strong>{{ item.frontend }}</strong></p>
                 <p>Backend: <strong>{{ item.backend }}</strong></p>
@@ -51,7 +51,7 @@
                 </div>
             </article>
             <picture>
-                <img [src]="item.image.src" [alt]="item.image.alt">
+                <img [src]="item.image.src" [alt]="item.image.alt" loading="lazy" decoding="async">
             </picture>
         </section>
     </article>
