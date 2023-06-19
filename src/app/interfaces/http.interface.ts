@@ -1,3 +1,9 @@
+export interface HttpResponse<T> {
+    data: T | any;
+    message: string
+    status: string
+}
+
 export interface BadgeInterface {
     src: string
     alt: string

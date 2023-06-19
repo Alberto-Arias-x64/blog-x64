@@ -1,36 +1,41 @@
 <section>
-    <h1>Contact me</h1>
-    <form [formGroup]="form" (ngSubmit)="sendForm(form)" class="f_column gap_standard padding_standard centred-v">
+    <h1>Contáctame</h1>
+    <form [formGroup]="form" (ngSubmit)="sendForm(form)" class="f_column gap_big padding_standard centred-v">
         <div class="input_decorator">
-            <label for="name">Name</label>
+            <label for="name">Nombre</label>
             <div class="f_row gap_small">
                 <svg-icon class="icon" src="assets/icons/user.svg"/>
                 <input type="text" id="name" name="name" formControlName="name" placeholder="John Doe" maxlength="20">
             </div>
+            <p class="customError" [class.active]="name?.hasError('required') && name?.touched">Campo requerido</p>
         </div>
         <div class="c_half gap_standard full">
             <div class="input_decorator">
-                <label for="phone">Phone</label>
+                <label for="phone">Teléfono</label>
                 <div class="f_row gap_small">
                     <svg-icon  class="icon" src="assets/icons/whatsapp.svg"/>
                     <input type="text" id="phone" name="phone" formControlName="phone" placeholder="+57 300..." appPhone>
                 </div>
+                <p class="customError" [class.active]="phone?.hasError('required') && phone?.touched">Campo requerido</p>
             </div>
             <div class="input_decorator">
-                <label for="email">Email</label>
+                <label for="email">Correo electrónico</label>
                 <div class="f_row gap_small centred-v">
                     <svg-icon  class="icon" src="assets/icons/mail.svg"/>
-                    <input type="email" id="email" name="email" formControlName="email" placeholder="johndoe@mail.com">
+                    <input type="email" id="email" name="email" formControlName="mail" placeholder="johndoe@mail.com">
                 </div>
+                <p class="customError" [class.active]="mail?.hasError('required') && mail?.touched">Campo requerido</p>
+                <p class="customError" [class.active]="mail?.hasError('email') && mail?.touched">El email no es valido</p>
             </div>
         </div>
         <div class="input_decorator">
-            <label for="message">Message</label>
+            <label for="message">Mensaje</label>
             <div class="f_row gap_small">
                 <svg-icon class="icon" src="assets/icons/message.svg"/>
-                <textarea formControlName="message" id="message" name="message" cols="30" rows="10" maxlength="300" placeholder="Hey"></textarea>
+                <textarea formControlName="message" id="message" name="message" cols="30" rows="10" maxlength="2000" placeholder="Hey"></textarea>
             </div>
+            <p class="customError" [class.active]="message?.hasError('required') && message?.touched">Campo requerido</p>
         </div>
-        <button type="submit" class="fit">Send</button>
+        <button type="submit" class="fit" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Send</p></button>
     </form>
 </section>

@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BadgeInterface, ProjectsInterface } from 'src/app/interfaces/http.interface';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { BlackFilterDirective } from 'src/app/directives/black-filter.directive';
 
 @Component({
     selector: 'app-about',
     standalone: true,
-    imports: [CommonModule, AngularSvgIconModule],
+    imports: [CommonModule, AngularSvgIconModule, BlackFilterDirective],
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.scss']
 })
