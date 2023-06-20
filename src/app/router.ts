@@ -8,8 +8,9 @@ const routes: Routes = [
             { path: 'contact', loadComponent: () => import('./views/contact/contact.component').then(c => c.ContactComponent), title: 'Alberto Arias | Contácteme' },
         ]
     },
+    { path: 'login', loadComponent: () => import('./views/login/login.component').then(c => c.LoginComponent) },
     {
-        path: 'admiñ', loadComponent: () => import('./templates/admin/admin.component').then(c => c.AdminComponent), children: [
+        path: 'admin', loadComponent: () => import('./templates/admin/admin.component').then(c => c.AdminComponent), children: [
             { path: 'messages', loadComponent: () => import('./views/messages/messages.component').then(c => c.MessagesComponent) }
         ]
     },

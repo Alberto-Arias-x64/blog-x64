@@ -9,3 +9,13 @@ export const messageSendMock: ModalInterface = {
     },
     button: "Cerrar"
 }
+
+export const BlockIPMock: ModalInterface = {
+    title: "Cuenta bloqueada",
+    description: "Tu cuenta ha sido temporalmente bloqueada",
+    image: {
+        src: "assets/icons/check.svg",
+        alt: "modal image",
+    },
+    button: "Cerrar"
+}

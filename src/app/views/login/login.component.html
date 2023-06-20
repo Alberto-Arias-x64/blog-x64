@@ -1,0 +1,21 @@
+<section class="f_column centred">
+    <form class="card padding_standard f_column centred gap_big" [formGroup]="form" (ngSubmit)="sendForm(form)">
+        <div class="input_decorator">
+            <label for="mail">Usuario</label>
+            <div class="f_row gap_small">
+                <svg-icon class="icon" src="assets/icons/user.svg"/>
+                <input type="text" id="mail" name="mail" formControlName="mail" placeholder="John Doe" maxlength="20">
+            </div>
+            <p class="customError" [class.active]="mail?.hasError('required') && mail?.touched">Campo requerido</p>
+        </div>
+        <div class="input_decorator">
+            <label for="password">Contraseña</label>
+            <div class="f_row gap_small">
+                <svg-icon class="icon" src="assets/icons/user.svg"/>
+                <input type="password" id="password" name="password" formControlName="password" placeholder="****" maxlength="20">
+            </div>
+            <p class="customError" [class.active]="password?.hasError('required') && password?.touched">Campo requerido</p>
+        </div>
+        <button type="submit" class="fit" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Send</p></button>
+    </form>
+</section>
