@@ -4,7 +4,7 @@ export interface HttpResponse<T> {
     status: string
 }
 
-export interface BadgeInterface {
+export interface ImageInterface {
     src: string
     alt: string
 }
@@ -17,5 +17,5 @@ export interface ProjectsInterface {
     deploy: string
     description: string
     link: string
-    image: BadgeInterface
+    image: ImageInterface
 }

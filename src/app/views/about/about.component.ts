@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { BadgeInterface, ProjectsInterface } from 'src/app/interfaces/http.interface';
+import { ImageInterface, ProjectsInterface } from 'src/app/interfaces/http.interface';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { BlackFilterDirective } from 'src/app/directives/black-filter.directive';
 
@@ -17,11 +17,11 @@ export class AboutComponent implements OnInit {
     @ViewChild('BadgeContainer') BadgeContainer?: ElementRef
 
     private Http = inject(HttpClient)
-    public Badges: BadgeInterface[] = []
+    public Badges: ImageInterface[] = []
     public Projects: ProjectsInterface[] = []
 
     ngOnInit(): void {
-        this.Http.get<BadgeInterface[]>('/assets/documents/badges.json').subscribe(res => {
+        this.Http.get<ImageInterface[]>('/uploads/documents/badges.json').subscribe(res => {
             this.Badges = res
             setTimeout(() => {
                 const containerLength = this.BadgeContainer?.nativeElement.scrollWidth
@@ -32,7 +32,7 @@ export class AboutComponent implements OnInit {
                 stylesheet.insertRule(rule, stylesheet.cssRules.length)
             }, 10)
         })
-        this.Http.get<ProjectsInterface[]>('/assets/documents/projects.json').subscribe(res => {
+        this.Http.get<ProjectsInterface[]>('/uploads/documents/projects.json').subscribe(res => {
             this.Projects = res
         })
     }

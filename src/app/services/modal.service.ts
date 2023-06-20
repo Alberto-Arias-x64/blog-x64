@@ -7,10 +7,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ModalService {
     private ModalState = new BehaviorSubject(false)
 
-    get State(): Observable<boolean> {
+    get getState(): Observable<boolean> {
         return this.ModalState.asObservable()
     }
-    set State(state: boolean) {
+    set setState(state: boolean) {
         this.ModalState.next(state)
     }
 }
