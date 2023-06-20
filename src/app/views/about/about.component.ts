@@ -16,7 +16,7 @@ export class AboutComponent implements OnInit {
 
     @ViewChild('BadgeContainer') BadgeContainer?: ElementRef
 
-    private Http = inject(HttpClient)
+    private readonly Http = inject(HttpClient)
     public Badges: ImageInterface[] = []
     public Projects: ProjectsInterface[] = []
 

@@ -1,22 +1,26 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalInterface } from 'src/app/interfaces/modal.interface';
 
 @Component({
-  selector: 'app-modal',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+    selector: 'app-modal',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit{
+export class ModalComponent implements OnInit {
     private Modal = inject(ModalService)
-    ModalState$ = this.Modal.getState
     state = false
+    data!: ModalInterface
 
     ngOnInit(): void {
-        this.ModalState$.subscribe(value => {
+        this.Modal.getState.subscribe(value => {
             this.state = value;
+        })
+        this.Modal.getData.subscribe(data => {
+            this.data = data;
         })
     }
 

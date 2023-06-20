@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit{
-    private Http = inject(HttpClient)
+    private readonly Http = inject(HttpClient)
     posts: any
 
     ngOnInit(): void {
