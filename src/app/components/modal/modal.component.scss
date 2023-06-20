@@ -1,4 +1,4 @@
-section{
+section {
     position: fixed;
     top: 0;
     height: 100vh;
@@ -6,16 +6,16 @@ section{
     background-color: transparentize($color: #000000, $amount: 0.5);
     z-index: 99;
 }
-article{
+article {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50% ,-50%);
+    transform: translate(-50%, -50%);
     height: fit-content;
     max-width: 30rem;
     background-color: var(--color_principal);
     text-align: center;
 }
-picture{
+picture {
     height: 10rem;
 }

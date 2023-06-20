@@ -12,8 +12,7 @@ import { ModalComponent } from 'src/app/components/modal/modal.component';
         CommonModule,
         HeaderComponent,
         FooterComponent,
-        RouterOutlet,
-        ModalComponent
+        RouterOutlet
     ],
     templateUrl: './principal.component.html',
     styleUrls: ['./principal.component.scss']

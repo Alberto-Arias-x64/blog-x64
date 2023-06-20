@@ -5,15 +5,15 @@ header{
     width: 100%;
     z-index: 9;
 }
-.active{
-    color: var(--color_accent);
-}
 
 a{
     text-decoration: none;
     transition: var(--standard_animation);
     &:hover{
         opacity: 0.6;
+    }
+    &.active{
+        color: var(--color_accent);
     }
 }
 

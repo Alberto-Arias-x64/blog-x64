@@ -1,0 +1,15 @@
+.router_box{
+    border-bottom: .1rem solid var(--color_secondary);
+}
+
+a{
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--standard_animation);
+    &:hover{
+        opacity: 0.6;
+    }
+    &.active{
+        color: var(--color_accent);
+    }
+}

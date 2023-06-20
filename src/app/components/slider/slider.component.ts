@@ -4,12 +4,12 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-slider',
-  standalone: true,
-  imports: [CommonModule, AngularSvgIconModule],
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+    selector: 'app-slider',
+    standalone: true,
+    imports: [CommonModule, AngularSvgIconModule],
+    templateUrl: './slider.component.html',
+    styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent {
-    @Input() list!:any[]
+    @Input() list!: any[]
 }

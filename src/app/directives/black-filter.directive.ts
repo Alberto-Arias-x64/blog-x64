@@ -4,10 +4,10 @@ import { Directive, ElementRef, OnDestroy, OnInit, Renderer2, inject } from '@an
     selector: '[appBlackFilter]',
     standalone: true
 })
-export class BlackFilterDirective implements OnInit, OnDestroy{
+export class BlackFilterDirective implements OnInit, OnDestroy {
 
     private el: ElementRef = inject(ElementRef)
-    private renderer: Renderer2 =inject(Renderer2)
+    private renderer: Renderer2 = inject(Renderer2)
 
     private observer!: IntersectionObserver
 
@@ -20,15 +20,15 @@ export class BlackFilterDirective implements OnInit, OnDestroy{
 
         this.observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                this.renderer.setStyle(this.el.nativeElement, 'filter', 'none');
-                this.renderer.setStyle(this.el.nativeElement, 'transition', 'filter 0.5s ease');
-              } else {
-                this.renderer.setStyle(this.el.nativeElement, 'filter', 'grayscale(100%)');
-                this.renderer.setStyle(this.el.nativeElement, 'transition', 'filter 0.5s ease');
-              }
+                if (entry.isIntersecting) {
+                    this.renderer.setStyle(this.el.nativeElement, 'filter', 'none');
+                    this.renderer.setStyle(this.el.nativeElement, 'transition', 'filter 0.5s ease');
+                } else {
+                    this.renderer.setStyle(this.el.nativeElement, 'filter', 'grayscale(100%)');
+                    this.renderer.setStyle(this.el.nativeElement, 'transition', 'filter 0.5s ease');
+                }
             });
-          }, options);
+        }, options);
 
         this.observer.observe(this.el.nativeElement);
     }

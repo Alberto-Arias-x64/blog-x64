@@ -7,15 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RouterModule, } from '@angular/router';
 import { QuicklinkStrategy } from 'ngx-quicklink';
+import { ModalComponent } from './components/modal/modal.component';
 @NgModule({
     declarations: [
         AppComponent
     ],
     imports: [
         BrowserModule,
+        ModalComponent,
         HttpClientModule,
         AngularSvgIconModule.forRoot(),
-        RouterModule.forRoot(routes, { preloadingStrategy: QuicklinkStrategy})
+        RouterModule.forRoot(routes, { preloadingStrategy: QuicklinkStrategy })
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -1,4 +1,9 @@
-section{
+section {
     min-height: 100vh;
     height: fit-content;
+    display: grid;
+    grid-template-columns: max-content auto;
+}
+
+.work_area {
 }

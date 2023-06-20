@@ -4,13 +4,13 @@ import { SliderComponent } from 'src/app/components/slider/slider.component';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-main',
-  standalone: true,
-  imports: [CommonModule, SliderComponent],
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+    selector: 'app-main',
+    standalone: true,
+    imports: [CommonModule, SliderComponent],
+    templateUrl: './main.component.html',
+    styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit{
+export class MainComponent implements OnInit {
     private readonly Http = inject(HttpClient)
     posts: any
 

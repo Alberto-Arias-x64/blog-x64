@@ -42,8 +42,8 @@ export class ContactComponent {
         })
     }
 
-    get name () {return this.form.get('name')}
-    get phone () {return this.form.get('phone')}
-    get mail () {return this.form.get('mail')}
-    get message () {return this.form.get('message')}
+    get name() { return this.form.get('name') }
+    get phone() { return this.form.get('phone') }
+    get mail() { return this.form.get('mail') }
+    get message() { return this.form.get('message') }
 }
