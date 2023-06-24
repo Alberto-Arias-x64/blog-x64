@@ -16,7 +16,7 @@ const routes: Routes = [
         path: 'admin',
         loadComponent: () => import('./templates/admin/admin.component').then((c) => c.AdminComponent),
         canActivate: [authGuard],
-        children: [{ path: 'messages', loadComponent: () => import('./views/messages/messages.component').then((c) => c.MessagesComponent) }]
+        children: [{ path: 'messages', loadComponent: () => import('./admin/messages/messages.component').then((c) => c.MessagesComponent) }]
     },
     { path: '**', loadComponent: () => import('./templates/error/error.component').then((c) => c.ErrorComponent) }
 ]

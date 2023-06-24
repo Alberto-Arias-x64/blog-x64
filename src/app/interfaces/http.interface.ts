@@ -1,5 +1,5 @@
 export interface HttpResponse<T> {
-    data: T | any;
+    data: T | any
     message: string
     status: string
 }
@@ -18,4 +18,10 @@ export interface ProjectsInterface {
     description: string
     link: string
     image: ImageInterface
+}
+
+export interface MessagesInterface {
+    name: string
+    read: boolean
+    createdAt: string | Date
 }

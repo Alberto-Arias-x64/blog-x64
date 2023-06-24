@@ -1,0 +1,9 @@
+<section>
+    <ng-container *ngFor="let item of messages">
+        <div>
+            <p>{{item.read}}</p>
+            <p>{{item.name}}</p>
+            <p>{{item.createdAt | date}}</p>
+        </div>
+    </ng-container>
+</section>

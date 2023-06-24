@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
     posts: any
 
     ngOnInit(): void {
-        this.Http.get('/assets/documents/posts.json').subscribe(res => {
+        this.Http.get('/uploads/documents/posts.json').subscribe(res => {
             this.posts = res
         })
     }
