@@ -9,7 +9,7 @@
     --color_secondary: #fff;
     --color_tertiary: #5c5c5c;
     --color_accent: #e31952;
-    --standard_animation: all ease 200ms;
+    --animation_standard: all ease 200ms;
 }
 html {
     font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
@@ -103,7 +103,7 @@ textarea {
     gap: 1rem;
     position: relative;
     border-bottom: 0.2rem var(--color_secondary) solid;
-    transition: var(--standard_animation);
+    transition: var(--animation_standard);
     &:focus-within {
         border-color: var(--color_accent);
         .icon {
@@ -125,7 +125,7 @@ textarea {
     left: 0;
     font-size: 1.5rem;
     color: var(--color_accent);
-    transition: var(--standard_animation);
+    transition: var(--animation_standard);
     opacity: 0;
     &.active {
         opacity: 1;
@@ -139,7 +139,7 @@ button {
     background-color: transparent;
     color: var(--color_secondary);
     cursor: pointer;
-    transition: var(--standard_animation);
+    transition: var(--animation_standard);
     &:disabled {
         cursor: default;
         opacity: 0.5;

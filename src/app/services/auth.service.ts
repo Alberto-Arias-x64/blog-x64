@@ -8,11 +8,11 @@ export class AuthService {
 
     set setToken(token: string) {
         this.token = token
-        localStorage.setItem("token", token)
+        sessionStorage.setItem('token', token)
     }
 
     get getToken() {
-        const token = localStorage.getItem("token")
+        const token = sessionStorage.getItem('token')
         if (this.token) return this.token
         if (token) return token
         return null

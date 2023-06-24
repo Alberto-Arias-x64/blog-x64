@@ -8,7 +8,7 @@ button {
     border: none;
     cursor: pointer;
     color: var(--color_secondary);
-    transition: var(--standard_animation);
+    transition: var(--animation_standard);
     &:hover {
         color: var(--color_accent);
     }

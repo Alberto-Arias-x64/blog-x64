@@ -9,8 +9,6 @@ export class TokenInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         const token = this.Auth.getToken
         if (token && request.url.includes('api/admin')) {
-            //const token = localStorage.getItem('jwt')
-
             const authRequest = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${token}`
@@ -18,7 +16,6 @@ export class TokenInterceptor implements HttpInterceptor {
             })
             return next.handle(authRequest)
         }
-
         return next.handle(request)
     }
 }

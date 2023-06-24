@@ -8,7 +8,7 @@ header{
 
 a{
     text-decoration: none;
-    transition: var(--standard_animation);
+    transition: var(--animation_standard);
     &:hover{
         opacity: 0.6;
     }

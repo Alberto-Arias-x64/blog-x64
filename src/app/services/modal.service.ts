@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { ModalInterface } from '../interfaces/modal.interface';
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { ModalInterface } from '../interfaces/modal.interface'
 
 @Injectable({
     providedIn: 'root'
 })
 export class ModalService {
     private _Data: ModalInterface = {
-        title: "",
-        description: "",
+        title: '',
+        description: '',
         image: {
-            src: "",
-            alt: ""
+            src: '',
+            alt: ''
         },
-        button: ""
+        button: ''
     }
     private ModalState = new BehaviorSubject(false)
     private ModalData = new BehaviorSubject(this._Data)

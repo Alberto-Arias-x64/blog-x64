@@ -1,7 +1,7 @@
 export interface HttpResponse<T> {
     data: T | any
     message: string
-    status: string
+    status: 'OK' | 'FAIL'
 }
 
 export interface ImageInterface {
@@ -21,6 +21,7 @@ export interface ProjectsInterface {
 }
 
 export interface MessagesInterface {
+    id: number
     name: string
     read: boolean
     createdAt: string | Date

@@ -2,11 +2,13 @@ import { Component, OnInit, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
 import { HttpResponse, MessagesInterface } from 'src/app/interfaces/http.interface'
+import { RelativeDatePipe } from 'src/app/pipes/relative-date.pipe'
+import { RouterModule } from '@angular/router'
 
 @Component({
     selector: 'app-messages',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, RelativeDatePipe, RouterModule],
     templateUrl: './messages.component.html',
     styleUrls: ['./messages.component.scss']
 })
@@ -19,6 +21,7 @@ export class MessagesComponent implements OnInit {
         this.Http.get<HttpResponse<MessagesInterface[]>>('api/admin/read_messages').subscribe({
             next: (res => {
                 this.messages = res.data
+                console.log("", this.messages)
             }),
             error: (res: any) => {}
         })

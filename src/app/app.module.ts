@@ -7,7 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component'
 import { RouterModule } from '@angular/router'
 import { QuicklinkStrategy } from 'ngx-quicklink'
-import { ModalComponent } from './components/modal/modal.component'
+import { ModalComponent } from './shared/modal/modal.component'
 import { TokenInterceptor } from './interceptors/token.interceptor'
 @NgModule({
     declarations: [AppComponent],

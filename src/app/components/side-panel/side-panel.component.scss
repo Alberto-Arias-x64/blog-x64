@@ -5,11 +5,15 @@
 a{
     text-decoration: none;
     cursor: pointer;
-    transition: var(--standard_animation);
+    transition: var(--animation_standard);
     &:hover{
         opacity: 0.6;
     }
     &.active{
         color: var(--color_accent);
     }
+}
+
+aside{
+    padding-left: 0;
 }

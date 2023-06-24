@@ -23,7 +23,7 @@
     padding: .2rem;
     border-radius: .2rem;
     background-color: whitesmoke;
-    transition: var(--standard_animation);
+    transition: var(--animation_standard);
     img{
         max-height: 100%;
         max-width: 100%;
@@ -40,7 +40,7 @@
         bottom: -2rem;
         font-size: smaller;
         color: transparent;
-        transition: var(--standard_animation);
+        transition: var(--animation_standard);
     }
 }
 .project{
@@ -72,7 +72,7 @@
     height: 5rem;
     width: 5rem;
     color: var(--color_secondary);
-    transition: var(--standard_animation);
+    transition: var(--animation_standard);
     cursor: pointer;
     &:hover{
         color: var(--color_accent);

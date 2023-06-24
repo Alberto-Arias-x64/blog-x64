@@ -1,9 +1,9 @@
-<section>
+<section class="padding_big">
     <ng-container *ngFor="let item of messages">
-        <div>
-            <p>{{item.read}}</p>
-            <p>{{item.name}}</p>
-            <p>{{item.createdAt | date}}</p>
+        <div class="message padding_small gap_small" [routerLink]="['/admin/messages/',item.id]">
+            <div class="dot" [class.no_read]="!item.read"></div>
+            <p>De: {{item.name}}</p>
+            <p>{{item.createdAt | relativeDate}}</p>
         </div>
     </ng-container>
 </section>

@@ -35,7 +35,7 @@ export class LoginComponent {
         if (form.invalid) return
         this.sendingFlag = true
         this.Modal.setData = BlockIPMock
-        this.Http.post<HttpResponse<any>>('/api/admin/login', form.value).subscribe({
+        this.Http.post<HttpResponse<any>>('/api/auth/login', form.value).subscribe({
             next: (res) => {
                 this.sendingFlag = false
                 if (res.status === 'OK') {
