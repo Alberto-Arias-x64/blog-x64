@@ -1,1 +1,11 @@
-<p>message-detail works!</p>
+<section class="padding_standard">
+    <article class="title f_row gap_small">
+        <h3>{{message?.name}}</h3>
+        <span class="time f_row gap_small fit">
+            <p>{{ message?.createdAt | date}}</p>
+            <p>({{ message?.createdAt | relativeDate}})</p>
+        </span>
+    </article>
+    <br>
+    <p>{{message?.message}}</p>
+</section>

@@ -26,3 +26,10 @@ export interface MessagesInterface {
     read: boolean
     createdAt: string | Date
 }
+
+export interface SingleMessageInterface extends MessagesInterface {
+    mail: string
+    message: string
+    phone: string
+    updatedAt: Date | string
+}
