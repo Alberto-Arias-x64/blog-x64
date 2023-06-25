@@ -8,7 +8,8 @@ const routes: Routes = [
         children: [
             { path: '', loadComponent: () => import('./views/main/main.component').then((c) => c.MainComponent), title: 'Alberto Arias | Blog' },
             { path: 'about', loadComponent: () => import('./views/about/about.component').then((c) => c.AboutComponent), title: 'Alberto Arias | Sobre mi' },
-            { path: 'contact', loadComponent: () => import('./views/contact/contact.component').then((c) => c.ContactComponent), title: 'Alberto Arias | Contácteme' }
+            { path: 'contact', loadComponent: () => import('./views/contact/contact.component').then((c) => c.ContactComponent), title: 'Alberto Arias | Contácteme' },
+            { path: 'post/:id', loadComponent: () => import('./views/post/post.component').then((c) => c.PostComponent), title: 'Alberto Arias | Contácteme' },
         ]
     },
     { path: 'login', loadComponent: () => import('./views/login/login.component').then((c) => c.LoginComponent) },
@@ -18,7 +19,7 @@ const routes: Routes = [
         canActivate: [authGuard],
         children: [
             { path: 'messages/:id', loadComponent: () => import('./admin/message-detail/message-detail.component').then((c) => c.MessageDetailComponent) },
-            { path: 'messages', loadComponent: () => import('./admin/messages/messages.component').then((c) => c.MessagesComponent) },
+            { path: 'messages', loadComponent: () => import('./admin/messages/messages.component').then((c) => c.MessagesComponent) }
         ]
     },
     { path: '**', loadComponent: () => import('./templates/error/error.component').then((c) => c.ErrorComponent) }

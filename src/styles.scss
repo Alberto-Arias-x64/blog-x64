@@ -300,3 +300,18 @@ picture {
         transform: rotate(360deg);
     }
 }
+
+
+/* markdown */
+.md{
+    h1{
+        font-size: 5rem;
+    }
+    h2{
+        font-size: 3rem;
+    }
+    pre{
+        max-width: calc(100vw - 12rem);
+        overflow: auto;
+    }
+}

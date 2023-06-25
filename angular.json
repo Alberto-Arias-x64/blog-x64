@@ -26,8 +26,8 @@
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "assets": ["src/favicon.ico", "src/assets"],
-                        "styles": ["src/styles.scss"],
-                        "scripts": []
+                        "styles": ["src/styles.scss", "node_modules/prismjs/themes/prism-okaidia.css"],
+                        "scripts": ["node_modules/marked/marked.min.js", "node_modules/prismjs/prism.js", "node_modules/prismjs/components/prism-csharp.min.js", "node_modules/prismjs/components/prism-css.min.js"]
                     },
                     "configurations": {
                         "production": {
