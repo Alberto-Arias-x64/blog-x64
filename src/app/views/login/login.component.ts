@@ -34,7 +34,11 @@ export class LoginComponent {
     sendForm(form: FormGroup) {
         if (form.invalid) return
         this.sendingFlag = true
-        this.Modal.setData = BlockIPMock
+        const modalTemplate = JSON.parse(JSON.stringify(BlockIPMock))
+        modalTemplate.buttonPrincipal.action = () => {
+            this.Router.navigate(['/'])
+        }
+        this.Modal.setData = modalTemplate
         this.Http.post<HttpResponse<any>>('/api/auth/login', form.value).subscribe({
             next: (res) => {
                 this.sendingFlag = false

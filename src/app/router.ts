@@ -17,9 +17,11 @@ const routes: Routes = [
         path: 'admin',
         loadComponent: () => import('./templates/admin/admin.component').then((c) => c.AdminComponent),
         canActivate: [authGuard],
+        title:'Admin',
         children: [
-            { path: 'messages/:id', loadComponent: () => import('./admin/message-detail/message-detail.component').then((c) => c.MessageDetailComponent) },
-            { path: 'messages', loadComponent: () => import('./admin/messages/messages.component').then((c) => c.MessagesComponent) }
+            { path: 'messages/:id', loadComponent: () => import('./admin/message-detail/message-detail.component').then((c) => c.MessageDetailComponent)},
+            { path: 'messages', loadComponent: () => import('./admin/messages/messages.component').then((c) => c.MessagesComponent) },
+            { path: 'new_post', loadComponent: () => import('./admin/post/post.component').then((c) => c.PostComponent) }
         ]
     },
     { path: '**', loadComponent: () => import('./templates/error/error.component').then((c) => c.ErrorComponent) }

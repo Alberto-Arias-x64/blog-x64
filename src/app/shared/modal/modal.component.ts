@@ -24,7 +24,10 @@ export class ModalComponent implements OnInit {
         })
     }
 
-    changeState() {
-        this.Modal.setState = !this.state
+    principalAction () {
+        if(this.data.buttonPrincipal.action){
+            this.data.buttonPrincipal.action()
+        }
+        this.Modal.setState = false
     }
 }

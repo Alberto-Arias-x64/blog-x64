@@ -1,8 +1,15 @@
-import { ImageInterface } from "./http.interface";
+import { ImageInterface } from './http.interface'
 
 export interface ModalInterface {
     title: string
     image: ImageInterface
     description: string
-    button: string
+    buttonPrincipal: {
+        text: string
+        action: Function | null
+    },
+    buttonSecondary?: {
+        text: string
+        action: Function | null
+    }
 }

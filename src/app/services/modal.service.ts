@@ -13,7 +13,10 @@ export class ModalService {
             src: '',
             alt: ''
         },
-        button: ''
+        buttonPrincipal: {
+            text: '',
+            action: () => {}
+        }
     }
     private ModalState = new BehaviorSubject(false)
     private ModalData = new BehaviorSubject(this._Data)

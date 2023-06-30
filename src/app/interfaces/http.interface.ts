@@ -33,3 +33,13 @@ export interface SingleMessageInterface extends MessagesInterface {
     phone: string
     updatedAt: Date | string
 }
+
+export interface PostInterface {
+    name: string
+    keywords: string
+    tags: string
+    description: string
+    date: Date | string
+    data: string,
+    image: string
+}

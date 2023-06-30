@@ -7,7 +7,10 @@ export const messageSendMock: ModalInterface = {
         src: "assets/icons/check.svg",
         alt: "modal image",
     },
-    button: "Cerrar"
+    buttonPrincipal: {
+        text: "Cerrar",
+        action: null,
+    }
 }
 
 export const BlockIPMock: ModalInterface = {
@@ -17,5 +20,8 @@ export const BlockIPMock: ModalInterface = {
         src: "assets/icons/check.svg",
         alt: "modal image",
     },
-    button: "Cerrar"
+    buttonPrincipal: {
+        text: "Cerrar",
+        action: null,
+    }
 }
