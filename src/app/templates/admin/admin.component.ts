@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidePanelComponent } from 'src/app/components/side-panel/side-panel.component';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from 'src/app/shared/header/header.component';
 
 @Component({
     selector: 'app-admin',
@@ -9,6 +10,7 @@ import { RouterModule } from '@angular/router';
     imports: [
         CommonModule,
         SidePanelComponent,
+        HeaderComponent,
         RouterModule
     ],
     templateUrl: './admin.component.html',

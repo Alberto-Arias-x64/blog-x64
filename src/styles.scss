@@ -6,7 +6,7 @@
 }
 :root {
     --color_principal: #000;
-    --color_principal_light: #1a1a1a;
+    --color_mantel: #1a1a1a;
     --color_secondary: #fff;
     --color_tertiary: #5c5c5c;
     --color_accent: #e31952;
@@ -16,6 +16,7 @@ html {
     font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 62.5%;
     background-color: var(--color_principal);
+    overflow-x: hidden;
 }
 * {
     margin: 0;
@@ -217,11 +218,11 @@ picture {
 }
 
 /* Layout grid */
-.c_half {
+.column_half {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-.c_DT {
+.column_2-3 {
     display: grid;
     grid-template-columns: 2fr 3fr;
 }
@@ -267,11 +268,7 @@ picture {
 
 /* Shared elements */
 .card {
-    background-color: var(--color_principal_light);
-    transition: var(--animation_standard);
-    &:hover{
-        background-color: #5c5c5c;
-    }
+    background-color: var(--color_mantel);
 }
 
 /* sending animation */

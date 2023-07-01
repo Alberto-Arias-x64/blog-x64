@@ -1,8 +1,8 @@
 <header class="padding_standard" [class.scroll]="isMenuScrolling">
     <nav class="f_row centred gap_standard">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">PRINCIPAL</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">BLOG</a>
         <a routerLink="/about" routerLinkActive="active">ACERCA DE MI</a>
         <a routerLink="/contact" routerLinkActive="active">CONTACTO</a>
-        <a>BLOG</a>
+        <a *ngIf="isAdmin" routerLink="/admin" routerLinkActive="active">ADMIN</a>
     </nav>
 </header>

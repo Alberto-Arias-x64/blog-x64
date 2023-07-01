@@ -19,7 +19,7 @@ export class ZoomFilterDirective {
     }
 
     private zoomIn(): void {
-        this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'scale(1.2)')
+        this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'scale(1.1)')
         this.renderer.setStyle(this.elementRef.nativeElement, 'transition', 'transform 0.3s')
     }
 

@@ -1,9 +1,11 @@
 header{
     position: fixed;
     top: 0;
+    left: 0;
     height: max-content;
-    width: 100%;
+    width: 100vw;
     z-index: 9;
+    transition: var(--animation_standard);
 }
 
 a{

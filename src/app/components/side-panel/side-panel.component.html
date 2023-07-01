@@ -1,4 +1,4 @@
-<aside class="padding_standard">
+<aside class="padding_standard full">
     <h4 class="padding_small">Admin</h4>
     <nav>
         <a routerLink="/admin/messages" routerLinkActive="active">
@@ -11,13 +11,13 @@
                 <p>New post</p>
             </div>
         </a>
-        <a routerLink="/get_logs" routerLinkActive="active">
+        <a href="/get_logs">
             <div class="router_box padding_small">
                 <p>Admin logs</p>
             </div>
         </a>
-        <button>
-            Log out
-        </button>
     </nav>
+    <button (click)="logOut()">
+        Log out
+    </button>
 </aside>

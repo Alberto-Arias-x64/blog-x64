@@ -1,6 +1,11 @@
-section {
+main {
     min-height: 100vh;
     height: fit-content;
+    display: grid;
+    grid-template-rows: 4rem auto;
+}
+
+.work_space{
     display: grid;
     grid-template-columns: max-content auto;
 }

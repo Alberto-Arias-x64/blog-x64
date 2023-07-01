@@ -1,3 +1,7 @@
+.about{
+    min-height: 100vh;
+    height: fit-content;
+}
 .portrait{
     filter: drop-shadow(transparentize($color: #e31952, $amount: .4) .2rem -.2rem .2rem);
 }
@@ -5,7 +9,7 @@
 .badge_container{
     position: relative;
     padding-bottom: 2rem;
-    overflow: hidden;
+    overflow: visible;
     margin: 0 auto;
     height: 8rem;
     width: 100%;
@@ -15,7 +19,6 @@
         animation: autoMove 60s infinite linear;
     }
 }
-
 .badge{
     position: relative;
     height: 7rem;
@@ -43,12 +46,23 @@
         transition: var(--animation_standard);
     }
 }
-.project{
-    max-width: 1000px;
+
+.projects_container{
     width: 100%;
-    .card{
-        border-right: none;
-    }
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+.project{
+    overflow: hidden;
+    max-width: 100rem;
+    width: 100%;
+    height: 40rem;
+}
+.info_card{
+    display: grid;
+    grid-template-rows: max-content auto min-content;
+    align-items: center;
 }
 .status{
     height: 1rem;
@@ -77,4 +91,11 @@
     &:hover{
         color: var(--color_accent);
     }
+}
+.pointer{
+    cursor: pointer;
+}
+
+.spacer{
+    margin-top: 10rem;
 }
