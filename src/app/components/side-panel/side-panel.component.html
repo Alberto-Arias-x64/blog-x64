@@ -1,9 +1,23 @@
 <aside class="padding_standard">
     <h4 class="padding_small">Admin</h4>
     <nav>
-        <div class="router_box padding_small">
-            <a routerLink="/admin/messages" routerLinkActive="active">Messages</a>
-            <a routerLink="/admin/new_post" routerLinkActive="active">new Post</a>
-        </div>
+        <a routerLink="/admin/messages" routerLinkActive="active">
+            <div class="router_box padding_small">
+                <p>Messages</p>
+            </div>
+        </a>
+        <a routerLink="/admin/new_post" routerLinkActive="active">
+            <div class="router_box padding_small">
+                <p>New post</p>
+            </div>
+        </a>
+        <a routerLink="/get_logs" routerLinkActive="active">
+            <div class="router_box padding_small">
+                <p>Admin logs</p>
+            </div>
+        </a>
+        <button>
+            Log out
+        </button>
     </nav>
 </aside>

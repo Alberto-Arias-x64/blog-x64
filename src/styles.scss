@@ -6,6 +6,7 @@
 }
 :root {
     --color_principal: #000;
+    --color_principal_light: #1a1a1a;
     --color_secondary: #fff;
     --color_tertiary: #5c5c5c;
     --color_accent: #e31952;
@@ -160,7 +161,6 @@ button {
 
 /* Images */
 picture {
-    position: relative;
     overflow: hidden;
     img {
         width: 100%;
@@ -267,10 +267,10 @@ picture {
 
 /* Shared elements */
 .card {
-    background-color: transparentize($color: white, $amount: 0.9);
+    background-color: var(--color_principal_light);
     transition: var(--animation_standard);
-    &:hover {
-        background-color: transparentize($color: white, $amount: 0.85);
+    &:hover{
+        background-color: #5c5c5c;
     }
 }
 

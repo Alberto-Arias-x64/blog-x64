@@ -34,8 +34,8 @@
         <h3>Proyectos</h3>
         <p>Muestra de mi talento y esfuerzo, si te interesa ver mas en mi GitHub tengo mas, la mayoría son públicos</p>
         <br>
-        <section class="c_DT project" *ngFor="let item of Projects">
-            <article class="card padding_standard f_column gap_small">
+        <section class="c_DT project card" *ngFor="let item of Projects">
+            <article class="padding_standard f_column gap_small">
                 <h5>{{ item.title }}</h5>
                 <div class="f_row gap_small centred-v">
                     <p>Estatus: <strong>{{item.status}}</strong></p>
@@ -51,7 +51,7 @@
                 </div>
             </article>
             <picture>
-                <img [src]="item.image.src" [alt]="item.image.alt" loading="lazy" decoding="async" appBlackFilter>
+                <img [src]="item.image.src" [alt]="item.image.alt" loading="lazy" decoding="async" appZoomFilter>
             </picture>
         </section>
     </article>

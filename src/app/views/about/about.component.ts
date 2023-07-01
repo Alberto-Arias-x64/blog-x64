@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ImageInterface, ProjectsInterface } from 'src/app/interfaces/http.interface';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { BlackFilterDirective } from 'src/app/directives/black-filter.directive';
+import { ZoomFilterDirective } from 'src/app/directives/zoom-filter.directive';
 
 @Component({
     selector: 'app-about',
     standalone: true,
-    imports: [CommonModule, AngularSvgIconModule, BlackFilterDirective],
+    imports: [CommonModule, AngularSvgIconModule, ZoomFilterDirective],
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.scss']
 })

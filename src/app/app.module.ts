@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router'
 import { QuicklinkStrategy } from 'ngx-quicklink'
 import { MarkdownModule } from 'ngx-markdown'
 import { ModalComponent } from './shared/modal/modal.component'
-import { TokenInterceptor } from './interceptors/token.interceptor'
+import { TokenInterceptor } from './interceptors/token.interceptor';
 @NgModule({
     declarations: [AppComponent],
     imports: [
