@@ -15,7 +15,7 @@ export class BlackFilterDirective implements OnInit, OnDestroy {
         const options = {
             root: null,
             rootMargin: '0px',
-            threshold: 1.0
+            threshold: 0.8
         }
 
         this.observer = new IntersectionObserver(entries => {

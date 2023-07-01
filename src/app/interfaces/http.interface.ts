@@ -12,12 +12,10 @@ export interface ImageInterface {
 export interface ProjectsInterface {
     title: string
     status: string
-    frontend: string
-    backend: string
-    deploy: string
     description: string
     link: string
     image: ImageInterface
+    tech: ImageInterface[]
 }
 
 export interface MessagesInterface {

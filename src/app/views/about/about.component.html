@@ -21,25 +21,8 @@
             </div>
         </div>
     </article>
-    <!-- Technologies -->
-    <article class="f_column gap_standard">
-        <h3>Stack de tecnologías</h3>
-        <p>Estas son unas de las herramientas que he utilizado a lo largo de mi carrera profesional</p>
-        <section class="badge_container">
-            <article class="f_row gap_small" #BadgeContainer>
-                <div class="badge f_column centred" *ngFor="let item of Badges">
-                    <img load="lazy" decoding="async" [src]="item.src" [alt]="item.alt">
-                    <p class="badge_name">{{item.alt}}</p>
-                </div>
-                <div class="badge f_column centred" *ngFor="let item of Badges">
-                    <img load="lazy" decoding="async" [src]="item.src" [alt]="item.alt">
-                    <p class="badge_name">{{item.alt}}</p>
-                </div>
-            </article>
-        </section>
-    </article>
     <!-- Projects -->
-    <article class="f_column gap_standard spacer">
+    <article class="f_column gap_standard">
         <h3>Proyectos</h3>
         <p>Muestra de mi talento y esfuerzo, si te interesa ver mas en mi GitHub tengo mas, la mayoría son públicos</p>
         <br>
@@ -49,23 +32,27 @@
                     <h5>{{ item.title }}</h5>
                     <div>
                         <div class="f_row gap_small centred-v">
-                            <p>Estatus: <strong>{{item.status}}</strong></p>
+                            <p><strong>Estatus: </strong>{{item.status}}</p>
                             <div class="status" [class.ok]="item.status === 'OK'"
                                 [class.development]="item.status === 'Desarrollo'"
                                 [class.pending]="item.status !== 'OK' && item.status !== 'Desarrollo'"></div>
                         </div>
-                        <p>Frontend: <strong>{{ item.frontend }}</strong></p>
-                        <p>Backend: <strong>{{ item.backend }}</strong></p>
-                        <p>Despliegue: <strong>{{ item.deploy }}</strong></p>
-                        <p>Descripción: <strong>{{ item.description }}</strong></p>
+                        <br>
+                        <p><strong>Descripción: </strong>{{ item.description }}</p>
                     </div>
                     <div class="f_column centred">
                         <button (click)="sendTo(item.link)" class="full">Visitar</button>
                     </div>
                 </article>
                 <picture (click)="sendTo(item.link)" class="pointer">
-                    <img [src]="item.image.src" [alt]="item.image.alt" loading="lazy" decoding="async" appZoomFilter>
+                    <img [src]="item.image.src" [alt]="item.image.alt" loading="lazy" decoding="async" appZoomFilter appBlackFilter>
                 </picture>
+                <div class="f_column gap_small badges_container full centred" appShowBadges>
+                    <div class="badge f_row centred" *ngFor="let tech of item.tech">
+                        <img load="lazy" decoding="async" [src]="tech.src" [alt]="tech.alt">
+                        <p class="badge_name">{{tech.alt}}</p>
+                    </div>
+                </div>
             </section>
         </div>
     </article>
