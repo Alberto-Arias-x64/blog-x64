@@ -1,5 +1,12 @@
 <section class="padding_big f_column centred">
     <br>
+    <div class="full post_wrapper">
+        <div class="f_row gap_small centred-v return_container" (click)="return()">
+            <svg-icon src="assets/icons/arrow.svg" class="return"/>
+            <p>Volver</p>
+        </div>
+    </div>
+    <br>
     <article class="post_wrapper">
         <markdown class="md f_column gap_big" [src]="data?.data"/>
     </article>

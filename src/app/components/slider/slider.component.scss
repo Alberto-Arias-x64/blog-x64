@@ -4,7 +4,7 @@ section {
     grid-template-columns: max-content auto max-content;
 }
 
-button {
+.control {
     border: none;
     cursor: pointer;
     color: var(--color_secondary);
@@ -30,8 +30,10 @@ button {
 }
 
 .contend {
+    position: relative;
     overflow: hidden;
     height: max-content;
+    background-color: transparent;
 }
 
 .blog {
@@ -45,7 +47,6 @@ button {
     }
     div {
         position: relative;
-        border: var(--color_secondary) 0.2rem solid;
         border-top: none;
         overflow: hidden;
         &::after {
@@ -61,9 +62,6 @@ button {
         p {
             width: 100%;
             height: fit-content;
-        }
-        p {
-            color: var(--color_tertiary);
         }
     }
 }

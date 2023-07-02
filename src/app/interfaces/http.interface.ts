@@ -33,7 +33,7 @@ export interface SingleMessageInterface extends MessagesInterface {
 }
 
 export interface PostInterface {
-    name: string
+    title: string
     keywords: string
     tags: string
     description: string

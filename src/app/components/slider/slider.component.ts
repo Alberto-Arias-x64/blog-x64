@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-import { HttpClientModule } from '@angular/common/http';
+import { Component, Input, inject } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { AngularSvgIconModule } from 'angular-svg-icon'
+import { PostInterface } from 'src/app/interfaces/http.interface'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-slider',
@@ -11,5 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
     styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent {
-    @Input() list!: any[]
+    @Input() list!: PostInterface[]
+    private readonly Router = inject(Router)
+
+    navigateTo(URL: string) {
+        const route = URL.replace(/\s/g, '_')
+        console.log('', route)
+        this.Router.navigate(['/post/', route])
+    }
 }

@@ -72,6 +72,12 @@ a,
 label {
     color: var(--color_secondary);
 }
+p > a{
+    transition: var(--animation_standard);
+    &:hover{
+        color: var(--color_accent);
+    }
+}
 
 /* Inputs */
 input {
