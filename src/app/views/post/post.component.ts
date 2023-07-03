@@ -4,7 +4,7 @@ import { MarkdownModule } from 'ngx-markdown'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Meta, Title } from '@angular/platform-browser'
 import { HttpClient } from '@angular/common/http'
-import { PostInterface } from 'src/app/interfaces/http.interface'
+import { HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 
 @Component({
@@ -24,10 +24,11 @@ export class PostComponent implements OnInit {
 
     ngOnInit(): void {
         const { id } = this.Route.snapshot.params
-        this.Http.get<PostInterface>(`/uploads/posts/${id}.json`).subscribe({
+        this.Http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
             next: (response) => {
-                this.data = response
-                this.metaTags(response)
+                this.data = response.data
+                console.log("", response)
+                this.metaTags(response.data)
             },
             error: () => this.Router.navigate(['/404'])
         })

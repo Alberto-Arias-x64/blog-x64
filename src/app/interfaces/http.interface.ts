@@ -37,7 +37,8 @@ export interface PostInterface {
     keywords: string
     tags: string
     description: string
-    date: Date | string
+    createdAt: Date | string
+    updatedAt: Date | string
     data: string,
     image: string
 }

@@ -1,1 +1,58 @@
-<p>siu</p>
+<section>
+    <h1>Publica un nuevo post</h1>
+    <form [formGroup]="form" (ngSubmit)="sendForm(form)" class="f_column gap_big padding_standard centred-v">
+        <div class="input_decorator">
+            <label for="title">Titulo</label>
+            <div class="f_row gap_small">
+                <svg-icon class="icon" src="assets/icons/user.svg"/>
+                <input type="text" id="title" name="title" formControlName="title" placeholder="" autocomplete="off">
+            </div>
+            <p class="customError" [class.active]="titile?.hasError('required') && titile?.touched">Campo requerido</p>
+        </div>
+        <div class="column_half gap_standard full">
+            <div class="input_decorator">
+                <label for="keywords">Keywords</label>
+                <div class="f_row gap_small">
+                    <svg-icon  class="icon" src="assets/icons/whatsapp.svg"/>
+                    <input type="text" id="keywords" name="keywords" formControlName="keywords" placeholder="Key, Word, For, SEO" autocomplete="off">
+                </div>
+                <p class="customError" [class.active]="keywords?.hasError('required') && keywords?.touched">Campo requerido</p>
+            </div>
+            <div class="input_decorator">
+                <label for="tags">Tags</label>
+                <div class="f_row gap_small centred-v">
+                    <svg-icon  class="icon" src="assets/icons/mail.svg"/>
+                    <input type="text" id="tags" name="tags" formControlName="tags" placeholder="" autocomplete="off">
+                </div>
+                <p class="customError" [class.active]="tags?.hasError('required') && tags?.touched">Campo requerido</p>
+            </div>
+        </div>
+        <div class="input_decorator">
+            <label for="description">Descripción</label>
+            <div class="f_row gap_small">
+                <svg-icon class="icon" src="assets/icons/message.svg"/>
+                <textarea formControlName="description" id="description" name="description" cols="30" rows="10" maxlength="2000" autocomplete="off"></textarea>
+            </div>
+            <p class="customError" [class.active]="description?.hasError('required') && description?.touched">Campo requerido</p>
+        </div>
+        <div class="column_half gap_standard">
+            <div class="input_decorator full">
+                <label for="image">Imagen</label>
+                <div class="f_row gap_small">
+                    <svg-icon class="icon" src="assets/icons/message.svg"/>
+                    <input type="file" id="image" name="image" accept=".png" (change)="selectFile($event, 'image')" (click)="touchField('image')">
+                </div>
+                <p class="customError" [class.active]="image?.hasError('required') && image?.touched">Campo requerido</p>
+            </div>
+            <div class="input_decorator full">
+                <label for="document">Descripción</label>
+                <div class="f_row gap_small">
+                    <svg-icon class="icon" src="assets/icons/message.svg"/>
+                    <input type="file" id="document" name="document" accept=".md" (change)="selectFile($event, 'document')" (click)="touchField('document')">
+                </div>
+                <p class="customError" [class.active]="document?.hasError('required') && document?.touched">Campo requerido</p>
+            </div>
+        </div>
+        <button type="submit" class="fit" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Send</p></button>
+    </form>
+</section>
