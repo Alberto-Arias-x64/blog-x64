@@ -25,3 +25,16 @@ export const BlockIPMock: ModalInterface = {
         action: null,
     }
 }
+
+export const ExpiredTimeModal: ModalInterface = {
+    title: "Sesión expirada",
+    description: "Se acabo el tiempo",
+    image: {
+        src: "assets/icons/check.svg",
+        alt: "modal image",
+    },
+    buttonPrincipal: {
+        text: "Cerrar",
+        action: null,
+    }
+}

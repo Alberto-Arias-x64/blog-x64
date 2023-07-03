@@ -65,8 +65,8 @@ export class PostComponent {
         this.form.get(control)?.markAsTouched()
     }
 
-    get titile() {
-        return this.form.get('titile')
+    get title() {
+        return this.form.get('title')
     }
     get keywords() {
         return this.form.get('keywords')

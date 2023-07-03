@@ -4,6 +4,7 @@
 .return_container{
     color: var(--color_secondary);
     cursor: pointer;
+    user-select: none;
     p{
         color: currentColor;
         transition: var(--animation_standard);
