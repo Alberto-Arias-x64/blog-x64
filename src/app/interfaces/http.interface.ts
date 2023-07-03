@@ -42,3 +42,8 @@ export interface PostInterface {
     data: string,
     image: string
 }
+
+export interface WindowsInterface {
+    folders:  string[];
+    archives: string[];
+}

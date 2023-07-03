@@ -21,7 +21,6 @@ export class MessagesComponent implements OnInit {
         this.Http.get<HttpResponse<MessagesInterface[]>>('api/admin/read_messages').subscribe({
             next: (res => {
                 this.messages = res.data
-                console.log("", this.messages)
             }),
             error: (res: any) => {}
         })

@@ -1,0 +1,17 @@
+<section class="f_column gap_standard padding_big">
+    <article class="f_row gap_small">
+        <p (click)="return()">Main</p>
+        <ng-container *ngFor="let item of path">
+            <p>&gt;</p>
+            <p>{{item}}</p>
+        </ng-container>
+    </article>
+    <article class="f_row gap_standard wrap">
+        <ng-container *ngFor="let item of folders">
+            <app-iconify iconType="folder" [name]="item" (dblclick)="open(item)"/>
+        </ng-container>
+        <ng-container *ngFor="let item of files">
+            <app-iconify iconType="archive" [name]="item" />
+        </ng-container>
+    </article>
+</section>

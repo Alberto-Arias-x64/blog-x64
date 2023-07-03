@@ -21,7 +21,8 @@ const routes: Routes = [
         children: [
             { path: 'messages/:id', loadComponent: () => import('./admin/message-detail/message-detail.component').then((c) => c.MessageDetailComponent)},
             { path: 'messages', loadComponent: () => import('./admin/messages/messages.component').then((c) => c.MessagesComponent) },
-            { path: 'new_post', loadComponent: () => import('./admin/post/post.component').then((c) => c.PostComponent) }
+            { path: 'windows', loadComponent: () => import('./admin/windows/windows.component').then((c) => c.WindowsComponent) },
+            { path: 'new_post', loadComponent: () => import('./admin/post/post.component').then((c) => c.PostComponent) },
         ]
     },
     { path: '**', loadComponent: () => import('./templates/error/error.component').then((c) => c.ErrorComponent) }
