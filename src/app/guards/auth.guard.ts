@@ -22,11 +22,13 @@ export const authGuard: CanActivateFn = (route, state) => {
             const timeRemaining = expirationDate.getTime() - currentTime.getTime()
             setTimeout(() => {
                 const modalModel = JSON.parse(JSON.stringify(ExpiredTimeModal))
-                modalModel.buttonPrincipal = () => Router.navigate(['/'])
+                modalModel.buttonPrincipal.action = () => {
+                    Auth.logOut()
+                    Router.navigate(['/'])
+                }
                 Modal.setData = modalModel
                 Modal.setState = true
             }, timeRemaining)
-            alert(`Quedan ${new Date(timeRemaining).getMinutes()} Minutos`)
             return true
         }
     }

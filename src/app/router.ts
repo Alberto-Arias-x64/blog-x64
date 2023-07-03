@@ -23,6 +23,7 @@ const routes: Routes = [
             { path: 'messages', loadComponent: () => import('./admin/messages/messages.component').then((c) => c.MessagesComponent) },
             { path: 'windows', loadComponent: () => import('./admin/windows/windows.component').then((c) => c.WindowsComponent) },
             { path: 'new_post', loadComponent: () => import('./admin/post/post.component').then((c) => c.PostComponent) },
+            { path: 'posts', loadComponent: () => import('./admin/posts/posts.component').then((c) => c.PostsComponent) },
         ]
     },
     { path: '**', loadComponent: () => import('./templates/error/error.component').then((c) => c.ErrorComponent) }

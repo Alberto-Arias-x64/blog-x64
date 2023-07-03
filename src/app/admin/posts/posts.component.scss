@@ -1,0 +1,30 @@
+.message {
+    display: grid;
+    grid-template-columns: max-content auto max-content;
+    border-bottom: 1px solid var(--color_secondary) ;
+    cursor: pointer;
+    &:hover {
+        p{
+            color: var(--color_accent);
+            opacity: 1;
+        }
+    }
+}
+.dot{
+    height: 2rem;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    border: .1rem solid var(--color_secondary);
+    transition: var(--animation_standard);
+    &:hover{
+        border-color: var(--color_accent);
+    }
+}
+
+.no_read{
+    font-weight: bold;
+}
+
+.read{
+    opacity: .6;
+}

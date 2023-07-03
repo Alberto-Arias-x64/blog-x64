@@ -1,1 +1,12 @@
-<p>posts works!</p>
+<section class="f_column centred-v padding_standard">
+    <ng-container *ngFor="let item of posts">
+        <div class="message padding_small gap_small full" [routerLink]="['/admin/new_post/',]">
+            <div class="dot"></div>
+            <p>{{item.title}}</p>
+            <p>{{item.createdAt | relativeDate}}</p>
+        </div>
+    </ng-container>
+    <button routerLink="/admin/new_post" class="fit margin_standard">
+        New posts
+    </button>
+</section>
