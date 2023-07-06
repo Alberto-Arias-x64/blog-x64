@@ -35,7 +35,7 @@ export interface SingleMessageInterface extends MessagesInterface {
 export interface PostInterface {
     title: string
     keywords: string
-    tags: string
+    category: string
     description: string
     createdAt: Date | string
     updatedAt: Date | string
