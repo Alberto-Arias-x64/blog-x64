@@ -17,7 +17,6 @@ export class SliderComponent {
 
     navigateTo(URL: string) {
         const route = URL.replace(/\s/g, '_')
-        console.log('', route)
         this.Router.navigate(['/post/', route])
     }
 }

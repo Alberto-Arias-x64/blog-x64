@@ -1,9 +1,44 @@
 <section>
     <h1>Dev Blog</h1>
-    <article>
-        <h3>Últimos</h3>
-        <ng-container>
-            <app-slider [list]="posts" />
-        </ng-container>
+    <p>say helou</p>
+    <br>
+    <!-- <article>
+        <h4>Populares</h4>
+        <app-slider [list]="posts" />
+    </article> -->
+    <article class="column_3-1 gap_big">
+        <div>
+            <section *ngFor="let item of posts" class="card padding_standard">
+                <article class="column_2-3">
+                    <picture (click)="navigateTo(item.title)" class="pointer padding_big">
+                        <img [src]="item.image" alt="imagen de blog" loading="lazy" decoding="async">
+                    </picture>
+                    <article class="padding_standard info_card">
+                        <h5>{{ item.title }}</h5>
+                        <p>{{item.createdAt | date}}</p>
+                        <br>
+                        <p>{{item.description}}</p>
+                    </article>
+                </article>
+                <article class="f_row centred-v">
+                    <button (click)="navigateTo(item.title)" class="fit">Seguir leyendo &gt;</button>
+                    <p>{{item.category}}</p>
+                </article>
+            </section>
+        </div>
+        <aside class="f_column">
+            <div class="input_decorator">
+                <label for="phone">Búsqueda</label>
+                <div class="f_row gap_small">
+                    <svg-icon class="icon" src="assets/icons/magnifier.svg" />
+                    <input type="text" id="search" name="search" placeholder="Búsqueda">
+                </div>
+            </div>
+            <br>
+            <h6>Temas</h6>
+            <ng-container *ngFor="let item of categoriesList">
+                <p>{{item.category}}</p>
+            </ng-container>
+        </aside>
     </article>
 </section>

@@ -47,3 +47,10 @@ export interface WindowsInterface {
     folders:  string[];
     archives: string[];
 }
+
+export interface CategoriesInterface {
+    id:        number;
+    category:  string;
+    createdAt: Date;
+    updatedAt: Date;
+}

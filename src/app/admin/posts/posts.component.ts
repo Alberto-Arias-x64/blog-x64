@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
 import { RouterLink } from '@angular/router'
 import { RelativeDatePipe } from 'src/app/pipes/relative-date.pipe'
+import { ModalService } from 'src/app/services/modal.service'
 
 @Component({
     selector: 'app-posts',
@@ -14,6 +15,8 @@ import { RelativeDatePipe } from 'src/app/pipes/relative-date.pipe'
 })
 export class PostsComponent {
     private readonly Http = inject(HttpClient)
+    private Modal = inject(ModalService)
+
 
     posts: PostInterface[] = []
 

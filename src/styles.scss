@@ -236,6 +236,10 @@ picture {
     display: grid;
     grid-template-columns: 2fr 3fr;
 }
+.column_3-1 {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
 
 /* Spacing */
 .margin_big {

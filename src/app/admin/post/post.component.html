@@ -11,7 +11,7 @@
         </div>
         <div class="column_half gap_standard full">
             <div class="input_decorator">
-                <label for="keywords">Keywords</label>
+                <label for="keywords">Palabras clave</label>
                 <div class="f_row gap_small">
                     <svg-icon  class="icon" src="assets/icons/whatsapp.svg"/>
                     <input type="text" id="keywords" name="keywords" formControlName="keywords" placeholder="Key, Word, For, SEO" autocomplete="off">
@@ -19,12 +19,15 @@
                 <p class="customError" [class.active]="keywords?.hasError('required') && keywords?.touched">Campo requerido</p>
             </div>
             <div class="input_decorator">
-                <label for="tags">Tags</label>
+                <label for="category">Categoría</label>
                 <div class="f_row gap_small centred-v">
                     <svg-icon  class="icon" src="assets/icons/mail.svg"/>
-                    <input type="text" id="tags" name="tags" formControlName="tags" placeholder="" autocomplete="off">
+                    <input type="text" list="categories" id="category" name="category" formControlName="category" placeholder="" autocomplete="off">
+                    <datalist id="categories" *ngFor="let item of categoriesList">
+                        <option>{{item.category}}</option>
+                    </datalist>
                 </div>
-                <p class="customError" [class.active]="tags?.hasError('required') && tags?.touched">Campo requerido</p>
+                <p class="customError" [class.active]="category?.hasError('required') && category?.touched">Campo requerido</p>
             </div>
         </div>
         <div class="input_decorator">
@@ -45,7 +48,7 @@
                 <p class="customError" [class.active]="image?.hasError('required') && image?.touched">Campo requerido</p>
             </div>
             <div class="input_decorator full">
-                <label for="document">Descripción</label>
+                <label for="document">Post (.md)</label>
                 <div class="f_row gap_small">
                     <svg-icon class="icon" src="assets/icons/message.svg"/>
                     <input type="file" id="document" name="document" accept=".md" (change)="selectFile($event, 'document')" (click)="touchField('document')">

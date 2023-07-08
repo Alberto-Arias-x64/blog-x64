@@ -1,12 +1,12 @@
-import { Component, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { ModalService } from 'src/app/services/modal.service'
 import { AngularSvgIconModule } from 'angular-svg-icon'
-import { HttpResponse } from 'src/app/interfaces/http.interface'
-import { messageSendMock } from 'src/app/mocks/modals.mock'
+import { CategoriesInterface, HttpResponse } from 'src/app/interfaces/http.interface'
+import { ErrorMock, messageSendMock, postCreatedMock } from 'src/app/mocks/modals.mock'
 
 @Component({
     selector: 'app-post',
@@ -15,22 +15,31 @@ import { messageSendMock } from 'src/app/mocks/modals.mock'
     templateUrl: './post.component.html',
     styleUrls: ['./post.component.scss']
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
     private readonly Builder = inject(FormBuilder)
     private readonly Http = inject(HttpClient)
     private readonly Router = inject(Router)
     private Modal = inject(ModalService)
 
+    categoriesList?: CategoriesInterface[] | null
     sendingFlag = false
 
     form = this.Builder.group({
         title: new FormControl(null, [Validators.required]),
         keywords: new FormControl(null, [Validators.required]),
-        tags: new FormControl(null, [Validators.required]),
+        category: new FormControl(null, [Validators.required]),
         description: new FormControl(null, [Validators.required]),
         image: new FormControl(null, [Validators.required]),
         document: new FormControl(null, [Validators.required])
     })
+
+    ngOnInit(): void {
+        this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
+            next: (res) => {
+                this.categoriesList = res.data
+            }
+        })
+    }
 
     sendForm(form: FormGroup) {
         if (form.invalid) return
@@ -46,11 +55,15 @@ export class PostComponent {
             next: (res) => {
                 this.sendingFlag = false
                 if (res.status === 'OK') {
+                    this.Modal.setData = postCreatedMock
                     this.Modal.setState = true
                     form.reset()
                 }
             },
-            error(err) {
+            error: (err) => {
+                this.sendingFlag = false
+                this.Modal.setData = ErrorMock
+                this.Modal.setState = true
                 console.log(err)
             }
         })
@@ -61,7 +74,7 @@ export class PostComponent {
         this.form.get(control)?.setValue(file)
     }
 
-    touchField(control: string){
+    touchField(control: string) {
         this.form.get(control)?.markAsTouched()
     }
 
@@ -71,8 +84,8 @@ export class PostComponent {
     get keywords() {
         return this.form.get('keywords')
     }
-    get tags() {
-        return this.form.get('tags')
+    get category() {
+        return this.form.get('category')
     }
     get description() {
         return this.form.get('description')

@@ -13,9 +13,35 @@ export const messageSendMock: ModalInterface = {
     }
 }
 
+export const postCreatedMock: ModalInterface = {
+    title: "Post creado",
+    description: "Dentro de poco veras el nuevo contenido",
+    image: {
+        src: "assets/icons/check.svg",
+        alt: "modal image",
+    },
+    buttonPrincipal: {
+        text: "Cerrar",
+        action: null,
+    }
+}
+
 export const BlockIPMock: ModalInterface = {
     title: "Cuenta bloqueada",
     description: "Tu cuenta ha sido temporalmente bloqueada",
+    image: {
+        src: "assets/icons/check.svg",
+        alt: "modal image",
+    },
+    buttonPrincipal: {
+        text: "Cerrar",
+        action: null,
+    }
+}
+
+export const ErrorMock: ModalInterface = {
+    title: "Ha ocurrido un error",
+    description: "Parece que ha ocurrido un error, vuelve a intentar",
     image: {
         src: "assets/icons/check.svg",
         alt: "modal image",
