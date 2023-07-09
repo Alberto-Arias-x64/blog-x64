@@ -6,7 +6,7 @@ import { Router } from '@angular/router'
 import { ModalService } from 'src/app/services/modal.service'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { CategoriesInterface, HttpResponse } from 'src/app/interfaces/http.interface'
-import { ErrorMock, messageSendMock, postCreatedMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock } from 'src/app/mocks/modals.mock'
 
 @Component({
     selector: 'app-post',
@@ -44,7 +44,7 @@ export class PostComponent implements OnInit {
     sendForm(form: FormGroup) {
         if (form.invalid) return
         this.sendingFlag = true
-        this.Modal.setData = messageSendMock
+        this.Modal.setData = copyMock(messageSendMock)
 
         const formData = new FormData()
         Object.entries(this.form.value).forEach(([clave, valor]: [string, any]) => {
@@ -55,14 +55,14 @@ export class PostComponent implements OnInit {
             next: (res) => {
                 this.sendingFlag = false
                 if (res.status === 'OK') {
-                    this.Modal.setData = postCreatedMock
+                    this.Modal.setData = copyMock(postCreatedMock)
                     this.Modal.setState = true
                     form.reset()
                 }
             },
             error: (err) => {
                 this.sendingFlag = false
-                this.Modal.setData = ErrorMock
+                this.Modal.setData = copyMock(ErrorMock)
                 this.Modal.setState = true
                 console.log(err)
             }
@@ -76,6 +76,15 @@ export class PostComponent implements OnInit {
 
     touchField(control: string) {
         this.form.get(control)?.markAsTouched()
+    }
+
+    return() {
+        const confirm = copyMock(confirmMock)
+        confirm.buttonSecondary.action = () => {
+            this.Router.navigate(['/admin/posts'])
+        }
+        this.Modal.setData = confirm
+        this.Modal.setState = true
     }
 
     get title() {

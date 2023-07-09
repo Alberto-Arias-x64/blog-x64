@@ -5,7 +5,7 @@ import { Component, inject } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule } from '@angular/common'
 
-import { BlockIPMock } from 'src/app/mocks/modals.mock'
+import { BlockIPMock, copyMock } from 'src/app/mocks/modals.mock'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { Router } from '@angular/router'
 import { AuthService } from 'src/app/services/auth.service'
@@ -34,7 +34,7 @@ export class LoginComponent {
     sendForm(form: FormGroup) {
         if (form.invalid) return
         this.sendingFlag = true
-        const modalTemplate = JSON.parse(JSON.stringify(BlockIPMock))
+        const modalTemplate = copyMock(BlockIPMock)
         modalTemplate.buttonPrincipal.action = () => {
             this.Router.navigate(['/'])
         }

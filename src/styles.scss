@@ -284,6 +284,25 @@ picture {
 .card {
     background-color: var(--color_mantel);
 }
+.return_container{
+    color: var(--color_secondary);
+    cursor: pointer;
+    user-select: none;
+    p{
+        color: currentColor;
+        transition: var(--animation_standard);
+    }
+    .return{
+        display: flex;
+        height: 1.5rem;
+        rotate: -90deg;
+        color: currentColor;
+        transition: var(--animation_standard);
+    }
+    &:hover{
+        color: var(--color_accent);
+    }
+}
 
 /* sending animation */
 .spinner {

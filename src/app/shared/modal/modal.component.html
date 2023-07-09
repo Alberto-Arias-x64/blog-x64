@@ -5,6 +5,9 @@
             <img [src]="data.image.src" [alt]="data.image.alt">
         </picture>
         <p>{{data.description}}</p>
-        <button class="full" (click)="principalAction()">{{data.buttonPrincipal.text}}</button>
+        <div class="f_row gap_small full">
+            <button class="full" (click)="principalAction()">{{data.buttonPrincipal.text}}</button>
+            <button *ngIf="data.buttonSecondary" class="full" (click)="secondaryAction()">{{data.buttonSecondary.text}}</button>
+        </div>
     </article>
 </section>

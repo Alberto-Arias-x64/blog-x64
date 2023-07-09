@@ -6,7 +6,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from 'src/app/interfaces/http.interface';
 import { ModalService } from 'src/app/services/modal.service';
-import { messageSendMock } from 'src/app/mocks/modals.mock';
+import { copyMock, messageSendMock } from 'src/app/mocks/modals.mock';
 
 @Component({
     selector: 'app-contact',
@@ -32,7 +32,7 @@ export class ContactComponent {
     sendForm(form: FormGroup) {
         if (form.invalid) return
         this.sendingFlag = true
-        this.Modal.setData = messageSendMock
+        this.Modal.setData = copyMock(messageSendMock)
         this.Http.post<HttpResponse<any>>('/api/send_message', form.value).subscribe((res) => {
             this.sendingFlag = false
             if (res.status === 'OK') {

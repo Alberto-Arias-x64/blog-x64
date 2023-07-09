@@ -8,12 +8,13 @@ import { RelativeDatePipe } from 'src/app/pipes/relative-date.pipe'
 import { LOCALE_ID } from '@angular/core'
 import localeEs from '@angular/common/locales/es'
 import { registerLocaleData } from '@angular/common'
+import { AngularSvgIconModule } from 'angular-svg-icon'
 registerLocaleData(localeEs, 'es')
 
 @Component({
     selector: 'app-message-detail',
     standalone: true,
-    imports: [CommonModule, RouterModule, RelativeDatePipe],
+    imports: [CommonModule, RouterModule, RelativeDatePipe, AngularSvgIconModule],
     templateUrl: './message-detail.component.html',
     styleUrls: ['./message-detail.component.scss'],
     providers: [{ provide: LOCALE_ID, useValue: 'es' }]
@@ -34,5 +35,9 @@ export class MessageDetailComponent implements OnInit {
                 this.Router.navigate(['/404'])
             }
         })
+    }
+
+    return() {
+        this.Router.navigate(['/admin/messages'])
     }
 }

@@ -1,5 +1,10 @@
 <section>
     <h1>Publica un nuevo post</h1>
+    <br>
+    <article class="f_row gap_small return_container centred-v" (click)="return()">
+        <svg-icon src="assets/icons/arrow.svg" class="return"/>
+        <p>Volver</p>
+    </article>
     <form [formGroup]="form" (ngSubmit)="sendForm(form)" class="f_column gap_big padding_standard centred-v">
         <div class="input_decorator">
             <label for="title">Titulo</label>

@@ -6,7 +6,7 @@ import { ModalInterface } from '../interfaces/modal.interface'
     providedIn: 'root'
 })
 export class ModalService {
-    private _Data: ModalInterface = {
+    private readonly ClearData: ModalInterface = {
         title: '',
         description: '',
         image: {
@@ -19,7 +19,7 @@ export class ModalService {
         }
     }
     private ModalState = new BehaviorSubject(false)
-    private ModalData = new BehaviorSubject(this._Data)
+    private ModalData = new BehaviorSubject(this.ClearData)
 
     get getState(): Observable<boolean> {
         return this.ModalState.asObservable()
@@ -32,6 +32,7 @@ export class ModalService {
         return this.ModalData.asObservable()
     }
     set setData(data: ModalInterface) {
+        this.ModalData.next(this.ClearData)
         this.ModalData.next(data)
     }
 }

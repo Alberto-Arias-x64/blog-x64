@@ -2,17 +2,11 @@
     <ng-container *ngFor="let item of posts">
         <div class="message padding_small gap_small full" [routerLink]="['/admin/new_post/',]">
             <div class="dot"></div>
-            <p>{{item.title}}</p>
-            <p>{{item.category}}</p>
+            <p>{{item.title}} - {{item.category}}</p>
             <p>{{item.createdAt | relativeDate}}</p>
         </div>
     </ng-container>
-    <article class="column_half centred margin_standard">
-        <button routerLink="/admin/new_post" class="fit">
-            New post
-        </button>
-        <button class="fit">
-            Add category
-        </button>
-    </article>
+    <button routerLink="/admin/new_post" class="fit margin_big">
+        New post
+    </button>
 </section>

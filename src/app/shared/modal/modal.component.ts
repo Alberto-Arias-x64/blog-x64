@@ -1,7 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ModalService } from 'src/app/services/modal.service';
-import { ModalInterface } from 'src/app/interfaces/modal.interface';
+import { Component, OnInit, inject } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { ModalService } from 'src/app/services/modal.service'
+import { ModalInterface } from 'src/app/interfaces/modal.interface'
 
 @Component({
     selector: 'app-modal',
@@ -16,17 +16,24 @@ export class ModalComponent implements OnInit {
     data!: ModalInterface
 
     ngOnInit(): void {
-        this.Modal.getState.subscribe(value => {
-            this.state = value;
+        this.Modal.getState.subscribe((value) => {
+            this.state = value
         })
-        this.Modal.getData.subscribe(data => {
-            this.data = data;
+        this.Modal.getData.subscribe((data) => {
+            this.data = data
         })
     }
 
-    principalAction () {
-        if(this.data.buttonPrincipal.action){
+    principalAction() {
+        if (this.data.buttonPrincipal.action) {
             this.data.buttonPrincipal.action()
+        }
+        this.Modal.setState = false
+    }
+
+    secondaryAction() {
+        if (this.data.buttonSecondary?.action) {
+            this.data.buttonSecondary?.action()
         }
         this.Modal.setState = false
     }
