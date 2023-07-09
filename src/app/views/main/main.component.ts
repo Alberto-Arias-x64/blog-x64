@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http'
 import { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { Router } from '@angular/router'
+import { ModalService } from 'src/app/services/modal.service'
+import { ErrorMock, copyMock } from 'src/app/mocks/modals.mock'
 
 @Component({
     selector: 'app-main',
@@ -16,13 +18,20 @@ import { Router } from '@angular/router'
 export class MainComponent implements OnInit {
     private readonly Http = inject(HttpClient)
     private readonly Router = inject(Router)
+    private Modal = inject(ModalService)
 
     categoriesList?: CategoriesInterface[]
     posts!: PostInterface[]
 
     ngOnInit(): void {
-        this.Http.get<HttpResponse<PostInterface[]>>('/api/read_posts').subscribe((res) => {
-            this.posts = res.data
+        this.Http.get<HttpResponse<PostInterface[]>>('/api/read_posts').subscribe({
+            next: (res) => {
+                this.posts = res.data
+            },
+            error:() => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
+            }
         })
         this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
             next: (res) => {
