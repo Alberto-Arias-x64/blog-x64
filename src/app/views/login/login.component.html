@@ -3,7 +3,7 @@
         <div class="input_decorator">
             <label for="mail">Usuario</label>
             <div class="f_row gap_small">
-                <svg-icon class="icon" src="assets/icons/user.svg"/>
+                <svg-icon class="input_icon" src="assets/icons/user.svg"/>
                 <input type="text" id="mail" name="mail" formControlName="mail" placeholder="John Doe" maxlength="20">
             </div>
             <p class="customError" [class.active]="mail?.hasError('required') && mail?.touched">Campo requerido</p>
@@ -11,7 +11,7 @@
         <div class="input_decorator">
             <label for="password">Contraseña</label>
             <div class="f_row gap_small">
-                <svg-icon class="icon" src="assets/icons/user.svg"/>
+                <svg-icon class="input_icon" src="assets/icons/user.svg"/>
                 <input type="password" id="password" name="password" formControlName="password" placeholder="****" maxlength="20">
             </div>
             <p class="customError" [class.active]="password?.hasError('required') && password?.touched">Campo requerido</p>

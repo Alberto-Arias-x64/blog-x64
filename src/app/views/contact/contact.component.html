@@ -3,8 +3,8 @@
     <form [formGroup]="form" (ngSubmit)="sendForm(form)" class="f_column gap_big padding_standard centred-v">
         <div class="input_decorator">
             <label for="name">Nombre</label>
-            <div class="f_row gap_small">
-                <svg-icon class="icon" src="assets/icons/user.svg"/>
+            <div class="f_row gap_small centred-v">
+                <svg-icon class="input_icon" src="assets/icons/user.svg"/>
                 <input type="text" id="name" name="name" formControlName="name" placeholder="John Doe" maxlength="20">
             </div>
             <p class="customError" [class.active]="name?.hasError('required') && name?.touched">Campo requerido</p>
@@ -12,8 +12,8 @@
         <div class="column_half gap_standard full">
             <div class="input_decorator">
                 <label for="phone">Teléfono</label>
-                <div class="f_row gap_small">
-                    <svg-icon  class="icon" src="assets/icons/whatsapp.svg"/>
+                <div class="f_row gap_small centred-v">
+                    <svg-icon  class="input_icon" src="assets/icons/whatsapp.svg"/>
                     <input type="text" id="phone" name="phone" formControlName="phone" placeholder="+57 300..." appPhone>
                 </div>
                 <p class="customError" [class.active]="phone?.hasError('required') && phone?.touched">Campo requerido</p>
@@ -21,7 +21,7 @@
             <div class="input_decorator">
                 <label for="email">Correo electrónico</label>
                 <div class="f_row gap_small centred-v">
-                    <svg-icon  class="icon" src="assets/icons/mail.svg"/>
+                    <svg-icon  class="input_icon" src="assets/icons/mail.svg"/>
                     <input type="email" id="email" name="email" formControlName="mail" placeholder="johndoe@mail.com">
                 </div>
                 <p class="customError" [class.active]="mail?.hasError('required') && mail?.touched">Campo requerido</p>
@@ -31,7 +31,7 @@
         <div class="input_decorator">
             <label for="message">Mensaje</label>
             <div class="f_row gap_small">
-                <svg-icon class="icon" src="assets/icons/message.svg"/>
+                <svg-icon class="input_icon" src="assets/icons/message.svg"/>
                 <textarea formControlName="message" id="message" name="message" cols="30" rows="10" maxlength="2000" placeholder="Hey"></textarea>
             </div>
             <p class="customError" [class.active]="message?.hasError('required') && message?.touched">Campo requerido</p>

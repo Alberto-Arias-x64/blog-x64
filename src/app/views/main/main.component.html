@@ -7,12 +7,12 @@
         <app-slider [list]="posts" />
     </article> -->
     <article class="column_3-1 gap_big">
-        <div>
+        <div class="f_column gap_big">
             <section *ngFor="let item of posts" class="card padding_standard column_2-3">
                 <picture (click)="navigateTo(item.title)" class="pointer padding_big">
                     <img [src]="item.image" alt="imagen de blog" loading="lazy" decoding="async">
                 </picture>
-                <article class="">
+                <article class="contend">
                     <div class="f_column">
                         <h4>{{ item.title }}</h4>
                         <p>{{item.createdAt | date}}</p>
@@ -31,8 +31,8 @@
         <aside class="f_column">
             <div class="input_decorator">
                 <label for="phone">Búsqueda</label>
-                <div class="f_row gap_small">
-                    <svg-icon class="icon" src="assets/icons/magnifier.svg" />
+                <div class="f_row gap_small centred-v">
+                    <svg-icon class="input_icon" src="assets/icons/magnifier.svg" />
                     <input type="text" id="search" name="search" placeholder="Búsqueda">
                 </div>
             </div>

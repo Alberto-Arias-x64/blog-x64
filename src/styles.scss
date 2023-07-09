@@ -111,16 +111,16 @@ textarea {
     transition: var(--animation_standard);
     &:focus-within {
         border-color: var(--color_accent);
-        .icon {
+        .input_icon {
             color: var(--color_accent);
         }
     }
-    .icon {
+    .input_icon {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 3rem;
-        width: auto;
+        width: 3rem;
         color: var(--color_secondary);
     }
 }
@@ -303,6 +303,12 @@ picture {
         color: var(--color_accent);
     }
 }
+.icon {
+    display: flex;
+    height: 3rem;
+    width: 3rem;
+}
+
 
 /* sending animation */
 .spinner {
