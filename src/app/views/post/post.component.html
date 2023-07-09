@@ -1,11 +1,20 @@
 <section class="padding_big f_column centred">
     <br>
-    <div class="full post_wrapper">
-        <div class="f_row gap_small centred-v return_container" (click)="return()">
+    <article class="full post_wrapper actions_header">
+        <div class="f_row gap_small centred-v return_container fit" (click)="return()">
             <svg-icon src="assets/icons/arrow.svg" class="return"/>
             <p>Volver</p>
         </div>
-    </div>
+        <div class="f_row gap_small centred-v">
+            <div class="f_row gap_small centred-v likes" [class.liked]="data?.liked" (click)="like($event ,data!.id)">
+                <svg-icon [src]="data?.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg' "
+                    class="icon" />
+                <p>{{data?.likes}}</p>
+            </div>
+            <hr style="height: 100%;">
+            <p>{{data?.createdAt | date}}</p>
+        </div>
+    </article>
     <br>
     <article class="post_wrapper">
         <markdown class="md f_column gap_big" [src]="data?.data"/>

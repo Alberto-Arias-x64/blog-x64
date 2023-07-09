@@ -1,22 +1,26 @@
 .post_wrapper{
     max-width: 100rem;
 }
-.return_container{
-    color: var(--color_secondary);
+
+.actions_header{
+    display: grid;
+    grid-template-columns: auto max-content;
+}
+
+.likes{
     cursor: pointer;
-    user-select: none;
-    p{
-        color: currentColor;
-        transition: var(--animation_standard);
-    }
+    color: var(--color_secondary);
+    transition: var(--animation_standard);
     &:hover{
         color: var(--color_accent);
+        p{
+            color: var(--color_accent);
+        }
     }
-}
-.return{
-    display: flex;
-    height: 1.5rem;
-    rotate: -90deg;
-    color: currentColor;
-    transition: var(--animation_standard);
+    &.liked {
+        color: var(--color_accent);
+        p{
+            color: var(--color_accent);
+        }
+    }
 }

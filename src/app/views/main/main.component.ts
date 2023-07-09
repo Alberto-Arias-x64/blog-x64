@@ -27,6 +27,13 @@ export class MainComponent implements OnInit {
         this.Http.get<HttpResponse<PostInterface[]>>('/api/read_posts').subscribe({
             next: (res) => {
                 this.posts = res.data
+                this.posts = this.posts.map(element => {
+                    if (window.localStorage.getItem(JSON.stringify(element.id))) {
+                        element.liked = true
+                    }
+                    else element.liked = false
+                    return element
+                })
             },
             error:() => {
                 this.Modal.setData = copyMock(ErrorMock)
@@ -36,6 +43,10 @@ export class MainComponent implements OnInit {
         this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
             next: (res) => {
                 this.categoriesList = res.data
+            },
+            error:() => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
             }
         })
     }
@@ -49,6 +60,7 @@ export class MainComponent implements OnInit {
             this.posts = this.posts.map(element => {
                 if (element.id === id) {
                     element.likes += 1
+                    element.liked = true
                 }
                 return element
             })

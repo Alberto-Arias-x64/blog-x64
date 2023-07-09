@@ -42,7 +42,8 @@ export interface PostInterface {
     updatedAt:      Date | string
     data:           string,
     image:          string,
-    likes:          number
+    likes:          number,
+    liked:          boolean
 }
 
 export interface WindowsInterface {

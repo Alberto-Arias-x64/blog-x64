@@ -27,8 +27,13 @@ export class PostComponent implements OnInit {
         this.Http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
             next: (response) => {
                 this.data = response.data
-                console.log("", response)
                 this.metaTags(response.data)
+                if (this.data){
+                    if (window.localStorage.getItem(JSON.stringify(this.data.id))) {
+                        this.data.liked = true
+                    }
+                    else this.data.liked = false
+                }
             },
             error: () => this.Router.navigate(['/404'])
         })
@@ -43,6 +48,15 @@ export class PostComponent implements OnInit {
         this.Meta.addTag({ property: 'og:title', content: data.title })
         this.Meta.addTag({ property: 'og:description', content: data.description })
         this.Meta.addTag({ property: 'og:image', content: data.image })
+    }
+
+    like(event: Event,id: string | number) {
+        const element = event.target as HTMLElement
+        if (window.localStorage.getItem(JSON.stringify(id))) return
+        this.Http.post('/api/like_post', { id }).subscribe(() => {
+            window.localStorage.setItem(JSON.stringify(id), 'true')
+            element.classList.add("liked")
+        })
     }
 
     return() {
