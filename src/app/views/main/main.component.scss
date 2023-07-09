@@ -1,0 +1,41 @@
+.blog{
+    height: 40rem;
+}
+.contend{
+    display: grid;
+    grid-template-rows: max-content auto max-content;
+    h4{
+        cursor: pointer;
+        transition: var(--animation_standard);
+        border-bottom: 1px solid transparent;
+        &:hover{
+            color: var(--color_accent);
+            border-color: var(--color_accent);
+        }
+    }
+}
+.info_bottom{
+    align-items: flex-end;
+}
+.likes{
+    cursor: pointer;
+    color: var(--color_secondary);
+    transition: var(--animation_standard);
+    &:hover{
+        color: var(--color_accent);
+        p{
+            color: var(--color_accent);
+        }
+    }
+    &.liked {
+        color: var(--color_accent);
+        p{
+            color: var(--color_accent);
+        }
+    }
+}
+
+aside{
+    top: 20px;
+    position: sticky;
+}

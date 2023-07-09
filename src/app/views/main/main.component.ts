@@ -31,7 +31,22 @@ export class MainComponent implements OnInit {
         })
     }
 
-    navigateTo(URL: string){
+    like(event: Event,id: string | number) {
+        const element = event.target as HTMLElement
+        if (window.localStorage.getItem(JSON.stringify(id))) return
+        this.Http.post('/api/like_post', { id }).subscribe(() => {
+            window.localStorage.setItem(JSON.stringify(id), 'true')
+            element.classList.add("liked")
+            this.posts = this.posts.map(element => {
+                if (element.id === id) {
+                    element.likes += 1
+                }
+                return element
+            })
+        })
+    }
+
+    navigateTo(URL: string) {
         const route = URL.replace(/\s/g, '_')
         this.Router.navigate(['/post/', route])
     }
