@@ -1,6 +1,6 @@
 <section>
-    <h1>Dev Blog</h1>
-    <p>Un pequeño espacio para compartir conocimiento sobre desarrollo Web</p>
+    <h1>{{title? title: 'Dev Blog'}}</h1>
+    <p *ngIf="!title">Un pequeño espacio para compartir conocimiento sobre desarrollo Web</p>
     <br>
     <!-- <article>
         <h4>Populares</h4>
@@ -10,7 +10,8 @@
         <div class="f_column gap_big">
             <section *ngFor="let item of posts" class="card blog padding_standard column_2-3">
                 <picture class="pointer padding_big">
-                    <img [src]="item.image" alt="imagen de blog" (click)="navigateTo(item.title)" loading="lazy" decoding="async">
+                    <img [src]="item.image" alt="imagen de blog" (click)="navigateTo(item.title)" loading="lazy"
+                        decoding="async">
                 </picture>
                 <article class="contend">
                     <div class="f_column gap_small">
@@ -24,7 +25,8 @@
                     <div class="f_column gap_standard info_bottom">
                         <hr class="full">
                         <div class="f_row gap_standard">
-                            <div class="f_row gap_small centred-v likes" [class.liked]="item.liked" (click)="like($event ,item.id)">
+                            <div class="f_row gap_small centred-v likes" [class.liked]="item.liked"
+                                (click)="like($event ,item.id)">
                                 <svg-icon [src]="item.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg' "
                                     class="icon" />
                                 <p>{{item.likes}}</p>
@@ -47,7 +49,7 @@
             <br>
             <h6>Temas</h6>
             <ng-container *ngFor="let item of categoriesList">
-                <p>{{item.category}}</p>
+                <a [routerLink]="['/category',item.category]" routerLinkActive="active">{{item.category}}</a>
             </ng-container>
         </aside>
     </article>
