@@ -78,6 +78,18 @@ p > a{
         color: var(--color_accent);
     }
 }
+.text_start{
+    width: 100%;
+    text-align: start;
+}
+.text_center{
+    width: 100%;
+    text-align: center;
+}
+.text_end{
+    width: 100%;
+    text-align: end;
+}
 
 /* Inputs */
 input {

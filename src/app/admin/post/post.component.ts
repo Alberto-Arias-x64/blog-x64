@@ -22,6 +22,7 @@ export class PostComponent implements OnInit {
     private Modal = inject(ModalService)
 
     categoriesList?: CategoriesInterface[] | null
+    selectedImage: string | null = null
     sendingFlag = false
 
     form = this.Builder.group({
@@ -72,6 +73,11 @@ export class PostComponent implements OnInit {
     selectFile(event: any, control: string) {
         const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null
         this.form.get(control)?.setValue(file)
+    }
+
+    selectImage(event: any){
+        const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null
+        this.selectedImage = URL.createObjectURL(file)
     }
 
     touchField(control: string) {

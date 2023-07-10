@@ -39,24 +39,29 @@
             <label for="description">Descripción</label>
             <div class="f_row gap_small">
                 <svg-icon class="input_icon" src="assets/icons/message.svg"/>
-                <textarea formControlName="description" id="description" name="description" cols="30" rows="10" maxlength="2000" autocomplete="off"></textarea>
+                <textarea formControlName="description" id="description" name="description" cols="30" rows="5" maxlength="2000" autocomplete="off"></textarea>
             </div>
             <p class="customError" [class.active]="description?.hasError('required') && description?.touched">Campo requerido</p>
         </div>
         <div class="column_half gap_standard">
-            <div class="input_decorator full centred-v">
-                <label for="image">Imagen</label>
-                <div class="f_row gap_small">
-                    <svg-icon class="input_icon" src="assets/icons/message.svg"/>
-                    <input type="file" id="image" name="image" accept=".png" (change)="selectFile($event, 'image')" (click)="touchField('image')">
+            <div class="f_column fit gap_small">
+                <div class="input_decorator centred-v">
+                    <label for="image" class="text_start">Imagen</label>
+                    <div class="f_row gap_small">
+                        <svg-icon class="input_icon" src="assets/icons/message.svg"/>
+                        <input type="file" id="image" name="image" accept=".png" (change)="selectFile($event, 'image')" (change)="selectImage($event)" (click)="touchField('image')">
+                    </div>
+                    <p class="customError" [class.active]="image?.hasError('required') && image?.touched">Campo requerido</p>
                 </div>
-                <p class="customError" [class.active]="image?.hasError('required') && image?.touched">Campo requerido</p>
+                <picture class="preview" *ngIf="selectedImage">
+                    <img [src]="selectedImage" alt="preview">
+                </picture>
             </div>
-            <div class="input_decorator full">
+            <div class="input_decorator fit">
                 <label for="document">Post (.md)</label>
                 <div class="f_row gap_small centred-v">
                     <svg-icon class="input_icon" src="assets/icons/message.svg"/>
-                    <input type="file" id="document" name="document" accept=".md" (change)="selectFile($event, 'document')" (click)="touchField('document')">
+                    <input type="file" class="full" id="document" name="document" accept=".md" (change)="selectFile($event, 'document')" (click)="touchField('document')">
                 </div>
                 <p class="customError" [class.active]="document?.hasError('required') && document?.touched">Campo requerido</p>
             </div>
