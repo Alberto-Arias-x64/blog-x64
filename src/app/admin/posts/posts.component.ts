@@ -25,4 +25,8 @@ export class PostsComponent {
             this.posts = res.data
         })
     }
+
+    convertTitle(title: string) {
+        return title.replace(/\s/g, "_")
+    }
 }

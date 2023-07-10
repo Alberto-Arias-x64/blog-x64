@@ -2,10 +2,10 @@ import { Component, OnInit, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { ModalService } from 'src/app/services/modal.service'
 import { AngularSvgIconModule } from 'angular-svg-icon'
-import { CategoriesInterface, HttpResponse } from 'src/app/interfaces/http.interface'
+import { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
 import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock } from 'src/app/mocks/modals.mock'
 
 @Component({
@@ -16,6 +16,7 @@ import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock } fr
     styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+    private readonly Route = inject(ActivatedRoute)
     private readonly Builder = inject(FormBuilder)
     private readonly Http = inject(HttpClient)
     private readonly Router = inject(Router)
@@ -24,6 +25,7 @@ export class PostComponent implements OnInit {
     categoriesList?: CategoriesInterface[] | null
     selectedImage: string | null = null
     sendingFlag = false
+    editFlag = false
 
     form = this.Builder.group({
         title: new FormControl(null, [Validators.required]),
@@ -35,6 +37,20 @@ export class PostComponent implements OnInit {
     })
 
     ngOnInit(): void {
+        if (this.Router.url.includes('edit_post')) {
+            this.editFlag = true
+            const { id } = this.Route.snapshot.params
+            this.Http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
+                next: (response) => {
+                    this.form.get('title')?.setValue(response.data.title)
+                    this.form.get('keywords')?.setValue(response.data.keywords)
+                    this.form.get('category')?.setValue(response.data.category)
+                    this.form.get('description')?.setValue(response.data.description)
+                    this.selectedImage = response.data.image
+                },
+                error: () => this.Router.navigate(['/404'])
+            })
+        }
         this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
             next: (res) => {
                 this.categoriesList = res.data
@@ -75,7 +91,7 @@ export class PostComponent implements OnInit {
         this.form.get(control)?.setValue(file)
     }
 
-    selectImage(event: any){
+    selectImage(event: any) {
         const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null
         this.selectedImage = URL.createObjectURL(file)
     }
