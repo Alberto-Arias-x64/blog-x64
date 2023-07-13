@@ -21,6 +21,7 @@ export class PostComponent implements OnInit {
     private readonly Http = inject(HttpClient)
     private readonly Router = inject(Router)
     private Modal = inject(ModalService)
+    private idPost : string | null = null
 
     categoriesList?: CategoriesInterface[] | null
     selectedImage: string | null = null
@@ -51,6 +52,7 @@ export class PostComponent implements OnInit {
                     this.form.get("image")?.updateValueAndValidity()
                     this.form.get("document")?.clearValidators()
                     this.form.get("document")?.updateValueAndValidity()
+                    this.idPost = response.data.id
                 },
                 error: () => this.Router.navigate(['/404'])
             })
@@ -104,11 +106,16 @@ export class PostComponent implements OnInit {
         this.form.get(control)?.markAsTouched()
     }
 
-    deleteBlog(){
+    deleteBlog() {
         const confirm = copyMock(confirmMock)
         confirm.buttonSecondary.action = () => {
-            this.Http.delete('/api/admin/send_post')
-            this.Router.navigate(['/admin/posts'])
+            this.Http.delete('/api/admin/delete_post',{
+                body: {
+                    id: this.idPost
+                }
+            }).subscribe(() => {
+                this.Router.navigate(['/admin/posts'])
+            })
         }
         this.Modal.setData = confirm
         this.Modal.setState = true

@@ -69,7 +69,7 @@
         </div>
         <button *ngIf="!editFlag" type="submit" class="fit" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Publicar</p></button>
         <div class="column_half gap_standard" *ngIf="editFlag">
-            <button type="button" class="fit" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Eliminar</p></button>
+            <button type="button" class="fit" (click)="deleteBlog()" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Eliminar</p></button>
             <button type="submit" class="fit" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Actualizar</p></button>
         </div>
     </form>
