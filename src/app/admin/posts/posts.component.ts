@@ -22,7 +22,7 @@ export class PostsComponent {
 
     ngOnInit(): void {
         this.Http.get<HttpResponse<PostInterface[]>>('/api/read_posts').subscribe(res => {
-            this.posts = res.data
+            if(res && res.data.length > 0) this.posts = res.data
         })
     }
 

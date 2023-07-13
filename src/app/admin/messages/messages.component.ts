@@ -20,7 +20,7 @@ export class MessagesComponent implements OnInit {
     ngOnInit(): void {
         this.Http.get<HttpResponse<MessagesInterface[]>>('api/admin/read_messages').subscribe({
             next: (res => {
-                this.messages = res.data
+                if(res && res.data.length > 0) this.messages = res.data
             }),
             error: (res: any) => {}
         })
