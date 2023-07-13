@@ -47,6 +47,10 @@ export class PostComponent implements OnInit {
                     this.form.get('category')?.setValue(response.data.category)
                     this.form.get('description')?.setValue(response.data.description)
                     this.selectedImage = response.data.image
+                    this.form.get("image")?.clearValidators()
+                    this.form.get("image")?.updateValueAndValidity()
+                    this.form.get("document")?.clearValidators()
+                    this.form.get("document")?.updateValueAndValidity()
                 },
                 error: () => this.Router.navigate(['/404'])
             })
@@ -98,6 +102,16 @@ export class PostComponent implements OnInit {
 
     touchField(control: string) {
         this.form.get(control)?.markAsTouched()
+    }
+
+    deleteBlog(){
+        const confirm = copyMock(confirmMock)
+        confirm.buttonSecondary.action = () => {
+            this.Http.delete('/api/admin/send_post')
+            this.Router.navigate(['/admin/posts'])
+        }
+        this.Modal.setData = confirm
+        this.Modal.setState = true
     }
 
     return() {
