@@ -356,4 +356,8 @@ picture {
         max-width: calc(100vw - 12rem);
         overflow: auto;
     }
+    ol{
+        color: var(--color_secondary);
+        padding-left: 2rem;
+    }
 }

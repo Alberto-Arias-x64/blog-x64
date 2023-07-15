@@ -22,23 +22,27 @@ export class MainComponent implements OnInit {
     private Modal = inject(ModalService)
 
     categoriesList?: CategoriesInterface[]
-    posts!: PostInterface[]
+    posts: PostInterface[] = []
     title: string | null = null
 
     ngOnInit(): void {
         this.Route.params.subscribe((params: any) => {
+            this.title = params.id
             if (this.Router.url.includes('category')) {
                 this.Http.get<HttpResponse<PostInterface[]>>(`/api/category_posts/${params.id}`).subscribe({
                     next: (res) => {
-                        this.title = params.id
-                        this.posts = []
-                        this.posts = res.data
-                        this.posts = this.posts.map((element) => {
-                            if (window.localStorage.getItem(JSON.stringify(element.id))) {
-                                element.liked = true
-                            } else element.liked = false
-                            return element
-                        })
+                        if (res.data && res.data.length > 0) {
+                            this.posts = res.data.map((element: PostInterface) => {
+                                if (window.localStorage.getItem(JSON.stringify(element.id))) {
+                                    element.liked = true
+                                } else element.liked = false
+                                return element
+                            })
+                        }
+                        else{
+                            this.posts = []
+                            this.Router.navigate(['/404'])
+                        }
                     },
                     error: () => {
                         this.Modal.setData = copyMock(ErrorMock)
