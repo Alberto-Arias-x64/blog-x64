@@ -26,6 +26,19 @@ export const postCreatedMock: ModalInterface = {
     }
 }
 
+export const postUpdatedMock: ModalInterface = {
+    title: 'Post editado',
+    description: 'Dentro de poco veras los cambios',
+    image: {
+        src: 'assets/icons/check.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Cerrar',
+        action: null
+    }
+}
+
 export const confirmMock: ModalInterface = {
     title: 'Confirma',
     description: 'Desea descartar los cambios',

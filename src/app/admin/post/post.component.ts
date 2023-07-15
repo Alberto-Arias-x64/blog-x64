@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { ModalService } from 'src/app/services/modal.service'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
-import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock, postUpdatedMock } from 'src/app/mocks/modals.mock'
 
 @Component({
     selector: 'app-post',
@@ -59,7 +59,7 @@ export class PostComponent implements OnInit {
         }
         this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
             next: (res) => {
-                this.categoriesList = res.data
+                if(res.data.length > 0) this.categoriesList = res.data
             }
         })
     }
@@ -70,26 +70,47 @@ export class PostComponent implements OnInit {
         this.Modal.setData = copyMock(messageSendMock)
 
         const formData = new FormData()
-        Object.entries(this.form.value).forEach(([clave, valor]: [string, any]) => {
+        Object.entries(form.value).forEach(([clave, valor]: [string, any]) => {
             formData.append(clave, valor)
         })
 
-        this.Http.post<HttpResponse<any>>('/api/admin/send_post', formData).subscribe({
-            next: (res) => {
-                this.sendingFlag = false
-                if (res.status === 'OK') {
-                    this.Modal.setData = copyMock(postCreatedMock)
+        if(this.Router.url.includes("edit_post")) {
+            formData.append("id", this.idPost as string)
+            this.Http.put<HttpResponse<any>>('/api/admin/update_post', formData).subscribe({
+                next: (res) => {
+                    this.sendingFlag = false
+                    if (res.status === 'OK') {
+                        this.Modal.setData = copyMock(postUpdatedMock)
+                        this.Modal.setState = true
+                        form.reset()
+                        this.Router.navigate(['/admin/posts'])
+                    }
+                },
+                error: (err) => {
+                    this.sendingFlag = false
+                    this.Modal.setData = copyMock(ErrorMock)
                     this.Modal.setState = true
-                    form.reset()
                 }
-            },
-            error: (err) => {
-                this.sendingFlag = false
-                this.Modal.setData = copyMock(ErrorMock)
-                this.Modal.setState = true
-                console.log(err)
-            }
-        })
+            })
+        } else {
+            this.Http.post<HttpResponse<any>>('/api/admin/send_post', formData).subscribe({
+                next: (res) => {
+                    this.sendingFlag = false
+                    if (res.status === 'OK') {
+                        this.Modal.setData = copyMock(postCreatedMock)
+                        this.Modal.setState = true
+                        form.reset()
+                        this.Router.navigate(['/admin/posts'])
+                    }
+                },
+                error: (err) => {
+                    this.sendingFlag = false
+                    this.Modal.setData = copyMock(ErrorMock)
+                    this.Modal.setState = true
+                    console.log(err)
+                }
+            })
+        }
     }
 
     selectFile(event: any, control: string) {

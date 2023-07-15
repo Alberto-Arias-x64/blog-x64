@@ -29,8 +29,10 @@
                 <div class="f_row centred-v">
                     <svg-icon  class="input_icon" src="assets/icons/categories.svg"/>
                     <input type="text" list="categories" id="category" name="category" formControlName="category" placeholder="" autocomplete="off">
-                    <datalist id="categories" *ngFor="let item of categoriesList">
-                        <option>{{item.category}}</option>
+                    <datalist id="categories">
+                        <ng-container *ngFor="let item of categoriesList">
+                            <option [value]="item.category">
+                        </ng-container>
                     </datalist>
                 </div>
                 <p class="customError" [class.active]="category?.hasError('required') && category?.touched">Campo requerido</p>
