@@ -6,19 +6,27 @@
             <p>{{item}}</p>
         </ng-container>
     </article>
-    <article class="f_row gap_small return_container centred-v" (click)="return()">
-        <svg-icon src="assets/icons/arrow.svg" class="return"/>
-        <p>Volver</p>
+    <article class="actions_item">
+        <div class="f_row gap_small return_container centred-v fit" (click)="return()">
+            <svg-icon src="assets/icons/arrow.svg" class="return"/>
+            <p>Volver</p>
+        </div>
+        <div class="f_row gap_standard">
+            <button *ngIf="isArchive(activeElement)" (click)="deleteFile(activeElement)">Eliminar</button>
+            <button *ngIf="isArchive(activeElement)">Descargar</button>
+            <button *ngIf="activeElement" (click)="isArchive(activeElement)? openFile(activeElement) : open(activeElement)">Abrir</button>
+            <button>Subir</button>
+        </div>
     </article>
     <article class="f_row gap_standard wrap">
         <ng-container *ngFor="let item of folders">
-            <app-iconify iconType="folder" [name]="item" (dblclick)="open(item)"/>
+            <app-iconify iconType="folder" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="open(item)"/>
         </ng-container>
         <ng-container *ngFor="let item of files">
-            <app-iconify iconType="archive" [name]="item" (dblclick)="openFile(item)"/>
+            <app-iconify iconType="archive" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="openFile(item)"/>
         </ng-container>
     </article>
-    <article class="full">
+    <article class="full" *ngIf="openEditor">
         <div class="actions gap_standard">
             <button class="fit">Cancelar</button>
             <button class="fit">Eliminar</button>

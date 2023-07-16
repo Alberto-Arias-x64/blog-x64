@@ -320,6 +320,12 @@ picture {
     height: 3rem;
     width: 3rem;
 }
+.window_active {
+    background-color: var(--color_mantel);
+    .icon {
+        color: var(--color_accent) !important;
+    }
+}
 
 
 /* sending animation */

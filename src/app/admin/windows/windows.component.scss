@@ -16,3 +16,10 @@
     grid-template-columns: max-content max-content auto;
     justify-items: end;
 }
+
+.actions_item{
+    height: 3rem;
+    display: grid;
+    grid-template-columns: max-content auto;
+    justify-items: flex-end;
+}

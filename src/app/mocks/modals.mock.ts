@@ -56,6 +56,23 @@ export const confirmMock: ModalInterface = {
     }
 }
 
+export const confirmDeleteMock: ModalInterface = {
+    title: 'Confirma',
+    description: 'Desea eliminar el archivo seleccionado',
+    image: {
+        src: 'assets/icons/check.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Cancelar',
+        action: null
+    },
+    buttonSecondary: {
+        text: 'Aceptar',
+        action: null
+    }
+}
+
 export const BlockIPMock: ModalInterface = {
     title: 'Cuenta bloqueada',
     description: 'Tu cuenta ha sido temporalmente bloqueada',
@@ -72,6 +89,19 @@ export const BlockIPMock: ModalInterface = {
 export const ErrorMock: ModalInterface = {
     title: 'Ha ocurrido un error',
     description: 'Parece que ha ocurrido un error, vuelve a intentar',
+    image: {
+        src: 'assets/icons/check.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Cerrar',
+        action: null
+    }
+}
+
+export const ErrorOpenMock: ModalInterface = {
+    title: 'Error',
+    description: 'No se puede abrir el archivo',
     image: {
         src: 'assets/icons/check.svg',
         alt: 'modal image'
