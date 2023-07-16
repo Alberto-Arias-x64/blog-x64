@@ -13,7 +13,6 @@ import { ErrorMock, copyMock, messageSendMock } from 'src/app/mocks/modals.mock'
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule, PhoneDirective, AngularSvgIconModule],
     templateUrl: './contact.component.html',
-    styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
     private readonly Builder = inject(FormBuilder)

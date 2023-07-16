@@ -40,8 +40,14 @@ export class WindowsComponent implements OnInit {
         else this.path.forEach((item) => (route += `/${item}`))
         this.Http.get<HttpResponse<WindowsInterface>>(`/api/admin/windows?path=${route}`).subscribe({
             next: (res) => {
-                this.folders = res.data.folders
-                this.files = res.data.archives
+                if (res.data) {
+                    this.folders = res.data.folders
+                    this.files = res.data.archives
+                }
+                else {
+                    this.folders = []
+                    this.files = []
+                }
             }
         })
     }

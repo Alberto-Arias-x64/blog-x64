@@ -18,5 +18,13 @@
             <app-iconify iconType="archive" [name]="item" (dblclick)="openFile(item)"/>
         </ng-container>
     </article>
-    <textarea class="editor padding_standard" #editor></textarea>
+    <article class="full">
+        <div class="actions gap_standard">
+            <button class="fit">Cancelar</button>
+            <button class="fit">Eliminar</button>
+            <button class="fit">Guardar</button>
+        </div>
+        <br>
+        <textarea class="editor padding_standard" #editor></textarea>
+    </article>
 </section>
