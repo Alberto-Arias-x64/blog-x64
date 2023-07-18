@@ -1,4 +1,4 @@
-<section class="gap_standard padding_big windows">
+<section class="gap_standard padding_big windows" *ngIf="!openEditor">
     <article class="f_row gap_small">
         <p>Main</p>
         <ng-container *ngFor="let item of path">
@@ -26,13 +26,22 @@
             <app-iconify iconType="archive" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="openFile(item)"/>
         </ng-container>
     </article>
-    <article class="full" *ngIf="openEditor">
-        <div class="actions gap_standard">
-            <button class="fit">Cancelar</button>
-            <button class="fit">Eliminar</button>
-            <button class="fit">Guardar</button>
-        </div>
-        <br>
-        <textarea class="editor padding_standard" #editor></textarea>
+</section>
+
+<section class="full padding_big" *ngIf="openEditor">
+    <article class="f_row gap_small">
+        <p>Main</p>
+        <ng-container *ngFor="let item of path">
+            <p>&gt;</p>
+            <p>{{item}}</p>
+        </ng-container>
     </article>
+    <br>
+    <article class="actions gap_standard">
+        <button class="fit" (click)="cancel()" >Cancelar</button>
+        <button class="fit" (click)="deleteFile(null)" >Eliminar</button>
+        <button class="fit">Guardar</button>
+    </article>
+    <br>
+    <textarea class="editor padding_standard" [(ngModel)]="editorData" #editor></textarea>
 </section>

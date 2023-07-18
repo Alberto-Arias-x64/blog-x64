@@ -73,6 +73,23 @@ export const confirmDeleteMock: ModalInterface = {
     }
 }
 
+export const confirmCancelMock: ModalInterface = {
+    title: 'Confirma',
+    description: 'Desea descartar los cambios',
+    image: {
+        src: 'assets/icons/check.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Cancelar',
+        action: null
+    },
+    buttonSecondary: {
+        text: 'Aceptar',
+        action: null
+    }
+}
+
 export const BlockIPMock: ModalInterface = {
     title: 'Cuenta bloqueada',
     description: 'Tu cuenta ha sido temporalmente bloqueada',

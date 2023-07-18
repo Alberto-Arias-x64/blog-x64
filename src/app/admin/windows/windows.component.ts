@@ -5,13 +5,14 @@ import { HttpResponse, WindowsInterface } from 'src/app/interfaces/http.interfac
 import { IconifyComponent } from 'src/app/components/iconify/iconify.component'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ModalService } from 'src/app/services/modal.service'
-import { ErrorOpenMock, confirmDeleteMock, copyMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, ErrorOpenMock, confirmCancelMock, confirmDeleteMock, copyMock } from 'src/app/mocks/modals.mock'
 import { ModalInterface } from 'src/app/interfaces/modal.interface'
+import { FormsModule } from '@angular/forms'
 
 @Component({
     selector: 'app-windows',
     standalone: true,
-    imports: [CommonModule, IconifyComponent, AngularSvgIconModule],
+    imports: [CommonModule, FormsModule, IconifyComponent, AngularSvgIconModule],
     templateUrl: './windows.component.html',
     styleUrls: ['./windows.component.scss']
 })
@@ -24,6 +25,7 @@ export class WindowsComponent implements OnInit {
     path: string[] = []
     activeElement: string | null = null
     openEditor = false
+    editorData = ''
 
     ngOnInit(): void {
         this.getPath()
@@ -49,6 +51,17 @@ export class WindowsComponent implements OnInit {
         this.getPath()
     }
 
+    cancel() {
+        const confirmModal: ModalInterface = copyMock(confirmCancelMock)
+        confirmModal.buttonSecondary!.action = () => {
+            this.path.pop()
+            this.editorData = ''
+            this.openEditor = false
+        }
+        this.Modal.setData = confirmModal
+        this.Modal.setState = true
+    }
+
     getPath() {
         let route = ''
         if (this.path.length === 0) route = ''
@@ -63,6 +76,10 @@ export class WindowsComponent implements OnInit {
                     this.folders = []
                     this.files = []
                 }
+            },
+            error: () => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
             }
         })
     }
@@ -77,11 +94,18 @@ export class WindowsComponent implements OnInit {
             next: (res) => {
                 if (res.status === 'OK') {
                     this.openEditor = true
-                    this.editor.nativeElement.value = res.data
+                    setTimeout(() => {
+                        this.editorData = res.data
+                        this.path.push(fileName as string)
+                    }, 100)
                 } else {
                     this.Modal.setData = copyMock(ErrorOpenMock)
                     this.Modal.setState = true
                 }
+            },
+            error: () => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
             }
         })
     }
@@ -93,8 +117,15 @@ export class WindowsComponent implements OnInit {
             if (this.path.length === 0) route = ''
             else if (this.path.length === 1) route = this.path[0]
             else this.path.forEach((item) => (route += `/${item}`))
-            route += `/${fileName}`
-            this.Http.delete<HttpResponse<string>>(`/api/admin/windows/delete_file`, { body: { path: route } }).subscribe(() => this.getPath())
+            if (fileName) route += `/${fileName}`
+            this.Http.delete<HttpResponse<string>>(`/api/admin/windows/delete_file`, { body: { path: route } }).subscribe(() => {
+                if (fileName) this.getPath()
+                else {
+                    this.editorData = ''
+                    this.openEditor = false
+                    this.return()
+                }
+            })
         }
         this.Modal.setData = confirmModal
         this.Modal.setState = true
