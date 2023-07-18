@@ -30,7 +30,8 @@ export class WindowsComponent implements OnInit {
     openEditor = false
     uploadFile = false
     editorData: string | null = null
-    fileData: any = null
+    fileName: string | any = null
+    fileData: string | any = null
 
     ngOnInit(): void {
         this.getPath()
@@ -70,10 +71,12 @@ export class WindowsComponent implements OnInit {
     upload(){
         this.uploadFile = true
         setTimeout(() => {
-            const file = this.fileInput.nativeElement as HTMLFormElement
+            const file = this.fileInput.nativeElement as HTMLInputElement
             file.click()
-            file.addEventListener("close",() => {
-                if(this.fileData) console.log(this.fileData)
+            file.addEventListener("change",() => {
+                if(this.fileData) {
+                    this.fileName = file.files?.item(0)?.name
+                }
                 else this.uploadFile = false
             })
         },100)

@@ -28,13 +28,13 @@
     </article>
     <article class="upload_file" *ngIf="uploadFile">
         <div class="file_container card padding_standard fit f_column gap_standard centred-v">
-            <p>fileName</p>
+            <p>{{fileName}}</p>
             <div class="f_row gap_standard">
                 <button (click)="cancelUpload()">Cancelar</button>
                 <button>Confirmar</button>
             </div>
         </div>
-        <input type="file" style="visibility: hidden; height: 0;" [(ngModel)]="fileData" #fileInput>
+        <input type="file" name="file" style="visibility: hidden; height: 0;" [(ngModel)]="fileData" #fileInput>
     </article>
 </section>
 
