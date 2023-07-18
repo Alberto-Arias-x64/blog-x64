@@ -17,15 +17,20 @@ import { FormsModule } from '@angular/forms'
     styleUrls: ['./windows.component.scss']
 })
 export class WindowsComponent implements OnInit {
+    @ViewChild('fileInput') fileInput!: ElementRef
     @ViewChild('editor') editor!: ElementRef
+
     private readonly Http = inject(HttpClient)
     private Modal = inject(ModalService)
+
+    path: string[] = []
     folders = []
     files = []
-    path: string[] = []
     activeElement: string | null = null
     openEditor = false
-    editorData = ''
+    uploadFile = false
+    editorData: string | null = null
+    fileData: any = null
 
     ngOnInit(): void {
         this.getPath()
@@ -55,11 +60,27 @@ export class WindowsComponent implements OnInit {
         const confirmModal: ModalInterface = copyMock(confirmCancelMock)
         confirmModal.buttonSecondary!.action = () => {
             this.path.pop()
-            this.editorData = ''
+            this.editorData = null
             this.openEditor = false
         }
         this.Modal.setData = confirmModal
         this.Modal.setState = true
+    }
+
+    upload(){
+        this.uploadFile = true
+        setTimeout(() => {
+            const file = this.fileInput.nativeElement as HTMLFormElement
+            file.click()
+            file.addEventListener("close",() => {
+                if(this.fileData) console.log(this.fileData)
+                else this.uploadFile = false
+            })
+        },100)
+    }
+
+    cancelUpload(){
+        this.uploadFile = false
     }
 
     getPath() {

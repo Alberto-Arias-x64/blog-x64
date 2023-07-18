@@ -10,6 +10,7 @@
     height: 100%;
     display: grid;
     grid-template-rows: max-content max-content max-content auto;
+    position: relative;
 }
 
 .actions{
@@ -23,4 +24,20 @@
     display: grid;
     grid-template-columns: max-content auto;
     justify-items: flex-end;
+}
+
+.upload_file{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparentize($color: #000000, $amount: 0.5);
+}
+
+.file_container{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
