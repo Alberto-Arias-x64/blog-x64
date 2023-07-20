@@ -5,7 +5,7 @@ import { HttpResponse, WindowsInterface } from 'src/app/interfaces/http.interfac
 import { IconifyComponent } from 'src/app/components/iconify/iconify.component'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ModalService } from 'src/app/services/modal.service'
-import { ErrorMock, ErrorOpenMock, confirmCancelMock, confirmDeleteMock, copyMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, ErrorOpenMock, confirmCancelMock, confirmDeleteMock, copyMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
 import { ModalInterface } from 'src/app/interfaces/modal.interface'
 import { FormsModule } from '@angular/forms'
 
@@ -139,14 +139,21 @@ export class WindowsComponent implements OnInit {
         if (this.path.length === 0) route = ''
         else if (this.path.length === 1) route = this.path[0]
         else this.path.forEach((item) => (route += `/${item}`))
-        if (file && route) {
+        if (file) {
             const form = new FormData()
             form.append('file', file)
             form.append('route', route)
             this.Http.post<HttpResponse<string>>('/api/admin/windows/upload_file', form).subscribe({
                 next: () => {
                     this.getPath()
-                }
+                    this.uploadingFile = false
+                    this.Modal.setData = copyMock(windowUploadedMock)
+                    this.Modal.setState = true
+                },
+                error:() => {
+                    this.Modal.setData = copyMock(ErrorMock)
+                    this.Modal.setState = true
+                },
             })
         }
     }
