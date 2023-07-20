@@ -5,7 +5,7 @@ import { HttpResponse, WindowsInterface } from 'src/app/interfaces/http.interfac
 import { IconifyComponent } from 'src/app/components/iconify/iconify.component'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ModalService } from 'src/app/services/modal.service'
-import { ErrorMock, ErrorOpenMock, confirmCancelMock, confirmDeleteMock, copyMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, ErrorOpenMock, confirmCancelMock, confirmDeleteMock, confirmUpdateMock, copyMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
 import { ModalInterface } from 'src/app/interfaces/modal.interface'
 import { FormsModule } from '@angular/forms'
 
@@ -81,6 +81,15 @@ export class WindowsComponent implements OnInit {
         }, 100)
     }
 
+    update() {
+        const confirmModal: ModalInterface = copyMock(confirmUpdateMock)
+        confirmModal.buttonSecondary!.action = () => {
+            this.updateText()
+        }
+        this.Modal.setData = confirmModal
+        this.Modal.setState = true
+    }
+
     cancelUpload() {
         this.uploadingFile = false
     }
@@ -150,12 +159,34 @@ export class WindowsComponent implements OnInit {
                     this.Modal.setData = copyMock(windowUploadedMock)
                     this.Modal.setState = true
                 },
-                error:() => {
+                error: () => {
                     this.Modal.setData = copyMock(ErrorMock)
                     this.Modal.setState = true
-                },
+                }
             })
         }
+    }
+
+    updateText() {
+        let route = ''
+        if (this.path.length === 0) route = ''
+        else if (this.path.length === 1) route = this.path[0]
+        else this.path.forEach((item) => (route += `/${item}`))
+        const form = {
+            text: this.editorData,
+            route: route
+        }
+        this.Http.put<HttpResponse<string>>('api/admin/windows/update_file', form).subscribe({
+            next: () => {
+                this.Modal.setData = copyMock(windowUploadedMock)
+                this.Modal.setState = true
+                this.openEditor = false
+            },
+            error: () => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
+            }
+        })
     }
 
     deleteFile(fileName: string | null) {

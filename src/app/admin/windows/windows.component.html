@@ -50,7 +50,7 @@
     <article class="actions gap_standard">
         <button class="fit" (click)="cancel()" >Cancelar</button>
         <button class="fit" (click)="deleteFile(null)" >Eliminar</button>
-        <button class="fit">Guardar</button>
+        <button class="fit" (click)="update()">Guardar</button>
     </article>
     <br>
     <textarea class="editor padding_standard" [(ngModel)]="editorData" #editor></textarea>

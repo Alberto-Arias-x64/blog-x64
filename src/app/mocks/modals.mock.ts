@@ -99,6 +99,22 @@ export const confirmCancelMock: ModalInterface = {
         action: null
     }
 }
+export const confirmUpdateMock: ModalInterface = {
+    title: 'Confirma',
+    description: 'Desea guardar los cambios',
+    image: {
+        src: 'assets/icons/check.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Cancelar',
+        action: null
+    },
+    buttonSecondary: {
+        text: 'Aceptar',
+        action: null
+    }
+}
 
 /* Errors */
 export const BlockIPMock: ModalInterface = {
