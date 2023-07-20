@@ -26,12 +26,12 @@
             <app-iconify iconType="archive" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="openFile(item)"/>
         </ng-container>
     </article>
-    <article class="upload_file" *ngIf="uploadFile">
+    <article class="upload_file" *ngIf="uploadingFile">
         <div class="file_container card padding_standard fit f_column gap_standard centred-v">
             <p>{{fileName}}</p>
             <div class="f_row gap_standard">
                 <button (click)="cancelUpload()">Cancelar</button>
-                <button>Confirmar</button>
+                <button (click)="uploadFile()">Confirmar</button>
             </div>
         </div>
         <input type="file" name="file" style="visibility: hidden; height: 0;" [(ngModel)]="fileData" #fileInput>

@@ -28,7 +28,7 @@ export class WindowsComponent implements OnInit {
     files = []
     activeElement: string | null = null
     openEditor = false
-    uploadFile = false
+    uploadingFile = false
     editorData: string | null = null
     fileName: string | any = null
     fileData: string | any = null
@@ -68,22 +68,21 @@ export class WindowsComponent implements OnInit {
         this.Modal.setState = true
     }
 
-    upload(){
-        this.uploadFile = true
+    upload() {
+        this.uploadingFile = true
         setTimeout(() => {
             const file = this.fileInput.nativeElement as HTMLInputElement
             file.click()
-            file.addEventListener("change",() => {
-                if(this.fileData) {
+            file.addEventListener('change', () => {
+                if (this.fileData) {
                     this.fileName = file.files?.item(0)?.name
-                }
-                else this.uploadFile = false
+                } else this.uploadingFile = false
             })
-        },100)
+        }, 100)
     }
 
-    cancelUpload(){
-        this.uploadFile = false
+    cancelUpload() {
+        this.uploadingFile = false
     }
 
     getPath() {
@@ -132,6 +131,24 @@ export class WindowsComponent implements OnInit {
                 this.Modal.setState = true
             }
         })
+    }
+
+    uploadFile() {
+        const file = this.fileInput.nativeElement.files?.item(0)
+        let route = ''
+        if (this.path.length === 0) route = ''
+        else if (this.path.length === 1) route = this.path[0]
+        else this.path.forEach((item) => (route += `/${item}`))
+        if (file && route) {
+            const form = new FormData()
+            form.append('file', file)
+            form.append('route', route)
+            this.Http.post<HttpResponse<string>>('/api/admin/windows/upload_file', form).subscribe({
+                next: () => {
+                    this.getPath()
+                }
+            })
+        }
     }
 
     deleteFile(fileName: string | null) {
