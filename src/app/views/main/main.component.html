@@ -9,8 +9,8 @@
     </article> -->
     <article class="column_3-1 gap_big">
         <div class="f_column gap_big">
-            <section *ngFor="let item of posts" class="card blog padding_standard column_2-3">
-                <picture class="pointer padding_big">
+            <section *ngFor="let item of posts" class="card blog padding_standard gap_big column_2-3">
+                <picture class="pointer">
                     <img [src]="item.image" alt="imagen de blog" (click)="navigateTo(item.title)" loading="lazy"
                         decoding="async">
                 </picture>
@@ -39,19 +39,33 @@
                 </article>
             </section>
         </div>
-        <aside class="f_column">
-            <div class="input_decorator">
-                <label for="phone">Búsqueda</label>
-                <div class="f_row gap_small centred-v">
-                    <svg-icon class="input_icon" src="assets/icons/magnifier.svg" />
-                    <input type="text" id="search" name="search" placeholder="Búsqueda">
+        <aside class="gap_small">
+            <section class="f_column">
+                <div class="input_decorator">
+                    <label for="phone">Búsqueda</label>
+                    <div class="f_row gap_small centred-v">
+                        <svg-icon class="input_icon" src="assets/icons/magnifier.svg" />
+                        <input type="text" id="search" name="search" placeholder="Búsqueda">
+                    </div>
                 </div>
-            </div>
-            <br>
-            <h6>Temas</h6>
-            <ng-container *ngFor="let item of categoriesList">
-                <a [routerLink]="['/category',item.category]" routerLinkActive="active">{{item.category}}</a>
-            </ng-container>
+                <br>
+                <h6>Temas</h6>
+                <ng-container *ngFor="let item of categoriesList">
+                    <a [routerLink]="['/category',item.category]" routerLinkActive="active">{{item.category}}</a>
+                </ng-container>
+            </section>
+            <section class="f_column" style="align-items: flex-end;">
+                <h6 class="text_end">¿Te gusta estar informado?</h6>
+                <p class="text_end">Suscribiere y no te pierdas de los últimos contenidos sobre la Web</p>
+                <div class="input_decorator">
+                    <div class="f_row gap_small centred-v">
+                        <svg-icon class="input_icon" src="assets/icons/mail.svg" />
+                        <input type="email" id="mail" name="mail" placeholder="mi@correo.com">
+                    </div>
+                </div>
+                <br>
+                <button class="fit" (click)="subscribe()" >Suscribirse</button>
+            </section>
         </aside>
     </article>
 </section>

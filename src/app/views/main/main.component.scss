@@ -1,5 +1,7 @@
 .blog{
-    height: 40rem;
+    width: 100%;
+    aspect-ratio: 3/1;
+    overflow: hidden;
 }
 .contend{
     display: grid;
@@ -36,10 +38,34 @@
 }
 
 aside{
-    top: 20px;
     position: sticky;
+    top: 8rem;
+    display: grid;
+    grid-template-rows: max-content auto;
+    align-items: end;
+    height: calc(100vh - 20rem);
+
 }
 
 .active{
     color: var(--color_accent);
+}
+
+h6{
+    padding-bottom: 1rem;
+}
+
+@media screen and (width <= 1280px) {
+    aside{
+        top: 4rem;
+    }
+}
+
+@media screen and (width <= 768px) {
+    .blog{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 3fr 1fr;
+        aspect-ratio: 4/5;
+    }
 }

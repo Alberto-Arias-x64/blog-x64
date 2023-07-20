@@ -49,6 +49,18 @@ export const windowUploadedMock: ModalInterface = {
         action: null
     }
 }
+export const subscribedMock: ModalInterface = {
+    title: 'Te has suscrito',
+    description: 'Revisa su correo electrónico',
+    image: {
+        src: 'assets/icons/check.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Cerrar',
+        action: null
+    }
+}
 
 /* Confirm */
 export const confirmMock: ModalInterface = {

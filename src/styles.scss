@@ -10,6 +10,7 @@
     --color_secondary: #fff;
     --color_tertiary: #5c5c5c;
     --color_accent: #e31952;
+    --animation_fast: all ease 100ms;
     --animation_standard: all ease 200ms;
     --animation_slow: all ease 400ms;
 }
@@ -46,31 +47,38 @@ h1 {
     font-size: 7rem;
     font-weight: lighter;
     color: var(--color_secondary);
+    transition: var(--animation_standard);
 }
 h2 {
     font-size: 6rem;
     color: var(--color_secondary);
+    transition: var(--animation_standard);
 }
 h3 {
     font-size: 5rem;
     color: var(--color_secondary);
+    transition: var(--animation_standard);
 }
 h4 {
     font-size: 4rem;
     color: var(--color_secondary);
+    transition: var(--animation_standard);
 }
 h5 {
     font-size: 3rem;
     color: var(--color_secondary);
+    transition: var(--animation_standard);
 }
 h6 {
     font-size: 2rem;
     color: var(--color_secondary);
+    transition: var(--animation_standard);
 }
 p,
 a,
 label {
     color: var(--color_secondary);
+    transition: var(--animation_standard);
 }
 p > a{
     transition: var(--animation_standard);
@@ -81,6 +89,7 @@ p > a{
 .text_start{
     width: 100%;
     text-align: start;
+
 }
 .text_center{
     width: 100%;
@@ -89,6 +98,31 @@ p > a{
 .text_end{
     width: 100%;
     text-align: end;
+}
+@media screen and (width <= 1280px) {
+    h1{
+        font-size: 5rem;
+    }
+    h2{
+        font-size: 4rem;
+    }
+    h3{
+        font-size: 3rem;
+    }
+    h4{
+        font-size: 2.5rem;
+    }
+    h5{
+        font-size: 2rem;
+    }
+    h6{
+        font-size: 1.8rem;
+    }
+    p,
+    a,
+    label {
+        font-size: 1.5rem
+    }
 }
 
 /* Inputs */
@@ -117,7 +151,7 @@ textarea {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    @extend .gap_standard;
     position: relative;
     border-bottom: 0.2rem var(--color_secondary) solid;
     transition: var(--animation_standard);
@@ -132,7 +166,7 @@ textarea {
         justify-content: center;
         align-items: center;
         height: 3rem;
-        width: 3rem;
+        aspect-ratio: 1/1;
         color: var(--color_secondary);
     }
 }
@@ -146,6 +180,19 @@ textarea {
     opacity: 0;
     &.active {
         opacity: 1;
+    }
+}
+@media screen and (width <= 1280px) {
+    .input_decorator{
+        input{
+            font-size: 1.5rem;
+        }
+        .input_icon{
+            height: 2rem;
+        }
+    }
+    .customError{
+        font-size: 1.2rem;
     }
 }
 
@@ -176,6 +223,11 @@ button {
     }
     p {
         color: currentColor !important;
+    }
+}
+@media screen and (width <= 1280px) {
+    button {
+        font-size: 1.5rem;
     }
 }
 
@@ -281,6 +333,35 @@ picture {
 .gap_small {
     gap: 1rem;
 }
+@media screen and (width <= 1280px) {
+    .margin_big {
+        margin: 2rem;
+    }
+    .margin_standard {
+        margin: 1.5rem;
+    }
+    .margin_small {
+        margin: 1rem;
+    }
+    .padding_big {
+        padding: 2rem;
+    }
+    .padding_standard {
+        padding: 1.5rem;
+    }
+    .padding_small {
+        padding: 1rem;
+    }
+    .gap_big {
+        gap: 2rem;
+    }
+    .gap_standard {
+        gap: 1rem;
+    }
+    .gap_small {
+        gap: .5rem;
+    }
+}
 
 /* Object size */
 .full {
@@ -318,7 +399,7 @@ picture {
 .icon {
     display: flex;
     height: 3rem;
-    width: 3rem;
+    aspect-ratio: 1/1;
 }
 .window_active {
     background-color: var(--color_mantel);
@@ -326,7 +407,11 @@ picture {
         color: var(--color_accent) !important;
     }
 }
-
+@media screen and (width <= 1280px) {
+    .icon{
+        height: 2rem;
+    }
+}
 
 /* sending animation */
 .spinner {

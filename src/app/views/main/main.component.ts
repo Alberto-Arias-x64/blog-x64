@@ -6,7 +6,7 @@ import { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/interf
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ModalService } from 'src/app/services/modal.service'
-import { ErrorMock, copyMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, copyMock, subscribedMock } from 'src/app/mocks/modals.mock'
 
 @Component({
     selector: 'app-main',
@@ -93,6 +93,11 @@ export class MainComponent implements OnInit {
                 return element
             })
         })
+    }
+
+    subscribe() {
+        this.Modal.setData = copyMock(subscribedMock)
+        this.Modal.setState = true
     }
 
     navigateTo(URL: string) {

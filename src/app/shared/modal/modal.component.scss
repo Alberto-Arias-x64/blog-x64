@@ -5,6 +5,9 @@ section {
     width: 100vw;
     background-color: transparentize($color: #000000, $amount: 0.5);
     z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--animation_fast);
 }
 article {
     position: absolute;
@@ -17,4 +20,9 @@ article {
 }
 picture {
     height: 10rem;
+}
+
+.show_modal{
+    opacity: 1;
+    visibility: visible;
 }
