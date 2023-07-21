@@ -24,6 +24,7 @@ export class MainComponent implements OnInit {
     categoriesList?: CategoriesInterface[]
     posts: PostInterface[] = []
     title: string | null = null
+    showMobile = false
 
     ngOnInit(): void {
         this.Route.params.subscribe((params: any) => {
@@ -98,6 +99,10 @@ export class MainComponent implements OnInit {
     subscribe() {
         this.Modal.setData = copyMock(subscribedMock)
         this.Modal.setState = true
+    }
+
+    toggleMobile(){
+        this.showMobile = !this.showMobile
     }
 
     navigateTo(URL: string) {

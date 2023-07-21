@@ -1,71 +1,119 @@
-.blog{
+.blog {
     width: 100%;
     aspect-ratio: 3/1;
     overflow: hidden;
 }
-.contend{
+.contend {
     display: grid;
     grid-template-rows: max-content auto max-content;
-    h4{
+    height: 100%;
+    h4 {
         cursor: pointer;
         transition: var(--animation_standard);
         border-bottom: 1px solid transparent;
-        &:hover{
+        &:hover {
             color: var(--color_accent);
             border-color: var(--color_accent);
         }
     }
 }
-.info_bottom{
+.decorator {
+    position: relative;
+    &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 3rem;
+        background-image: linear-gradient(rgba(0, 0, 0, 0), var(--color_mantel));
+        bottom: 0;
+        left: 0;
+    }
+}
+.info_bottom {
     align-items: flex-end;
 }
-.likes{
+.likes {
     cursor: pointer;
     color: var(--color_secondary);
     transition: var(--animation_standard);
-    &:hover{
+    &:hover {
         color: var(--color_accent);
-        p{
+        p {
             color: var(--color_accent);
         }
     }
     &.liked {
         color: var(--color_accent);
-        p{
+        p {
             color: var(--color_accent);
         }
     }
 }
-
-aside{
+aside {
     position: sticky;
     top: 8rem;
     display: grid;
     grid-template-rows: max-content auto;
     align-items: end;
     height: calc(100vh - 20rem);
-
 }
-
-.active{
+.active {
     color: var(--color_accent);
 }
-
-h6{
+h6 {
     padding-bottom: 1rem;
 }
-
-@media screen and (width <= 1280px) {
-    aside{
-        top: 4rem;
-    }
+.pointer{
+    cursor: pointer;
 }
-
+.mobile_button{
+    display: none;
+}
+/* @media screen and (width <= 1280px) {
+} */
 @media screen and (width <= 768px) {
-    .blog{
+    .blog_layout{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        aside{
+            height: 100vh;
+            width: 30rem;
+            padding: 2rem;
+            padding-top: 8rem;
+            position: fixed;
+            right: -30rem;
+            top: 0;
+            overflow: visible;
+            background-color: transparentize($color: #000000, $amount: 0.2);
+            backdrop-filter: blur(20px);
+            transition: var(--animation_standard);
+            &.visible{
+                right: 0%;
+            }
+            .mobile_button{
+                color: white;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 10%;
+                left: -5rem;
+                height: 5rem;
+                width: 5rem;
+                background-color: transparentize($color: #e31952, $amount: 0.3);
+                backdrop-filter: blur(20px);
+                p{
+                    font-size: 3rem;
+                }
+            }
+        }
+    }
+    .blog {
         display: grid;
         grid-template-columns: auto;
-        grid-template-rows: 3fr 1fr;
+        grid-template-rows: 3fr 2fr;
         aspect-ratio: 4/5;
     }
 }

@@ -444,11 +444,36 @@ picture {
         font-size: 3rem;
     }
     pre {
-        max-width: calc(100vw - 12rem);
+        max-width: calc(100vw - 8rem);
         overflow: auto;
+        border-radius: 0 !important;
+    }
+    img{
+        max-width: calc(100vw - 8rem);
     }
     ol{
         color: var(--color_secondary);
         padding-left: 2rem;
     }
+}
+@media screen and (width <= 768px) {
+    .md {
+        h1 {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+    }
+}
+
+/* overflow */
+.hide_overflow_y{
+    overflow-y: hidden;
+}
+.hide_overflow_x{
+    overflow-x: hidden;
+}
+.hide_overflow{
+    overflow: hidden;
 }

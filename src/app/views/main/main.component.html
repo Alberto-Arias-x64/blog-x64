@@ -7,19 +7,19 @@
         <h4>Populares</h4>
         <app-slider [list]="posts" />
     </article> -->
-    <article class="column_3-1 gap_big">
+    <article class="column_3-1 gap_big blog_layout">
         <div class="f_column gap_big">
             <section *ngFor="let item of posts" class="card blog padding_standard gap_big column_2-3">
                 <picture class="pointer">
                     <img [src]="item.image" alt="imagen de blog" (click)="navigateTo(item.title)" loading="lazy"
                         decoding="async">
                 </picture>
-                <article class="contend">
+                <article class="contend hide_overflow">
                     <div class="f_column gap_small">
                         <h4 (click)="navigateTo(item.title)" class="fit">{{ item.title }}</h4>
                         <p>{{item.createdAt | date}}</p>
                     </div>
-                    <div class="f_column gap_small">
+                    <div class="f_column gap_small hide_overflow decorator">
                         <br>
                         <p (click)="navigateTo(item.title)">{{item.description}}</p>
                     </div>
@@ -39,7 +39,7 @@
                 </article>
             </section>
         </div>
-        <aside class="gap_small">
+        <aside class="gap_small visible" [class.visible]="showMobile">
             <section class="f_column">
                 <div class="input_decorator">
                     <label for="phone">Búsqueda</label>
@@ -66,6 +66,10 @@
                 <br>
                 <button class="fit" (click)="subscribe()" >Suscribirse</button>
             </section>
+            <div class="mobile_button" (click)="toggleMobile()">
+                <p *ngIf="!showMobile">+</p>
+                <p *ngIf="showMobile">-</p>
+            </div>
         </aside>
     </article>
 </section>
