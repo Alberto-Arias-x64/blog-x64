@@ -1,0 +1,6 @@
+@media screen and (width <= 480px) {
+    .column_half{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+}

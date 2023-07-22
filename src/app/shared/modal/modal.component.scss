@@ -1,8 +1,8 @@
 section {
     position: fixed;
     top: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background-color: transparentize($color: #000000, $amount: 0.5);
     z-index: 99;
     opacity: 0;
@@ -16,6 +16,7 @@ article {
     transform: translate(-50%, -50%);
     height: fit-content;
     max-width: 30rem;
+    width: 100%;
     text-align: center;
 }
 picture {

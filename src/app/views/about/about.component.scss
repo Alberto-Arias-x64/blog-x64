@@ -129,6 +129,7 @@
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
         aspect-ratio: 2/3;
+        transform: translateX(-2.5rem);
         picture{
             grid-row: 1;
         }
