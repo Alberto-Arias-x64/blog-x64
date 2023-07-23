@@ -119,6 +119,7 @@ export class MainComponent implements OnInit {
             error: () => {
                 this.Modal.setData = copyMock(ErrorMock)
                 this.Modal.setState = true
+                this.sendingMail = false
             }
         })
     }

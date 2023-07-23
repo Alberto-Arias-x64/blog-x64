@@ -24,3 +24,24 @@
         }
     }
 }
+
+.share{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: transparentize($color: #000000, $amount: 0.5);
+    backdrop-filter: blur(20px);
+    article{
+        cursor: pointer;
+        color: var(--color_secondary);
+        transition: var(--animation_standard);
+        &:hover{
+            color: var(--color_accent);
+        }
+        svg-icon{
+            display: flex;
+            height: 4rem;
+            aspect-ratio: 1/1;
+        }
+    }
+}

@@ -21,6 +21,7 @@ export class PostComponent implements OnInit {
     private readonly Meta = inject(Meta)
     private Title = inject(Title)
     data?: PostInterface
+    URL = ''
 
     ngOnInit(): void {
         const { id } = this.Route.snapshot.params
@@ -37,6 +38,7 @@ export class PostComponent implements OnInit {
             },
             error: () => this.Router.navigate(['/404'])
         })
+        this.URL = window.location.href
     }
 
     metaTags(data: PostInterface) {
