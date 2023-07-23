@@ -7,24 +7,32 @@ import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ModalService } from 'src/app/services/modal.service'
 import { ErrorMock, copyMock, subscribedMock } from 'src/app/mocks/modals.mock'
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 
 @Component({
     selector: 'app-main',
     standalone: true,
-    imports: [CommonModule, SliderComponent, AngularSvgIconModule, RouterModule],
+    imports: [CommonModule, SliderComponent, AngularSvgIconModule, RouterModule, FormsModule, ReactiveFormsModule],
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+    private readonly Route = inject(ActivatedRoute)
     private readonly Http = inject(HttpClient)
     private readonly Router = inject(Router)
-    private readonly Route = inject(ActivatedRoute)
+    private readonly Builder = inject(FormBuilder)
     private Modal = inject(ModalService)
 
     categoriesList?: CategoriesInterface[]
     posts: PostInterface[] = []
     title: string | null = null
     showMobile = false
+    sendingMail = false
+    sendedMail = false
+
+    form = this.Builder.group({
+        mail: new FormControl(null, [Validators.required, Validators.email])
+    })
 
     ngOnInit(): void {
         this.Route.params.subscribe((params: any) => {
@@ -96,9 +104,24 @@ export class MainComponent implements OnInit {
         })
     }
 
-    subscribe() {
-        this.Modal.setData = copyMock(subscribedMock)
-        this.Modal.setState = true
+    subscribe(form: FormGroup) {
+        this.sendingMail = true
+        this.Http.post<HttpResponse<null>>("/api/register_mail", { mail: form.get('mail')?.value }).subscribe({
+            next: (res) => {
+                if (res.status === 'OK') {
+                    this.Modal.setData = copyMock(subscribedMock)
+                    this.Modal.setState = true
+                    this.form.get('mail')?.setValue(null)
+                    this.form.get('mail')?.disable()
+                    this.sendedMail = true
+                    this.sendingMail = false
+                }
+            },
+            error: () => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
+            }
+        })
     }
 
     toggleMobile(){

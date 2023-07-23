@@ -54,18 +54,20 @@
                     <a [routerLink]="['/category',item.category]" routerLinkActive="active">{{item.category}}</a>
                 </ng-container>
             </section>
-            <section class="f_column" style="align-items: flex-end;">
+            <form [formGroup]="form" (ngSubmit)="subscribe(form)" class="f_column" style="align-items: flex-end;">
                 <h6 class="text_end">¿Te gusta estar informado?</h6>
                 <p class="text_end">Suscribiere y no te pierdas de los últimos contenidos sobre la Web</p>
                 <div class="input_decorator">
                     <div class="f_row gap_small centred-v">
                         <svg-icon class="input_icon" src="assets/icons/mail.svg" />
-                        <input type="email" id="mail" name="mail" placeholder="mi@correo.com">
+                        <input type="email" id="mail" formControlName="mail" name="mail" placeholder="mi@correo.com">
                     </div>
                 </div>
                 <br>
-                <button class="fit" (click)="subscribe()" >Suscribirse</button>
-            </section>
+                <button class="fit" [disabled]="form.invalid || sendingMail || sendedMail" [class.spinner]="sendingMail">
+                    <p *ngIf="!sendingMail">Suscribirse</p>
+                </button>
+            </form>
             <div class="mobile_button" (click)="toggleMobile()">
                 <p *ngIf="!showMobile">+</p>
                 <p *ngIf="showMobile">-</p>
