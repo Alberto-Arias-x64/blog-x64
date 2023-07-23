@@ -62,6 +62,7 @@
                         <svg-icon class="input_icon" src="assets/icons/mail.svg" />
                         <input type="email" id="mail" formControlName="mail" name="mail" placeholder="mi@correo.com">
                     </div>
+                    <p class="customError" [class.active]="mail?.hasError('email') && mail?.touched">El email no es valido</p>
                 </div>
                 <br>
                 <button class="fit" [disabled]="form.invalid || sendingMail || sendedMail" [class.spinner]="sendingMail">

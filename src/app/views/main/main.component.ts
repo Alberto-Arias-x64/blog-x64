@@ -47,8 +47,7 @@ export class MainComponent implements OnInit {
                                 } else element.liked = false
                                 return element
                             })
-                        }
-                        else{
+                        } else {
                             this.posts = []
                             this.Router.navigate(['/404'])
                         }
@@ -106,7 +105,7 @@ export class MainComponent implements OnInit {
 
     subscribe(form: FormGroup) {
         this.sendingMail = true
-        this.Http.post<HttpResponse<null>>("/api/register_mail", { mail: form.get('mail')?.value }).subscribe({
+        this.Http.post<HttpResponse<null>>('/api/register_mail', { mail: form.get('mail')?.value }).subscribe({
             next: (res) => {
                 if (res.status === 'OK') {
                     this.Modal.setData = copyMock(subscribedMock)
@@ -124,12 +123,16 @@ export class MainComponent implements OnInit {
         })
     }
 
-    toggleMobile(){
+    toggleMobile() {
         this.showMobile = !this.showMobile
     }
 
     navigateTo(URL: string) {
         const route = URL.replace(/\s/g, '_')
         this.Router.navigate(['/post/', route])
+    }
+
+    get mail() {
+        return this.form.get('mail')
     }
 }
