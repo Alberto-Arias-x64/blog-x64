@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
-import { HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
+import { HttpResponse, PostInterface, PostPaginatorInterface } from 'src/app/interfaces/http.interface'
 import { RouterLink } from '@angular/router'
 import { RelativeDatePipe } from 'src/app/pipes/relative-date.pipe'
 import { ModalService } from 'src/app/services/modal.service'
+import { ErrorMock, NoDataMock, copyMock } from 'src/app/mocks/modals.mock'
 
 @Component({
     selector: 'app-posts',
@@ -17,16 +18,25 @@ export class PostsComponent {
     private readonly Http = inject(HttpClient)
     private Modal = inject(ModalService)
 
-
     posts: PostInterface[] = []
 
     ngOnInit(): void {
-        this.Http.get<HttpResponse<PostInterface[]>>('/api/read_posts').subscribe(res => {
-            if(res && res.data.length > 0) this.posts = res.data
+        this.Http.get<HttpResponse<PostPaginatorInterface>>('/api/read_posts').subscribe({
+            next: (res) => {
+                if (res && res.data?.count > 0) this.posts = res.data.rows
+                else {
+                    this.Modal.setData = copyMock(NoDataMock)
+                    this.Modal.setState = true
+                }
+            },
+            error: () => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
+            }
         })
     }
 
     convertTitle(title: string) {
-        return title.replace(/\s/g, "_")
+        return title.replace(/\s/g, '_')
     }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { SliderComponent } from 'src/app/components/slider/slider.component'
 import { HttpClient } from '@angular/common/http'
-import { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
+import { CategoriesInterface, HttpResponse, PostInterface, PostPaginatorInterface } from 'src/app/interfaces/http.interface'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ModalService } from 'src/app/services/modal.service'
@@ -38,10 +38,10 @@ export class MainComponent implements OnInit {
         this.Route.params.subscribe((params: any) => {
             this.title = params.id
             if (this.Router.url.includes('category')) {
-                this.Http.get<HttpResponse<PostInterface[]>>(`/api/category_posts/${params.id}`).subscribe({
+                this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/category_posts/${params.id}`).subscribe({
                     next: (res) => {
-                        if (res.data && res.data.length > 0) {
-                            this.posts = res.data.map((element: PostInterface) => {
+                        if (res.data && res.data.count > 0) {
+                            this.posts = res.data.rows.map((element: PostInterface) => {
                                 if (window.localStorage.getItem(JSON.stringify(element.id))) {
                                     element.liked = true
                                 } else element.liked = false
@@ -59,9 +59,9 @@ export class MainComponent implements OnInit {
                 })
             } else {
                 this.title = null
-                this.Http.get<HttpResponse<PostInterface[]>>('/api/read_posts').subscribe({
+                this.Http.get<HttpResponse<PostPaginatorInterface>>('/api/read_posts').subscribe({
                     next: (res) => {
-                        this.posts = res.data
+                        this.posts = res.data.rows
                         this.posts = this.posts.map((element) => {
                             if (window.localStorage.getItem(JSON.stringify(element.id))) {
                                 element.liked = true

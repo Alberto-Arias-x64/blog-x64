@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     @HostListener('window:scroll', [])
     onWindowScroll() {
         const number = (isPlatformBrowser(this.platformId) && window.pageYOffset) || document.documentElement.scrollTop || document.body.scrollTop || 0
-        if (number > 60) {
+        if (number > 20) {
             this.isMenuScrolling = true
         } else {
             this.isMenuScrolling = false

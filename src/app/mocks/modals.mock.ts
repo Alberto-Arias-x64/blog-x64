@@ -3,7 +3,7 @@ import { ModalInterface } from '../interfaces/modal.interface'
 /* Info */
 export const messageSendMock: ModalInterface = {
     title: 'Mensaje enviado',
-    description: 'Tu mensaje a sido enviado satisfactoriamente, dentro de poco me pondré en contacto',
+    description: 'Tu mensaje a sido enviado, dentro de poco me pondré en contacto',
     image: {
         src: 'assets/icons/check.svg',
         alt: 'modal image'
@@ -29,7 +29,7 @@ export const postUpdatedMock: ModalInterface = {
     title: 'Post editado',
     description: 'Dentro de poco veras los cambios',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/recicle.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {
@@ -53,7 +53,7 @@ export const subscribedMock: ModalInterface = {
     title: 'Te has suscrito',
     description: 'Revisa su correo electrónico',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/notify.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {
@@ -67,7 +67,7 @@ export const confirmMock: ModalInterface = {
     title: 'Confirma',
     description: 'Desea descartar los cambios',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/alert.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {
@@ -83,7 +83,7 @@ export const confirmDeleteMock: ModalInterface = {
     title: 'Confirma',
     description: 'Desea eliminar el archivo seleccionado',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/trash.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {
@@ -99,7 +99,7 @@ export const confirmCancelMock: ModalInterface = {
     title: 'Confirma',
     description: 'Desea descartar los cambios',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/alert.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {
@@ -115,7 +115,7 @@ export const confirmUpdateMock: ModalInterface = {
     title: 'Confirma',
     description: 'Desea guardar los cambios',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/gear.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {
@@ -133,7 +133,7 @@ export const BlockIPMock: ModalInterface = {
     title: 'Cuenta bloqueada',
     description: 'Tu cuenta ha sido temporalmente bloqueada',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/cross.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {
@@ -153,11 +153,23 @@ export const ErrorMock: ModalInterface = {
         action: null
     }
 }
+export const NoDataMock: ModalInterface = {
+    title: 'Sin datos',
+    description: 'Parece que todavía no hay datos',
+    image: {
+        src: 'assets/icons/alert.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Cerrar',
+        action: null
+    }
+}
 export const ErrorOpenMock: ModalInterface = {
     title: 'Error',
     description: 'No se puede abrir el archivo',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/cross.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {
@@ -169,7 +181,7 @@ export const ExpiredTimeModal: ModalInterface = {
     title: 'Sesión expirada',
     description: 'Se acabo el tiempo',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/recicle.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {

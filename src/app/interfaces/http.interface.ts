@@ -46,6 +46,10 @@ export interface PostInterface {
     liked:          boolean
 }
 
+export interface PostPaginatorInterface{
+    count: number,
+    rows: PostInterface[]
+}
 export interface WindowsInterface {
     folders:  string[];
     archives: string[];
