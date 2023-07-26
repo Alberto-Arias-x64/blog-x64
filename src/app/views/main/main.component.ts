@@ -49,6 +49,28 @@ export class MainComponent implements OnInit {
                             })
                         } else {
                             this.posts = []
+                            this.Modal.setData = copyMock(ErrorMock)
+                            this.Modal.setState = true
+                        }
+                    },
+                    error: () => {
+                        this.Modal.setData = copyMock(ErrorMock)
+                        this.Modal.setState = true
+                    }
+                })
+            } else if (this.Router.url.includes('search')) {
+                this.title = params.id
+                this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/filter_posts/${params.id}`).subscribe({
+                    next: (res) => {
+                        if (res.data && res.data.count > 0) {
+                            this.posts = res.data.rows.map((element: PostInterface) => {
+                                if (window.localStorage.getItem(JSON.stringify(element.id))) {
+                                    element.liked = true
+                                } else element.liked = false
+                                return element
+                            })
+                        } else {
+                            this.posts = []
                             this.Router.navigate(['/404'])
                         }
                     },
