@@ -6,7 +6,7 @@ import { CategoriesInterface, HttpResponse, PostInterface, PostPaginatorInterfac
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ModalService } from 'src/app/services/modal.service'
-import { ErrorMock, copyMock, subscribedMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, NoDataMock, copyMock, subscribedMock } from 'src/app/mocks/modals.mock'
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 
 @Component({
@@ -49,8 +49,7 @@ export class MainComponent implements OnInit {
                             })
                         } else {
                             this.posts = []
-                            this.Modal.setData = copyMock(ErrorMock)
-                            this.Modal.setState = true
+                            this.Router.navigate(['/404'])
                         }
                     },
                     error: () => {
@@ -71,7 +70,8 @@ export class MainComponent implements OnInit {
                             })
                         } else {
                             this.posts = []
-                            this.Router.navigate(['/404'])
+                            this.Modal.setData = copyMock(NoDataMock)
+                            this.Modal.setState = true
                         }
                     },
                     error: () => {
