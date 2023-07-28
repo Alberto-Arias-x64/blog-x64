@@ -30,7 +30,11 @@ export class MainComponent implements OnInit {
     sendingMail = false
     sendedMail = false
 
-    form = this.Builder.group({
+    searchForm = this.Builder.group({
+        search: new FormControl(null, [Validators.required])
+    })
+
+    subscribeForm = this.Builder.group({
         mail: new FormControl(null, [Validators.required, Validators.email])
     })
 
@@ -125,6 +129,20 @@ export class MainComponent implements OnInit {
         })
     }
 
+    search(form: FormGroup) {
+        this.Http.post<HttpResponse<null>>('/api/search', { mail: form.get('mail')?.value }).subscribe({
+            next: (res) => {
+                if (res.status === 'OK') {
+                    this.Router.navigate(['/search/'])
+                }
+            },
+            error: () => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
+            }
+        })
+    }
+
     subscribe(form: FormGroup) {
         this.sendingMail = true
         this.Http.post<HttpResponse<null>>('/api/register_mail', { mail: form.get('mail')?.value }).subscribe({
@@ -132,8 +150,8 @@ export class MainComponent implements OnInit {
                 if (res.status === 'OK') {
                     this.Modal.setData = copyMock(subscribedMock)
                     this.Modal.setState = true
-                    this.form.get('mail')?.setValue(null)
-                    this.form.get('mail')?.disable()
+                    this.subscribeForm.get('mail')?.setValue(null)
+                    this.subscribeForm.get('mail')?.disable()
                     this.sendedMail = true
                     this.sendingMail = false
                 }
@@ -156,6 +174,6 @@ export class MainComponent implements OnInit {
     }
 
     get mail() {
-        return this.form.get('mail')
+        return this.subscribeForm.get('mail')
     }
 }
