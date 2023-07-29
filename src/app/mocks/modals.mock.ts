@@ -13,6 +13,18 @@ export const messageSendMock: ModalInterface = {
         action: null
     }
 }
+export const backupMock: ModalInterface = {
+    title: 'Backup creado',
+    description: 'Dentro de poco comenzara la descarga',
+    image: {
+        src: 'assets/icons/check.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Descargar',
+        action: null
+    }
+}
 export const postCreatedMock: ModalInterface = {
     title: 'Post creado',
     description: 'Dentro de poco veras el nuevo contenido',

@@ -16,6 +16,7 @@
             <button *ngIf="isArchive(activeElement)">Descargar</button>
             <button *ngIf="activeElement" (click)="isArchive(activeElement)? openFile(activeElement) : open(activeElement)">Abrir</button>
             <button (click)="upload()">Subir</button>
+            <button (click)="backup()">Backup</button>
         </div>
     </article>
     <article class="f_row gap_standard wrap">

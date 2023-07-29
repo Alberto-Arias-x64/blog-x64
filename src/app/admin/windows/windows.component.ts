@@ -1,14 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { HttpResponse, WindowsInterface } from 'src/app/interfaces/http.interface'
 import { IconifyComponent } from 'src/app/components/iconify/iconify.component'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ModalService } from 'src/app/services/modal.service'
-import { ErrorMock, ErrorOpenMock, confirmCancelMock, confirmDeleteMock, confirmUpdateMock, copyMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, ErrorOpenMock, backupMock, confirmCancelMock, confirmDeleteMock, confirmUpdateMock, copyMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
 import { ModalInterface } from 'src/app/interfaces/modal.interface'
 import { FormsModule } from '@angular/forms'
-
+import { saveAs } from 'file-saver'
 @Component({
     selector: 'app-windows',
     standalone: true,
@@ -136,6 +136,26 @@ export class WindowsComponent implements OnInit {
                 }
             },
             error: () => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
+            }
+        })
+    }
+
+    backup() {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        this.Http.get<Blob>('/api/admin/windows/backup', { headers, responseType: 'blob' as 'json' }).subscribe({
+            next: (res) => {
+                const backupModal = copyMock(backupMock)
+                backupModal.buttonPrincipal!.action = () => {
+                    const date = new Date()
+                    saveAs(res, `backup_${date.getDate()}_${date.getMonth()}_${date.getFullYear()}`)
+                }
+                this.Modal.setData = backupModal
+                this.Modal.setState = true
+            },
+            error: (err) => {
+                console.log(err)
                 this.Modal.setData = copyMock(ErrorMock)
                 this.Modal.setState = true
             }
