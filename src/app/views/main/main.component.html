@@ -22,14 +22,14 @@
                     <div class="f_column gap_small hide_overflow decorator">
                         <br>
                         <p (click)="navigateTo(item.title)">{{item.description}}</p>
+                        <br>
                     </div>
                     <div class="f_column gap_standard info_bottom">
                         <hr class="full">
                         <div class="f_row gap_standard">
                             <div class="f_row gap_small centred-v likes" [class.liked]="item.liked"
                                 (click)="like($event ,item.id)">
-                                <svg-icon [src]="item.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg' "
-                                    class="icon" />
+                                <svg-icon [src]="item.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg' " class="icon" />
                                 <p>{{item.likes}}</p>
                             </div>
                             <hr>
