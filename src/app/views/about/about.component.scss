@@ -1,6 +1,9 @@
 .about{
     min-height: 100vh;
     height: fit-content;
+    strong{
+        color: var(--color_accent);
+    }
 }
 .portrait_container{
     width: 60rem;

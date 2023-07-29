@@ -40,9 +40,9 @@
             </section>
         </div>
         <aside class="gap_small visible" [class.visible]="showMobile">
-            <form class="f_column" [formGroup]="searchForm" (ngSubmit)="search(subscribeForm)">
+            <form class="f_column" [formGroup]="searchForm" (ngSubmit)="search(searchForm)">
                 <div class="input_decorator">
-                    <label for="phone">Búsqueda</label>
+                    <label for="search">Búsqueda</label>
                     <div class="f_row gap_small centred-v">
                         <svg-icon class="input_icon" src="assets/icons/magnifier.svg" />
                         <input type="text" id="search" name="search" formControlName="search" placeholder="Búsqueda">

@@ -130,17 +130,8 @@ export class MainComponent implements OnInit {
     }
 
     search(form: FormGroup) {
-        this.Http.post<HttpResponse<null>>('/api/search', { mail: form.get('mail')?.value }).subscribe({
-            next: (res) => {
-                if (res.status === 'OK') {
-                    this.Router.navigate(['/search/'])
-                }
-            },
-            error: () => {
-                this.Modal.setData = copyMock(ErrorMock)
-                this.Modal.setState = true
-            }
-        })
+        this.Router.navigate([`/search/${form.get('search')?.value}`])
+        this.searchForm.get('search')?.setValue(null)
     }
 
     subscribe(form: FormGroup) {
