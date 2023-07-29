@@ -229,4 +229,9 @@ export class WindowsComponent implements OnInit {
         this.Modal.setData = confirmModal
         this.Modal.setState = true
     }
+
+    clickOut(event: MouseEvent){
+        const target = event.target as HTMLElement
+        if (target.id === 'clicOut') this.activeElement = null
+    }
 }

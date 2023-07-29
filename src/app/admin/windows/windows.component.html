@@ -1,4 +1,4 @@
-<section class="gap_standard padding_big windows" *ngIf="!openEditor">
+<section class="gap_standard padding_big windows" *ngIf="!openEditor" (click)="clickOut($event)" id="clicOut">
     <article class="f_row gap_small">
         <p>Main</p>
         <ng-container *ngFor="let item of path">
@@ -19,7 +19,7 @@
             <button (click)="backup()">Backup</button>
         </div>
     </article>
-    <article class="f_row gap_standard wrap">
+    <article class="f_row gap_small wrap fit">
         <ng-container *ngFor="let item of folders">
             <app-iconify iconType="folder" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="open(item)"/>
         </ng-container>
