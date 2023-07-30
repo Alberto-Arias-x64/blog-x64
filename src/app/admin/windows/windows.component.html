@@ -12,11 +12,12 @@
             <p>Volver</p>
         </div>
         <div class="f_row gap_standard">
-            <button *ngIf="isArchive(activeElement)" (click)="deleteFile(activeElement)">Eliminar</button>
-            <button *ngIf="isArchive(activeElement)">Descargar</button>
+            <button *ngIf="activeElement" (click)="isArchive(activeElement)? deleteFile(activeElement) : deleteFolder(activeElement)">Eliminar</button>
+            <!-- <button *ngIf="isArchive(activeElement)">Descargar</button> -->
             <button *ngIf="activeElement" (click)="isArchive(activeElement)? openFile(activeElement) : open(activeElement)">Abrir</button>
-            <button (click)="upload()">Subir</button>
-            <button (click)="backup()">Backup</button>
+            <button *ngIf="!activeElement" (click)="folder()">Carpeta</button>
+            <button *ngIf="!activeElement" (click)="upload()">Subir</button>
+            <button *ngIf="!activeElement && path[0] === 'backup'" (click)="backup()">Backup</button>
         </div>
     </article>
     <article class="f_row gap_small wrap fit">
@@ -37,6 +38,22 @@
         </div>
         <input type="file" name="file" style="visibility: hidden; height: 0;" [(ngModel)]="fileData" #fileInput>
     </article>
+    <form [formGroup]="folderForm" (ngSubmit)="createFolder(folderForm)" class="upload_file" *ngIf="newFolder">
+        <div class="file_container card padding_standard fit f_column gap_standard centred-v">
+            <div class="input_decorator fit">
+                <label for="folder">Nombre de la carpeta</label>
+                <div class="f_row centred-v">
+                    <svg-icon class="input_icon" src="assets/icons/folder.svg"/>
+                    <input type="text" class="full" id="folder" name="folder" formControlName="folderName">
+                </div>
+                <p class="customError" [class.active]="folderName?.hasError('required') && folderName?.touched">Campo requerido</p>
+            </div>
+            <div class="f_row gap_standard">
+                <button type="button" (click)="cancelFolder()">Cancelar</button>
+                <button type="submit" [disabled]="folderForm.invalid">Confirmar</button>
+            </div>
+        </div>
+    </form>
 </section>
 
 <section class="full padding_big" *ngIf="openEditor">

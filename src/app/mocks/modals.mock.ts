@@ -61,6 +61,18 @@ export const windowUploadedMock: ModalInterface = {
         action: null
     }
 }
+export const windowFolderMock: ModalInterface = {
+    title: 'Carpeta creada',
+    description: 'Dentro de poco veras los cambios',
+    image: {
+        src: 'assets/icons/check.svg',
+        alt: 'modal image'
+    },
+    buttonPrincipal: {
+        text: 'Cerrar',
+        action: null
+    }
+}
 export const subscribedMock: ModalInterface = {
     title: 'Te has suscrito',
     description: 'Revisa su correo electrónico',
@@ -157,7 +169,7 @@ export const ErrorMock: ModalInterface = {
     title: 'Ha ocurrido un error',
     description: 'Parece que ha ocurrido un error, vuelve a intentar',
     image: {
-        src: 'assets/icons/check.svg',
+        src: 'assets/icons/alert.svg',
         alt: 'modal image'
     },
     buttonPrincipal: {

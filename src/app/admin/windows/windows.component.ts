@@ -5,14 +5,14 @@ import { HttpResponse, WindowsInterface } from 'src/app/interfaces/http.interfac
 import { IconifyComponent } from 'src/app/components/iconify/iconify.component'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { ModalService } from 'src/app/services/modal.service'
-import { ErrorMock, ErrorOpenMock, backupMock, confirmCancelMock, confirmDeleteMock, confirmUpdateMock, copyMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, ErrorOpenMock, backupMock, confirmCancelMock, confirmDeleteMock, confirmUpdateMock, copyMock, windowFolderMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
 import { ModalInterface } from 'src/app/interfaces/modal.interface'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 import { saveAs } from 'file-saver'
 @Component({
     selector: 'app-windows',
     standalone: true,
-    imports: [CommonModule, FormsModule, IconifyComponent, AngularSvgIconModule],
+    imports: [CommonModule, FormsModule, IconifyComponent, AngularSvgIconModule, ReactiveFormsModule],
     templateUrl: './windows.component.html',
     styleUrls: ['./windows.component.scss']
 })
@@ -20,6 +20,7 @@ export class WindowsComponent implements OnInit {
     @ViewChild('fileInput') fileInput!: ElementRef
     @ViewChild('editor') editor!: ElementRef
 
+    private readonly Builder = inject(FormBuilder)
     private readonly Http = inject(HttpClient)
     private Modal = inject(ModalService)
 
@@ -27,11 +28,16 @@ export class WindowsComponent implements OnInit {
     folders = []
     files = []
     activeElement: string | null = null
+    newFolder = false
     openEditor = false
     uploadingFile = false
     editorData: string | null = null
     fileName: string | any = null
     fileData: string | any = null
+
+    folderForm = this.Builder.group({
+        folderName: new FormControl(null, [Validators.required])
+    })
 
     ngOnInit(): void {
         this.getPath()
@@ -142,8 +148,48 @@ export class WindowsComponent implements OnInit {
         })
     }
 
+    folder() {
+        this.newFolder = true
+    }
+
+    cancelFolder() {
+        this.newFolder = false
+    }
+
+    createFolder(form: FormGroup) {
+        let route = ''
+        if (this.path.length === 0) route = ''
+        else if (this.path.length === 1) route = this.path[0]
+        else this.path.forEach((item) => (route += `/${item}`))
+        route += `/${form.get('folderName')?.value}`
+        const newPath = {
+            path: route
+        }
+        this.Http.post<HttpResponse<any>>('/api/admin/windows/create_folder', newPath).subscribe({
+            next: (res) => {
+                if (res.status === 'OK') {
+                    this.Modal.setData = copyMock(windowFolderMock)
+                    this.Modal.setState = true
+                    this.getPath()
+                } else {
+                    this.Modal.setData = copyMock(ErrorMock)
+                    this.Modal.setState = true
+                }
+            },
+            error: () => {
+                this.Modal.setData = copyMock(ErrorMock)
+                this.Modal.setState = true
+
+            },
+            complete: () => {
+                this.newFolder = false
+                form.reset()
+            }
+        })
+    }
+
     backup() {
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
         this.Http.get<Blob>('/api/admin/windows/backup', { headers, responseType: 'blob' as 'json' }).subscribe({
             next: (res) => {
                 const backupModal = copyMock(backupMock)
@@ -230,8 +276,33 @@ export class WindowsComponent implements OnInit {
         this.Modal.setState = true
     }
 
-    clickOut(event: MouseEvent){
+    deleteFolder(fileName: string | null) {
+        const confirmModal: ModalInterface = copyMock(confirmDeleteMock)
+        confirmModal.buttonSecondary!.action = () => {
+            let route = ''
+            if (this.path.length === 0) route = ''
+            else if (this.path.length === 1) route = this.path[0]
+            else this.path.forEach((item) => (route += `/${item}`))
+            if (fileName) route += `/${fileName}`
+            this.Http.delete<HttpResponse<string>>(`/api/admin/windows/delete_folder`, { body: { path: route } }).subscribe(() => {
+                if (fileName) this.getPath()
+                else {
+                    this.editorData = ''
+                    this.openEditor = false
+                    this.return()
+                }
+            })
+        }
+        this.Modal.setData = confirmModal
+        this.Modal.setState = true
+    }
+
+    clickOut(event: MouseEvent) {
         const target = event.target as HTMLElement
         if (target.id === 'clicOut') this.activeElement = null
+    }
+
+    get folderName() {
+        return this.folderForm.get('folderName')
     }
 }
