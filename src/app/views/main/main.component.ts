@@ -26,6 +26,8 @@ export class MainComponent implements OnInit {
     categoriesList?: CategoriesInterface[]
     posts: PostInterface[] = []
     title: string | null = null
+    paginator = 1
+    pagine = 1
     showMobile = false
     sendingMail = false
     sendedMail = false
@@ -85,8 +87,12 @@ export class MainComponent implements OnInit {
                 })
             } else {
                 this.title = null
+                this.Route.queryParams.subscribe(({page}) => {
+                    console.log("", page)
+                })
                 this.Http.get<HttpResponse<PostPaginatorInterface>>('/api/read_posts').subscribe({
                     next: (res) => {
+                        this.paginator = res.data.count/3
                         this.posts = res.data.rows
                         this.posts = this.posts.map((element) => {
                             if (window.localStorage.getItem(JSON.stringify(element.id))) {
@@ -162,6 +168,16 @@ export class MainComponent implements OnInit {
     navigateTo(URL: string) {
         const route = URL.replace(/\s/g, '_')
         this.Router.navigate(['/post/', route])
+    }
+
+    changePage(action: boolean){
+        if (action) {
+            this.pagine ++
+
+        }else{
+            this.pagine --
+        }
+        this.Router.navigate([''],{queryParams: {page: this.pagine}})
     }
 
     get mail() {

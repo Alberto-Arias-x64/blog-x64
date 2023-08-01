@@ -455,6 +455,9 @@ picture {
         color: var(--color_secondary);
         padding-left: 2rem;
     }
+    strong{
+        color: var(--color_accent);
+    }
 }
 @media screen and (width <= 768px) {
     .md {
