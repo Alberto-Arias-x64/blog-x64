@@ -18,9 +18,9 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 })
 export class MainComponent implements OnInit {
     private readonly Route = inject(ActivatedRoute)
+    private readonly Builder = inject(FormBuilder)
     private readonly Http = inject(HttpClient)
     private readonly Router = inject(Router)
-    private readonly Builder = inject(FormBuilder)
     private Modal = inject(ModalService)
 
     categoriesList?: CategoriesInterface[]
@@ -117,7 +117,7 @@ export class MainComponent implements OnInit {
             this.Http.get<HttpResponse<PostPaginatorInterface>>(URLRoute).subscribe({
                 next: (res) => {
                     window.scrollTo(0, 0)
-                    this.paginator = Math.ceil(res.data.count/3)
+                    this.paginator = Math.ceil(res.data.count/5)
                     if(pageData < 1 || pageData > this.paginator) this.Router.navigate(["/404"])
                     this.posts = res.data.rows
                     if (res.data && res.data.count > 0) {

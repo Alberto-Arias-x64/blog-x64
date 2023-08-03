@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { MarkdownModule } from 'ngx-markdown'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -15,6 +15,9 @@ import { AngularSvgIconModule } from 'angular-svg-icon'
     styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+
+    @ViewChild('likeButton') likeButton! :ElementRef
+
     private readonly Route = inject(ActivatedRoute)
     private readonly Http = inject(HttpClient)
     private readonly Router = inject(Router)
@@ -52,12 +55,14 @@ export class PostComponent implements OnInit {
         this.Meta.addTag({ property: 'og:image', content: data.image })
     }
 
-    like(event: Event,id: string | number) {
-        const element = event.target as HTMLElement
+    like(id: string | number) {
+        const element = this.likeButton.nativeElement as HTMLElement
         if (window.localStorage.getItem(JSON.stringify(id))) return
         this.Http.post('/api/like_post', { id }).subscribe(() => {
             window.localStorage.setItem(JSON.stringify(id), 'true')
             element.classList.add("liked")
+            this.data!.liked = true
+            this.data!.likes ++
         })
     }
 

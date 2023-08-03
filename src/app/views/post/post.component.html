@@ -6,9 +6,8 @@
             <p>Volver</p>
         </div>
         <div class="f_row gap_small centred-v">
-            <div class="f_row gap_small centred-v likes" [class.liked]="data?.liked" (click)="like($event ,data!.id)">
-                <svg-icon [src]="data?.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg' "
-                    class="icon" />
+            <div class="f_row gap_small centred-v likes" [class.liked]="data?.liked" (click)="like(data!.id)" #likeButton>
+                <svg-icon [src]="data?.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg' " class="icon" />
                 <p>{{data?.likes}}</p>
             </div>
             <hr style="height: 100%;">

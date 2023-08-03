@@ -39,7 +39,7 @@
                 </article>
             </section>
             <section class="f_row centred gap_standard">
-                <button (click)="changePage(false)">&lt;</button><p>{{pagine}}/{{paginator}}</p><button (click)="changePage(true)">&gt;</button>
+                <button (click)="changePage(false)">&lt;</button><p class="text_big">{{pagine}} / {{paginator}}</p><button (click)="changePage(true)">&gt;</button>
             </section>
         </div>
         <aside class="gap_small visible" [class.visible]="showMobile">

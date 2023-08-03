@@ -99,6 +99,9 @@ p > a{
     width: 100%;
     text-align: end;
 }
+.text_big {
+    font-size: 2rem;
+}
 @media screen and (width <= 1280px) {
     h1{
         font-size: 5rem;
@@ -122,6 +125,9 @@ p > a{
     a,
     label {
         font-size: 1.5rem
+    }
+    .text_big {
+        font-size: 1.8rem;
     }
 }
 
