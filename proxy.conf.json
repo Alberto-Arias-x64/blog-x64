@@ -8,5 +8,10 @@
         "target": "https://localhost:4000",
         "secure": false,
         "changeOrigin": true
+    },
+    "/public": {
+        "target": "https://localhost:4000",
+        "secure": false,
+        "changeOrigin": true
     }
 }

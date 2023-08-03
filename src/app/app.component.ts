@@ -1,16 +1,15 @@
 import { Component } from '@angular/core'
-import { ChildrenOutletContexts } from '@angular/router'
+import { ChildrenOutletContexts, RouterOutlet } from '@angular/router'
 import { slideInAnimation } from './app.animation'
 
 @Component({
     selector: 'app-root',
-    template: '<div [@routeAnimations]="getRouteAnimationData()" ><router-outlet #outlet="outlet" /> <app-modal /></div>',
+    template: '<div [@routeAnimations]="getRouteAnimationData(outlet)" ><router-outlet #outlet="outlet" /> <app-modal /></div>',
     animations: [slideInAnimation]
 })
 export class AppComponent {
-    constructor(private contexts: ChildrenOutletContexts) {}
 
-    getRouteAnimationData() {
-        return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+    getRouteAnimationData(outlet: RouterOutlet) {
+        return outlet && outlet.activatedRouteData && outlet.activatedRouteData['']
     }
 }

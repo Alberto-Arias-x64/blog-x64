@@ -11,10 +11,12 @@ import { MarkdownModule } from 'ngx-markdown'
 import { ModalComponent } from './shared/modal/modal.component'
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         ModalComponent,
         HttpClientModule,
         AngularSvgIconModule.forRoot(),
