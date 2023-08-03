@@ -44,82 +44,14 @@ export class MainComponent implements OnInit {
         this.Route.params.subscribe((params: any) => {
             if (this.Router.url.includes('category')) {
                 this.title = params.id
-                this.Route.queryParams.subscribe(({page}) => {
-                    const pageData = page ?? 1
-                    this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/category_posts/${params.id}/${pageData}`).subscribe({
-                        next: (res) => {
-                            window.scrollTo(0, 0)
-                            this.paginator = Math.ceil(res.data.count/3)
-                            this.posts = res.data.rows
-                            if (res.data && res.data.count > 0) {
-                                this.posts = res.data.rows.map((element: PostInterface) => {
-                                    if (window.localStorage.getItem(JSON.stringify(element.id))) {
-                                        element.liked = true
-                                    } else element.liked = false
-                                    return element
-                                })
-                            } else {
-                                this.posts = []
-                                this.Router.navigate(['/404'])
-                            }
-                        },
-                        error: () => {
-                            this.Modal.setData = copyMock(ErrorMock)
-                            this.Modal.setState = true
-                        }
-                    })
-                })
+                this.handleSubscription('/api/category_posts', params.id)
+
             } else if (this.Router.url.includes('search')) {
                 this.title = params.id
-                this.Route.queryParams.subscribe(({page}) => {
-                    const pageData = page ?? 1
-                    this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/filter_posts/${params.id}/${pageData}`).subscribe({
-                        next: (res) => {
-                            window.scrollTo(0, 0)
-                            this.paginator = Math.ceil(res.data.count/3)
-                            this.posts = res.data.rows
-                            if (res.data && res.data.count > 0) {
-                                this.posts = res.data.rows.map((element: PostInterface) => {
-                                    if (window.localStorage.getItem(JSON.stringify(element.id))) {
-                                        element.liked = true
-                                    } else element.liked = false
-                                    return element
-                                })
-                            } else {
-                                this.posts = []
-                                this.Modal.setData = copyMock(NoDataMock)
-                                this.Modal.setState = true
-                            }
-                        },
-                        error: () => {
-                            this.Modal.setData = copyMock(ErrorMock)
-                            this.Modal.setState = true
-                        }
-                    })
-                })
-
+                this.handleSubscription('/api/filter_posts', params.id)
             } else {
                 this.title = null
-                this.Route.queryParams.subscribe(({page}) => {
-                    const pageData = page ?? 1
-                    this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/read_posts/${pageData}`).subscribe({
-                        next: (res) => {
-                            window.scrollTo(0, 0)
-                            this.paginator = Math.ceil(res.data.count/3)
-                            this.posts = res.data.rows
-                            this.posts = this.posts.map((element) => {
-                                if (window.localStorage.getItem(JSON.stringify(element.id))) {
-                                    element.liked = true
-                                } else element.liked = false
-                                return element
-                            })
-                        },
-                        error: () => {
-                            this.Modal.setData = copyMock(ErrorMock)
-                            this.Modal.setState = true
-                        }
-                    })
-                })
+                this.handleSubscription('/api/read_posts')
             }
         })
         this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
@@ -175,6 +107,40 @@ export class MainComponent implements OnInit {
         })
     }
 
+    handleSubscription(route :string, params: string | null = null){
+        this.Route.queryParams.subscribe(({page}) => {
+            const pageData = page ?? 1
+            this.pagine = pageData
+            let URLRoute = ''
+            if (params) URLRoute = `${route}/${params}/${pageData}`
+            else URLRoute = `${route}/${pageData}`
+            this.Http.get<HttpResponse<PostPaginatorInterface>>(URLRoute).subscribe({
+                next: (res) => {
+                    window.scrollTo(0, 0)
+                    this.paginator = Math.ceil(res.data.count/3)
+                    if(pageData < 1 || pageData > this.paginator) this.Router.navigate(["/404"])
+                    this.posts = res.data.rows
+                    if (res.data && res.data.count > 0) {
+                        this.posts = res.data.rows.map((element: PostInterface) => {
+                            if (window.localStorage.getItem(JSON.stringify(element.id))) {
+                                element.liked = true
+                            } else element.liked = false
+                            return element
+                        })
+                    } else {
+                        this.posts = []
+                        this.Router.navigate(['/404'])
+                    }
+                },
+                error: () => {
+                    this.Modal.setData = copyMock(ErrorMock)
+                    this.Modal.setState = true
+                    this.Router.navigate(['/404'])
+                }
+            })
+        })
+    }
+
     toggleMobile() {
         this.showMobile = !this.showMobile
     }
@@ -193,7 +159,8 @@ export class MainComponent implements OnInit {
             if(this.pagine <= 1) return
             this.pagine --
         }
-        this.Router.navigate([''],{queryParams: {page: this.pagine}})
+        const route = this.Router.url.replace(/\?.*/gm,'')
+        this.Router.navigate([route],{queryParams: {page: this.pagine}})
     }
 
     get mail() {
