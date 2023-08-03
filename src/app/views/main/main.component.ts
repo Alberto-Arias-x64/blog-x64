@@ -42,69 +42,83 @@ export class MainComponent implements OnInit {
 
     ngOnInit(): void {
         this.Route.params.subscribe((params: any) => {
-            this.title = params.id
             if (this.Router.url.includes('category')) {
-                this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/category_posts/${params.id}`).subscribe({
-                    next: (res) => {
-                        if (res.data && res.data.count > 0) {
-                            this.posts = res.data.rows.map((element: PostInterface) => {
-                                if (window.localStorage.getItem(JSON.stringify(element.id))) {
-                                    element.liked = true
-                                } else element.liked = false
-                                return element
-                            })
-                        } else {
-                            this.posts = []
-                            this.Router.navigate(['/404'])
+                this.title = params.id
+                this.Route.queryParams.subscribe(({page}) => {
+                    const pageData = page ?? 1
+                    this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/category_posts/${params.id}/${pageData}`).subscribe({
+                        next: (res) => {
+                            window.scrollTo(0, 0)
+                            this.paginator = Math.ceil(res.data.count/3)
+                            this.posts = res.data.rows
+                            if (res.data && res.data.count > 0) {
+                                this.posts = res.data.rows.map((element: PostInterface) => {
+                                    if (window.localStorage.getItem(JSON.stringify(element.id))) {
+                                        element.liked = true
+                                    } else element.liked = false
+                                    return element
+                                })
+                            } else {
+                                this.posts = []
+                                this.Router.navigate(['/404'])
+                            }
+                        },
+                        error: () => {
+                            this.Modal.setData = copyMock(ErrorMock)
+                            this.Modal.setState = true
                         }
-                    },
-                    error: () => {
-                        this.Modal.setData = copyMock(ErrorMock)
-                        this.Modal.setState = true
-                    }
+                    })
                 })
             } else if (this.Router.url.includes('search')) {
                 this.title = params.id
-                this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/filter_posts/${params.id}`).subscribe({
-                    next: (res) => {
-                        if (res.data && res.data.count > 0) {
-                            this.posts = res.data.rows.map((element: PostInterface) => {
+                this.Route.queryParams.subscribe(({page}) => {
+                    const pageData = page ?? 1
+                    this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/filter_posts/${params.id}/${pageData}`).subscribe({
+                        next: (res) => {
+                            window.scrollTo(0, 0)
+                            this.paginator = Math.ceil(res.data.count/3)
+                            this.posts = res.data.rows
+                            if (res.data && res.data.count > 0) {
+                                this.posts = res.data.rows.map((element: PostInterface) => {
+                                    if (window.localStorage.getItem(JSON.stringify(element.id))) {
+                                        element.liked = true
+                                    } else element.liked = false
+                                    return element
+                                })
+                            } else {
+                                this.posts = []
+                                this.Modal.setData = copyMock(NoDataMock)
+                                this.Modal.setState = true
+                            }
+                        },
+                        error: () => {
+                            this.Modal.setData = copyMock(ErrorMock)
+                            this.Modal.setState = true
+                        }
+                    })
+                })
+
+            } else {
+                this.title = null
+                this.Route.queryParams.subscribe(({page}) => {
+                    const pageData = page ?? 1
+                    this.Http.get<HttpResponse<PostPaginatorInterface>>(`/api/read_posts/${pageData}`).subscribe({
+                        next: (res) => {
+                            window.scrollTo(0, 0)
+                            this.paginator = Math.ceil(res.data.count/3)
+                            this.posts = res.data.rows
+                            this.posts = this.posts.map((element) => {
                                 if (window.localStorage.getItem(JSON.stringify(element.id))) {
                                     element.liked = true
                                 } else element.liked = false
                                 return element
                             })
-                        } else {
-                            this.posts = []
-                            this.Modal.setData = copyMock(NoDataMock)
+                        },
+                        error: () => {
+                            this.Modal.setData = copyMock(ErrorMock)
                             this.Modal.setState = true
                         }
-                    },
-                    error: () => {
-                        this.Modal.setData = copyMock(ErrorMock)
-                        this.Modal.setState = true
-                    }
-                })
-            } else {
-                this.title = null
-                this.Route.queryParams.subscribe(({page}) => {
-                    console.log("", page)
-                })
-                this.Http.get<HttpResponse<PostPaginatorInterface>>('/api/read_posts').subscribe({
-                    next: (res) => {
-                        this.paginator = res.data.count/3
-                        this.posts = res.data.rows
-                        this.posts = this.posts.map((element) => {
-                            if (window.localStorage.getItem(JSON.stringify(element.id))) {
-                                element.liked = true
-                            } else element.liked = false
-                            return element
-                        })
-                    },
-                    error: () => {
-                        this.Modal.setData = copyMock(ErrorMock)
-                        this.Modal.setState = true
-                    }
+                    })
                 })
             }
         })
@@ -172,9 +186,11 @@ export class MainComponent implements OnInit {
 
     changePage(action: boolean){
         if (action) {
+            if(this.pagine >= this.paginator) return
             this.pagine ++
 
         }else{
+            if(this.pagine <= 1) return
             this.pagine --
         }
         this.Router.navigate([''],{queryParams: {page: this.pagine}})

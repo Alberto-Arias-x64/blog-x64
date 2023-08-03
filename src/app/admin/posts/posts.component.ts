@@ -21,9 +21,11 @@ export class PostsComponent {
     posts: PostInterface[] = []
 
     ngOnInit(): void {
-        this.Http.get<HttpResponse<PostPaginatorInterface>>('/api/read_posts').subscribe({
+        this.Http.get<HttpResponse<PostInterface[]>>('/api/admin/read_posts').subscribe({
             next: (res) => {
-                if (res && res.data?.count > 0) this.posts = res.data.rows
+                if (res && res.data.length > 0) {
+                    this.posts = res.data
+                }
                 else {
                     this.Modal.setData = copyMock(NoDataMock)
                     this.Modal.setState = true
