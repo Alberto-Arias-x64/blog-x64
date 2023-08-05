@@ -11,7 +11,7 @@
         <div class="f_column gap_big">
             <section *ngFor="let item of posts" class="card blog padding_standard gap_big column_2-3">
                 <picture class="pointer">
-                    <img [src]="item.image" alt="imagen de blog" (click)="navigateTo(item.title)" loading="lazy"
+                    <img [src]="item.image" alt="imagen de blog" (click)="navigateTo(item.title)" loading="eager"
                         decoding="async">
                 </picture>
                 <article class="contend hide_overflow">

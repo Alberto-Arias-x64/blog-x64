@@ -1,10 +1,10 @@
 import { Component } from '@angular/core'
-import { ChildrenOutletContexts, RouterOutlet } from '@angular/router'
+import { RouterOutlet } from '@angular/router'
 import { slideInAnimation } from './app.animation'
 
 @Component({
     selector: 'app-root',
-    template: '<div [@routeAnimations]="getRouteAnimationData(outlet)" ><router-outlet #outlet="outlet" /> <app-modal /></div>',
+    template: '<div><router-outlet #outlet="outlet" /> <app-modal /></div>',
     animations: [slideInAnimation]
 })
 export class AppComponent {
