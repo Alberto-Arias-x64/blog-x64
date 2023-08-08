@@ -1,7 +1,7 @@
 <main>
     <app-header />
     <div class="padding_big">
-        <router-outlet />
+        <router-outlet (activate)="scrollToTop()"/>
     </div>
     <app-footer />
 </main>

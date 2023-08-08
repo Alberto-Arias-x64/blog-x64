@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { FooterComponent } from 'src/app/shared/footer/footer.component';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-principal',
@@ -16,12 +16,9 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
     templateUrl: './principal.component.html',
     styleUrls: ['./principal.component.scss']
 })
-export class PrincipalComponent implements OnInit {
-    private readonly Router = inject(ActivatedRoute)
+export class PrincipalComponent {
 
-    ngOnInit() {
-        this.Router.url.subscribe(() => {
-            window.scrollTo(0, 0)
-        })
+    scrollToTop() {
+        window.scrollTo(0, 0)
     }
 }
