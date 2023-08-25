@@ -52,7 +52,7 @@
                     <label for="image" class="text_start">Imagen</label>
                     <div class="f_row centred-v">
                         <svg-icon class="input_icon" src="assets/icons/image.svg"/>
-                        <input type="file" id="image" name="image" accept=".png" (change)="selectFile($event, 'image')" (change)="selectImage($event)" (click)="touchField('image')">
+                        <input type="file" id="image" name="image" accept=".webp" (change)="selectFile($event, 'image')" (change)="selectImage($event)" (click)="touchField('image')">
                     </div>
                     <p class="customError" [class.active]="image?.hasError('required') && image?.touched">Campo requerido</p>
                 </div>
