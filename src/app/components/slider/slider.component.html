@@ -3,17 +3,17 @@
     <svg-icon src="/assets/icons/arrow.svg" class="return" />
   </button>
   <div class="f_row centred gap_standard contend">
-    <ng-container *ngFor="let item of list">
-      <article class="blog card" (click)="navigateTo(item.title)">
-        <picture>
-          <img [src]="item.image" alt="blog" />
-        </picture>
-        <div class="f_column gap_small padding_small">
-          <h6>{{ item.title }}</h6>
-          <p>{{ item.description }}</p>
-        </div>
-      </article>
-    </ng-container>
+    @for (item of list(); track $index) {
+    <article class="blog card" (click)="navigateTo(item.title)">
+      <picture>
+        <img [src]="item.image" alt="blog" />
+      </picture>
+      <div class="f_column gap_small padding_small">
+        <h6>{{ item.title }}</h6>
+        <p>{{ item.description }}</p>
+      </div>
+    </article>
+    }
   </div>
   <button class="padding_small control">
     <svg-icon src="/assets/icons/arrow.svg" class="forward" />

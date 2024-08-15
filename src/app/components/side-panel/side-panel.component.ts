@@ -11,11 +11,11 @@ import { CommonModule } from '@angular/common'
   styleUrl: './side-panel.component.scss'
 })
 export class SidePanelComponent {
-  private readonly Auth = inject(AuthService)
-  private readonly Router = inject(Router)
+  private readonly authService = inject(AuthService)
+  private readonly router = inject(Router)
 
   logOut() {
-    this.Auth.logOut()
-    this.Router.navigate(['/'])
+    this.authService.logOut()
+    this.router.navigate(['/'])
   }
 }

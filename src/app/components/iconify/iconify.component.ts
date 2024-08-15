@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, input, OnInit, signal } from '@angular/core'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { CommonModule } from '@angular/common'
 
@@ -10,13 +10,12 @@ import { CommonModule } from '@angular/common'
   styleUrl: './iconify.component.scss'
 })
 export class IconifyComponent implements OnInit {
-  @Input() name = ''
-  @Input() iconType: 'archive' | 'folder' = 'folder'
-  @Output() iconClicked = new EventEmitter<string>()
-  image = ''
+  name = input.required<string>()
+  iconType = input.required<'archive' | 'folder'>()
+  image = signal('')
 
   ngOnInit() {
-    if (this.iconType === 'folder') this.image = '/assets/icons/folder.svg'
-    if (this.iconType === 'archive') this.image = '/assets/icons/file.svg'
+    if (this.iconType() === 'folder') this.image.set('/assets/icons/folder.svg')
+    if (this.iconType() === 'archive') this.image.set('/assets/icons/file.svg')
   }
 }

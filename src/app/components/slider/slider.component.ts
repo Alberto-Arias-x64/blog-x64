@@ -1,5 +1,5 @@
 import { PostInterface } from 'src/app/core/interfaces/http.interface'
-import { Component, Input, inject } from '@angular/core'
+import { Component, inject, input } from '@angular/core'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router'
@@ -12,7 +12,7 @@ import { Router } from '@angular/router'
   styleUrl: './slider.component.scss'
 })
 export class SliderComponent {
-  @Input() list!: PostInterface[]
+  list = input.required<PostInterface[]>()
   private readonly Router = inject(Router)
 
   navigateTo(URL: string) {
