@@ -1,6 +1,6 @@
-import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { TokenInterceptor } from './core/interceptors/token.interceptor'
+import { tokenInterceptor } from './core/interceptors/token.interceptor'
 import { ModalComponent } from './shared/modal/modal.component'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { BrowserModule } from '@angular/platform-browser'
@@ -27,13 +27,6 @@ import routes from './router'
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    provideHttpClient(withInterceptorsFromDi())
-  ]
+  providers: [provideHttpClient(withInterceptors([tokenInterceptor]))]
 })
 export class AppModule {}

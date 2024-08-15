@@ -8,8 +8,8 @@ import { Injectable } from '@angular/core'
 })
 export class ModalService {
   private readonly ClearData: ModalInterface = copyMock(cleanMock)
-  private ModalState = new BehaviorSubject(false)
-  private ModalData = new BehaviorSubject(this.ClearData)
+  private readonly ModalState = new BehaviorSubject(false)
+  private readonly ModalData = new BehaviorSubject(this.ClearData)
 
   get getState(): Observable<boolean> {
     return this.ModalState.asObservable()

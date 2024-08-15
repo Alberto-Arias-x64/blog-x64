@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = () => {
 
   if (authService.getToken) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const decodedToken: any = jwt_decode(authService.getToken)
+    const decodedToken = jwt_decode<any>(authService.getToken)
     const expirationDate = new Date(decodedToken.exp * 1000)
     const currentTime = new Date()
 
