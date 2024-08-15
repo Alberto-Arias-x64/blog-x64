@@ -32,6 +32,7 @@ export class ContactComponent {
   sendForm(form: FormGroup) {
     if (form.invalid) return
     this.sendingFlag = true
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.http.post<HttpResponse<any>>('/api/send_message', form.value).subscribe({
       next: (res) => {
         this.sendingFlag = false

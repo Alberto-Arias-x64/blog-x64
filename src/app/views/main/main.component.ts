@@ -1,6 +1,6 @@
 import type { CategoriesInterface, HttpResponse, PostInterface, PostPaginatorInterface } from 'src/app/core/interfaces/http.interface'
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { ErrorMock, NoDataMock, copyMock, subscribedMock } from 'src/app/mocks/modals.mock'
+import { ErrorMock, copyMock, subscribedMock } from 'src/app/mocks/modals.mock'
 import { SliderComponent } from 'src/app/components/slider/slider.component'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ModalService } from 'src/app/core/services/modal.service'
@@ -18,10 +18,10 @@ import { CommonModule } from '@angular/common'
 })
 export class MainComponent implements OnInit {
   private readonly activeRoute = inject(ActivatedRoute)
+  private readonly modalService = inject(ModalService)
   private readonly formBuilder = inject(FormBuilder)
   private readonly http = inject(HttpClient)
   private readonly router = inject(Router)
-  private readonly modalService = inject(ModalService)
 
   categoriesList?: CategoriesInterface[]
   posts: PostInterface[] = []
@@ -41,6 +41,7 @@ export class MainComponent implements OnInit {
   })
 
   ngOnInit() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.activeRoute.params.subscribe((params: any) => {
       if (this.router.url.includes('category')) {
         this.title = params.id

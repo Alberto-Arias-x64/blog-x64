@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common'
   styleUrl: './iconify.component.scss'
 })
 export class IconifyComponent implements OnInit {
-  @Input() name: string = ''
+  @Input() name = ''
   @Input() iconType: 'archive' | 'folder' = 'folder'
   @Output() iconClicked = new EventEmitter<string>()
   image = ''

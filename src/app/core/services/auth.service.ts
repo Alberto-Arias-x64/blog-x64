@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs'
   providedIn: 'root'
 })
 export class AuthService {
-  private isAdmin: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  private isAdmin = new BehaviorSubject(false)
   private token: string | null = null
 
   set setToken(token: string) {

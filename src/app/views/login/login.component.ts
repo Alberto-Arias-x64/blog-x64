@@ -38,6 +38,7 @@ export class LoginComponent {
       this.router.navigate(['/'])
     }
     this.modalService.setData = modalTemplate
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.http.post<HttpResponse<any>>('/api/auth/login', form.value).subscribe({
       next: (res) => {
         this.sendingFlag = false

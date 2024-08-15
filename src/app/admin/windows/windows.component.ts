@@ -25,15 +25,15 @@ export class WindowsComponent implements OnInit {
   private readonly http = inject(HttpClient)
 
   path: string[] = []
-  folders = []
-  files = []
+  folders: string[] = []
+  files: string[] = []
   activeElement: string | null = null
   newFolder = false
   openEditor = false
   uploadingFile = false
   editorData: string | null = null
-  fileName: string | any = null
-  fileData: string | any = null
+  fileName: string | null = null
+  fileData: string | null = null
 
   folderForm = this.formBuilder.group({
     folderName: new FormControl(null, [Validators.required])
@@ -81,7 +81,7 @@ export class WindowsComponent implements OnInit {
       file.click()
       file.addEventListener('change', () => {
         if (this.fileData) {
-          this.fileName = file.files?.item(0)?.name
+          this.fileName = file.files?.item(0)?.name ?? null
         } else this.uploadingFile = false
       })
     }, 100)
@@ -133,7 +133,7 @@ export class WindowsComponent implements OnInit {
         if (res.status === 'OK') {
           this.openEditor = true
           setTimeout(() => {
-            this.editorData = res.data
+            this.editorData = res.data ?? ''
             this.path.push(fileName as string)
           }, 100)
         } else {
@@ -165,6 +165,7 @@ export class WindowsComponent implements OnInit {
     const newPath = {
       path: route
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.http.post<HttpResponse<any>>('/api/admin/windows/create_folder', newPath).subscribe({
       next: (res) => {
         if (res.status === 'OK') {

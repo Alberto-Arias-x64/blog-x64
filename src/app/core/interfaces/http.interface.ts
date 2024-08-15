@@ -1,5 +1,5 @@
 export interface HttpResponse<T> {
-  data: T | any
+  data: T | undefined
   message: string
   status: 'OK' | 'FAIL'
 }

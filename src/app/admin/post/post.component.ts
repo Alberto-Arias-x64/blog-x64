@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock, postUpdatedMock } from 'src/app/mocks/modals.mock'
 import type { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/core/interfaces/http.interface'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
@@ -42,7 +43,7 @@ export class PostComponent implements OnInit {
       this.editFlag = true
       const { id } = this.activeRoute.snapshot.params
       this.http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           this.form.get('title')?.setValue(response.data.title)
           this.form.get('keywords')?.setValue(response.data.keywords)
           this.form.get('category')?.setValue(response.data.category)
@@ -58,7 +59,7 @@ export class PostComponent implements OnInit {
       })
     }
     this.http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
-      next: (res) => {
+      next: (res: any) => {
         if (res.data.length > 0) this.categoriesList = res.data
       }
     })
