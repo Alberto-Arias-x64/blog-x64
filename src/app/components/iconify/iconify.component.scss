@@ -1,24 +1,24 @@
 div {
-    overflow: hidden;
-    height: 12rem;
-    aspect-ratio: 1/1;
-    background-color: transparent;
+  overflow: hidden;
+  height: 12rem;
+  aspect-ratio: 1/1;
+  background-color: transparent;
+  transition: var(--animation_standard);
+  user-select: none;
+  .icon {
+    display: flex;
+    height: 6rem;
+    width: auto;
     transition: var(--animation_standard);
-    user-select: none;
-    .icon {
-        display: flex;
-        height: 6rem;
-        width: auto;
-        transition: var(--animation_standard);
-        color: var(--color_secondary);
-    }
-    &:hover {
-        background-color: var(--color_mantel);
-    }
+    color: var(--color_secondary);
+  }
+  &:hover {
+    background-color: var(--color_mantel);
+  }
 }
 
 p {
-    width: 100%;
-    overflow-wrap: break-word;
-    text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+  text-align: center;
 }

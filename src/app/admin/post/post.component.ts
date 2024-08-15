@@ -9,164 +9,164 @@ import { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/interf
 import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock, postUpdatedMock } from 'src/app/mocks/modals.mock'
 
 @Component({
-    selector: 'app-post',
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, AngularSvgIconModule],
-    templateUrl: './post.component.html',
-    styleUrls: ['./post.component.scss']
+  selector: 'app-post',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, AngularSvgIconModule],
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-    private readonly Route = inject(ActivatedRoute)
-    private readonly Builder = inject(FormBuilder)
-    private readonly Http = inject(HttpClient)
-    private readonly Router = inject(Router)
-    private Modal = inject(ModalService)
-    private idPost : string | null = null
+  private readonly Route = inject(ActivatedRoute)
+  private readonly Builder = inject(FormBuilder)
+  private readonly Http = inject(HttpClient)
+  private readonly Router = inject(Router)
+  private Modal = inject(ModalService)
+  private idPost: string | null = null
 
-    categoriesList?: CategoriesInterface[] | null
-    selectedImage: string | null = null
-    sendingFlag = false
-    editFlag = false
+  categoriesList?: CategoriesInterface[] | null
+  selectedImage: string | null = null
+  sendingFlag = false
+  editFlag = false
 
-    form = this.Builder.group({
-        title: new FormControl(null, [Validators.required]),
-        keywords: new FormControl(null, [Validators.required]),
-        category: new FormControl(null, [Validators.required]),
-        description: new FormControl(null, [Validators.required]),
-        image: new FormControl(null, [Validators.required]),
-        document: new FormControl(null, [Validators.required])
+  form = this.Builder.group({
+    title: new FormControl(null, [Validators.required]),
+    keywords: new FormControl(null, [Validators.required]),
+    category: new FormControl(null, [Validators.required]),
+    description: new FormControl(null, [Validators.required]),
+    image: new FormControl(null, [Validators.required]),
+    document: new FormControl(null, [Validators.required])
+  })
+
+  ngOnInit(): void {
+    if (this.Router.url.includes('edit_post')) {
+      this.editFlag = true
+      const { id } = this.Route.snapshot.params
+      this.Http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
+        next: (response) => {
+          this.form.get('title')?.setValue(response.data.title)
+          this.form.get('keywords')?.setValue(response.data.keywords)
+          this.form.get('category')?.setValue(response.data.category)
+          this.form.get('description')?.setValue(response.data.description)
+          this.selectedImage = response.data.image
+          this.form.get('image')?.clearValidators()
+          this.form.get('image')?.updateValueAndValidity()
+          this.form.get('document')?.clearValidators()
+          this.form.get('document')?.updateValueAndValidity()
+          this.idPost = response.data.id
+        },
+        error: () => this.Router.navigate(['/404'])
+      })
+    }
+    this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
+      next: (res) => {
+        if (res.data.length > 0) this.categoriesList = res.data
+      }
+    })
+  }
+
+  sendForm(form: FormGroup) {
+    if (form.invalid) return
+    this.sendingFlag = true
+    this.Modal.setData = copyMock(messageSendMock)
+
+    const formData = new FormData()
+    Object.entries(form.value).forEach(([clave, valor]: [string, any]) => {
+      formData.append(clave, valor)
     })
 
-    ngOnInit(): void {
-        if (this.Router.url.includes('edit_post')) {
-            this.editFlag = true
-            const { id } = this.Route.snapshot.params
-            this.Http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
-                next: (response) => {
-                    this.form.get('title')?.setValue(response.data.title)
-                    this.form.get('keywords')?.setValue(response.data.keywords)
-                    this.form.get('category')?.setValue(response.data.category)
-                    this.form.get('description')?.setValue(response.data.description)
-                    this.selectedImage = response.data.image
-                    this.form.get("image")?.clearValidators()
-                    this.form.get("image")?.updateValueAndValidity()
-                    this.form.get("document")?.clearValidators()
-                    this.form.get("document")?.updateValueAndValidity()
-                    this.idPost = response.data.id
-                },
-                error: () => this.Router.navigate(['/404'])
-            })
-        }
-        this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
-            next: (res) => {
-                if(res.data.length > 0) this.categoriesList = res.data
-            }
-        })
-    }
-
-    sendForm(form: FormGroup) {
-        if (form.invalid) return
-        this.sendingFlag = true
-        this.Modal.setData = copyMock(messageSendMock)
-
-        const formData = new FormData()
-        Object.entries(form.value).forEach(([clave, valor]: [string, any]) => {
-            formData.append(clave, valor)
-        })
-
-        if(this.Router.url.includes("edit_post")) {
-            formData.append("id", this.idPost as string)
-            this.Http.put<HttpResponse<any>>('/api/admin/update_post', formData).subscribe({
-                next: (res) => {
-                    this.sendingFlag = false
-                    if (res.status === 'OK') {
-                        this.Modal.setData = copyMock(postUpdatedMock)
-                        this.Modal.setState = true
-                        form.reset()
-                        this.Router.navigate(['/admin/posts'])
-                    }
-                },
-                error: (err) => {
-                    this.sendingFlag = false
-                    this.Modal.setData = copyMock(ErrorMock)
-                    this.Modal.setState = true
-                }
-            })
-        } else {
-            this.Http.post<HttpResponse<any>>('/api/admin/send_post', formData).subscribe({
-                next: (res) => {
-                    this.sendingFlag = false
-                    if (res.status === 'OK') {
-                        this.Modal.setData = copyMock(postCreatedMock)
-                        this.Modal.setState = true
-                        form.reset()
-                        this.Router.navigate(['/admin/posts'])
-                    }
-                },
-                error: (err) => {
-                    this.sendingFlag = false
-                    this.Modal.setData = copyMock(ErrorMock)
-                    this.Modal.setState = true
-                    console.log(err)
-                }
-            })
-        }
-    }
-
-    selectFile(event: any, control: string) {
-        const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null
-        this.form.get(control)?.setValue(file)
-    }
-
-    selectImage(event: any) {
-        const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null
-        this.selectedImage = URL.createObjectURL(file)
-    }
-
-    touchField(control: string) {
-        this.form.get(control)?.markAsTouched()
-    }
-
-    deleteBlog() {
-        const confirm = copyMock(confirmMock)
-        confirm.buttonSecondary.action = () => {
-            this.Http.delete('/api/admin/delete_post',{
-                body: {
-                    id: this.idPost
-                }
-            }).subscribe(() => {
-                this.Router.navigate(['/admin/posts'])
-            })
-        }
-        this.Modal.setData = confirm
-        this.Modal.setState = true
-    }
-
-    return() {
-        const confirm = copyMock(confirmMock)
-        confirm.buttonSecondary.action = () => {
+    if (this.Router.url.includes('edit_post')) {
+      formData.append('id', this.idPost as string)
+      this.Http.put<HttpResponse<any>>('/api/admin/update_post', formData).subscribe({
+        next: (res) => {
+          this.sendingFlag = false
+          if (res.status === 'OK') {
+            this.Modal.setData = copyMock(postUpdatedMock)
+            this.Modal.setState = true
+            form.reset()
             this.Router.navigate(['/admin/posts'])
+          }
+        },
+        error: (err) => {
+          this.sendingFlag = false
+          this.Modal.setData = copyMock(ErrorMock)
+          this.Modal.setState = true
         }
-        this.Modal.setData = confirm
-        this.Modal.setState = true
+      })
+    } else {
+      this.Http.post<HttpResponse<any>>('/api/admin/send_post', formData).subscribe({
+        next: (res) => {
+          this.sendingFlag = false
+          if (res.status === 'OK') {
+            this.Modal.setData = copyMock(postCreatedMock)
+            this.Modal.setState = true
+            form.reset()
+            this.Router.navigate(['/admin/posts'])
+          }
+        },
+        error: (err) => {
+          this.sendingFlag = false
+          this.Modal.setData = copyMock(ErrorMock)
+          this.Modal.setState = true
+          console.log(err)
+        }
+      })
     }
+  }
 
-    get title() {
-        return this.form.get('title')
+  selectFile(event: any, control: string) {
+    const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null
+    this.form.get(control)?.setValue(file)
+  }
+
+  selectImage(event: any) {
+    const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null
+    this.selectedImage = URL.createObjectURL(file)
+  }
+
+  touchField(control: string) {
+    this.form.get(control)?.markAsTouched()
+  }
+
+  deleteBlog() {
+    const confirm = copyMock(confirmMock)
+    confirm.buttonSecondary.action = () => {
+      this.Http.delete('/api/admin/delete_post', {
+        body: {
+          id: this.idPost
+        }
+      }).subscribe(() => {
+        this.Router.navigate(['/admin/posts'])
+      })
     }
-    get keywords() {
-        return this.form.get('keywords')
+    this.Modal.setData = confirm
+    this.Modal.setState = true
+  }
+
+  return() {
+    const confirm = copyMock(confirmMock)
+    confirm.buttonSecondary.action = () => {
+      this.Router.navigate(['/admin/posts'])
     }
-    get category() {
-        return this.form.get('category')
-    }
-    get description() {
-        return this.form.get('description')
-    }
-    get image() {
-        return this.form.get('image')
-    }
-    get document() {
-        return this.form.get('document')
-    }
+    this.Modal.setData = confirm
+    this.Modal.setState = true
+  }
+
+  get title() {
+    return this.form.get('title')
+  }
+  get keywords() {
+    return this.form.get('keywords')
+  }
+  get category() {
+    return this.form.get('category')
+  }
+  get description() {
+    return this.form.get('description')
+  }
+  get image() {
+    return this.form.get('image')
+  }
+  get document() {
+    return this.form.get('document')
+  }
 }

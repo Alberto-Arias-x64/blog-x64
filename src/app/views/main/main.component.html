@@ -1,83 +1,83 @@
 <section>
-    <h1>{{title? title: 'Dev Blog'}}</h1>
-    <p *ngIf="!title">Un pequeño espacio para compartir conocimiento sobre desarrollo Web</p>
-    <br *ngIf="title">
-    <br>
-    <!-- <article>
+  <h1>{{ title ? title : 'Dev Blog' }}</h1>
+  <p *ngIf="!title">Un pequeño espacio para compartir conocimiento sobre desarrollo Web</p>
+  <br *ngIf="title" />
+  <br />
+  <!-- <article>
         <h4>Populares</h4>
         <app-slider [list]="posts" />
     </article> -->
-    <article class="column_3-1 gap_big blog_layout">
-        <div class="f_column gap_big">
-            <section *ngFor="let item of posts" class="card blog padding_standard gap_big column_2-3">
-                <picture class="pointer">
-                    <img [src]="item.image" alt="imagen de blog" (click)="navigateTo(item.title)" loading="eager"
-                        decoding="async">
-                </picture>
-                <article class="contend hide_overflow">
-                    <div class="f_column gap_small">
-                        <h4 (click)="navigateTo(item.title)" class="fit">{{ item.title }}</h4>
-                        <p>{{item.createdAt | date}}</p>
-                    </div>
-                    <div class="f_column gap_small hide_overflow decorator">
-                        <br>
-                        <p class="pointer" (click)="navigateTo(item.title)">{{item.description}}</p>
-                        <br>
-                    </div>
-                    <div class="f_column gap_standard info_bottom">
-                        <hr class="full">
-                        <div class="f_row gap_standard">
-                            <div class="f_row gap_small centred-v likes" [class.liked]="item.liked"
-                                (click)="like($event ,item.id)">
-                                <svg-icon [src]="item.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg' " class="icon" />
-                                <p>{{item.likes}}</p>
-                            </div>
-                            <hr>
-                            <button (click)="navigateTo(item.title)" class="fit">{{item.category}}</button>
-                        </div>
-                    </div>
-                </article>
-            </section>
-            <section class="f_row centred gap_standard">
-                <button (click)="changePage(false)">&lt;</button><p class="text_big">{{pagine}} / {{paginator}}</p><button (click)="changePage(true)">&gt;</button>
-            </section>
-        </div>
-        <aside class="gap_small visible" [class.visible]="showMobile">
-            <form class="f_column" [formGroup]="searchForm" (ngSubmit)="search(searchForm)">
-                <div class="input_decorator">
-                    <label for="search">Búsqueda</label>
-                    <div class="f_row gap_small centred-v">
-                        <svg-icon class="input_icon" src="assets/icons/magnifier.svg" />
-                        <input type="text" id="search" name="search" formControlName="search" placeholder="Búsqueda">
-                    </div>
-                </div>
-                <br>
-                <button class="fit">Buscar</button>
-                <br>
-                <h6>Temas</h6>
-                <ng-container *ngFor="let item of categoriesList">
-                    <a [routerLink]="['/category',item.category]" routerLinkActive="active">{{item.category}}</a>
-                </ng-container>
-            </form>
-            <form [formGroup]="subscribeForm" (ngSubmit)="subscribe(subscribeForm)" class="f_column" style="align-items: flex-end;">
-                <h6 class="text_end">¿Te gusta estar informado?</h6>
-                <p class="text_end">Suscribiere y no te pierdas de los últimos contenidos sobre la Web</p>
-                <div class="input_decorator">
-                    <div class="f_row gap_small centred-v">
-                        <svg-icon class="input_icon" src="assets/icons/mail.svg" />
-                        <input type="email" id="mail" formControlName="mail" name="mail" placeholder="mi@correo.com">
-                    </div>
-                    <p class="customError" [class.active]="mail?.hasError('email') && mail?.touched">El email no es valido</p>
-                </div>
-                <br>
-                <button class="fit" [disabled]="subscribeForm.invalid || sendingMail || sendedMail" [class.spinner]="sendingMail">
-                    <p *ngIf="!sendingMail">Suscribirse</p>
-                </button>
-            </form>
-            <div class="mobile_button" (click)="toggleMobile()">
-                <p *ngIf="!showMobile">+</p>
-                <p *ngIf="showMobile">-</p>
+  <article class="column_3-1 gap_big blog_layout">
+    <div class="f_column gap_big">
+      <section *ngFor="let item of posts" class="card blog padding_standard gap_big column_2-3">
+        <picture class="pointer">
+          <img [src]="item.image" alt="imagen de blog" (click)="navigateTo(item.title)" loading="eager" decoding="async" />
+        </picture>
+        <article class="contend hide_overflow">
+          <div class="f_column gap_small">
+            <h4 (click)="navigateTo(item.title)" class="fit">{{ item.title }}</h4>
+            <p>{{ item.createdAt | date }}</p>
+          </div>
+          <div class="f_column gap_small hide_overflow decorator">
+            <br />
+            <p class="pointer" (click)="navigateTo(item.title)">{{ item.description }}</p>
+            <br />
+          </div>
+          <div class="f_column gap_standard info_bottom">
+            <hr class="full" />
+            <div class="f_row gap_standard">
+              <div class="f_row gap_small centred-v likes" [class.liked]="item.liked" (click)="like($event, item.id)">
+                <svg-icon [src]="item.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg'" class="icon" />
+                <p>{{ item.likes }}</p>
+              </div>
+              <hr />
+              <button (click)="navigateTo(item.title)" class="fit">{{ item.category }}</button>
             </div>
-        </aside>
-    </article>
+          </div>
+        </article>
+      </section>
+      <section class="f_row centred gap_standard">
+        <button (click)="changePage(false)">&lt;</button>
+        <p class="text_big">{{ pagine }} / {{ paginator }}</p>
+        <button (click)="changePage(true)">&gt;</button>
+      </section>
+    </div>
+    <aside class="gap_small visible" [class.visible]="showMobile">
+      <form class="f_column" [formGroup]="searchForm" (ngSubmit)="search(searchForm)">
+        <div class="input_decorator">
+          <label for="search">Búsqueda</label>
+          <div class="f_row gap_small centred-v">
+            <svg-icon class="input_icon" src="assets/icons/magnifier.svg" />
+            <input type="text" id="search" name="search" formControlName="search" placeholder="Búsqueda" />
+          </div>
+        </div>
+        <br />
+        <button class="fit">Buscar</button>
+        <br />
+        <h6>Temas</h6>
+        <ng-container *ngFor="let item of categoriesList">
+          <a [routerLink]="['/category', item.category]" routerLinkActive="active">{{ item.category }}</a>
+        </ng-container>
+      </form>
+      <form [formGroup]="subscribeForm" (ngSubmit)="subscribe(subscribeForm)" class="f_column" style="align-items: flex-end">
+        <h6 class="text_end">¿Te gusta estar informado?</h6>
+        <p class="text_end">Suscribiere y no te pierdas de los últimos contenidos sobre la Web</p>
+        <div class="input_decorator">
+          <div class="f_row gap_small centred-v">
+            <svg-icon class="input_icon" src="assets/icons/mail.svg" />
+            <input type="email" id="mail" formControlName="mail" name="mail" placeholder="mi@correo.com" />
+          </div>
+          <p class="customError" [class.active]="mail?.hasError('email') && mail?.touched">El email no es valido</p>
+        </div>
+        <br />
+        <button class="fit" [disabled]="subscribeForm.invalid || sendingMail || sendedMail" [class.spinner]="sendingMail">
+          <p *ngIf="!sendingMail">Suscribirse</p>
+        </button>
+      </form>
+      <div class="mobile_button" (click)="toggleMobile()">
+        <p *ngIf="!showMobile">+</p>
+        <p *ngIf="showMobile">-</p>
+      </div>
+    </aside>
+  </article>
 </section>

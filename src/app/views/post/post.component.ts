@@ -8,65 +8,63 @@ import { HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 
 @Component({
-    selector: 'app-post',
-    standalone: true,
-    imports: [CommonModule, MarkdownModule, AngularSvgIconModule],
-    templateUrl: './post.component.html',
-    styleUrls: ['./post.component.scss']
+  selector: 'app-post',
+  standalone: true,
+  imports: [CommonModule, MarkdownModule, AngularSvgIconModule],
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+  @ViewChild('likeButton') likeButton!: ElementRef
 
-    @ViewChild('likeButton') likeButton! :ElementRef
+  private readonly Route = inject(ActivatedRoute)
+  private readonly Http = inject(HttpClient)
+  private readonly Router = inject(Router)
+  private readonly Meta = inject(Meta)
+  private Title = inject(Title)
+  data?: PostInterface
+  URL = ''
 
-    private readonly Route = inject(ActivatedRoute)
-    private readonly Http = inject(HttpClient)
-    private readonly Router = inject(Router)
-    private readonly Meta = inject(Meta)
-    private Title = inject(Title)
-    data?: PostInterface
-    URL = ''
+  ngOnInit(): void {
+    const { id } = this.Route.snapshot.params
+    this.Http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
+      next: (response) => {
+        this.data = response.data
+        this.metaTags(response.data)
+        if (this.data) {
+          if (window.localStorage.getItem(JSON.stringify(this.data.id))) {
+            this.data.liked = true
+          } else this.data.liked = false
+        }
+      },
+      error: () => this.Router.navigate(['/404'])
+    })
+    this.URL = window.location.href
+  }
 
-    ngOnInit(): void {
-        const { id } = this.Route.snapshot.params
-        this.Http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
-            next: (response) => {
-                this.data = response.data
-                this.metaTags(response.data)
-                if (this.data){
-                    if (window.localStorage.getItem(JSON.stringify(this.data.id))) {
-                        this.data.liked = true
-                    }
-                    else this.data.liked = false
-                }
-            },
-            error: () => this.Router.navigate(['/404'])
-        })
-        this.URL = window.location.href
-    }
+  metaTags(data: PostInterface) {
+    this.Title.setTitle(`${data.title} | Albeto Arias`)
+    this.Meta.addTag({ name: 'description', value: data.description })
+    this.Meta.addTag({ name: 'keywords', content: data.keywords })
+    this.Meta.addTag({ name: 'author', content: 'Alberto Arias' })
+    this.Meta.addTag({ name: 'robots', content: 'index, follow' })
+    this.Meta.addTag({ property: 'og:title', content: data.title })
+    this.Meta.addTag({ property: 'og:description', content: data.description })
+    this.Meta.addTag({ property: 'og:image', content: data.image })
+  }
 
-    metaTags(data: PostInterface) {
-        this.Title.setTitle(`${data.title} | Albeto Arias`)
-        this.Meta.addTag({ name: 'description', value: data.description })
-        this.Meta.addTag({ name: 'keywords', content: data.keywords })
-        this.Meta.addTag({ name: 'author', content: 'Alberto Arias' })
-        this.Meta.addTag({ name: 'robots', content: 'index, follow' })
-        this.Meta.addTag({ property: 'og:title', content: data.title })
-        this.Meta.addTag({ property: 'og:description', content: data.description })
-        this.Meta.addTag({ property: 'og:image', content: data.image })
-    }
+  like(id: string | number) {
+    const element = this.likeButton.nativeElement as HTMLElement
+    if (window.localStorage.getItem(JSON.stringify(id))) return
+    this.Http.post('/api/like_post', { id }).subscribe(() => {
+      window.localStorage.setItem(JSON.stringify(id), 'true')
+      element.classList.add('liked')
+      this.data!.liked = true
+      this.data!.likes++
+    })
+  }
 
-    like(id: string | number) {
-        const element = this.likeButton.nativeElement as HTMLElement
-        if (window.localStorage.getItem(JSON.stringify(id))) return
-        this.Http.post('/api/like_post', { id }).subscribe(() => {
-            window.localStorage.setItem(JSON.stringify(id), 'true')
-            element.classList.add("liked")
-            this.data!.liked = true
-            this.data!.likes ++
-        })
-    }
-
-    return() {
-        this.Router.navigate(["/"])
-    }
+  return() {
+    this.Router.navigate(['/'])
+  }
 }

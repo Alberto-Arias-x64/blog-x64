@@ -1,494 +1,493 @@
 /* Global */
 @font-face {
-    font-family: 'Montserrat';
-    src: url('assets/fonts/Montserrat-VariableFont_wght.ttf');
-    font-display: swap;
+  font-family: 'Montserrat';
+  src: url('assets/fonts/Montserrat-VariableFont_wght.ttf');
+  font-display: swap;
 }
 :root {
-    --color_principal: #000;
-    --color_mantel: #1a1a1a;
-    --color_secondary: #fff;
-    --color_tertiary: #5c5c5c;
-    --color_accent: #e31952;
-    --animation_fast: all ease 100ms;
-    --animation_standard: all ease 200ms;
-    --animation_slow: all ease 400ms;
+  --color_principal: #000;
+  --color_mantel: #1a1a1a;
+  --color_secondary: #fff;
+  --color_tertiary: #5c5c5c;
+  --color_accent: #e31952;
+  --animation_fast: all ease 100ms;
+  --animation_standard: all ease 200ms;
+  --animation_slow: all ease 400ms;
 }
 html {
-    font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 62.5%;
-    background-color: var(--color_principal);
-    overflow-x: hidden;
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 62.5%;
+  background-color: var(--color_principal);
+  overflow-x: hidden;
 }
 * {
-    margin: 0;
-    padding: 0;
-    font-size: 1.8rem;
-    scroll-behavior: smooth;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 1.8rem;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 /* Scroll */
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background-color: var(--color_secondary);
+  background-color: var(--color_secondary);
 }
 ::-webkit-scrollbar-thumb {
-    background-color: var(--color_tertiary);
+  background-color: var(--color_tertiary);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color_accent);
+  background-color: var(--color_accent);
 }
 
 /* Titles & texts */
 h1 {
-    font-size: 7rem;
-    font-weight: lighter;
-    color: var(--color_secondary);
-    transition: var(--animation_standard);
+  font-size: 7rem;
+  font-weight: lighter;
+  color: var(--color_secondary);
+  transition: var(--animation_standard);
 }
 h2 {
-    font-size: 6rem;
-    color: var(--color_secondary);
-    transition: var(--animation_standard);
+  font-size: 6rem;
+  color: var(--color_secondary);
+  transition: var(--animation_standard);
 }
 h3 {
-    font-size: 5rem;
-    color: var(--color_secondary);
-    transition: var(--animation_standard);
+  font-size: 5rem;
+  color: var(--color_secondary);
+  transition: var(--animation_standard);
 }
 h4 {
-    font-size: 4rem;
-    color: var(--color_secondary);
-    transition: var(--animation_standard);
+  font-size: 4rem;
+  color: var(--color_secondary);
+  transition: var(--animation_standard);
 }
 h5 {
-    font-size: 3rem;
-    color: var(--color_secondary);
-    transition: var(--animation_standard);
+  font-size: 3rem;
+  color: var(--color_secondary);
+  transition: var(--animation_standard);
 }
 h6 {
-    font-size: 2rem;
-    color: var(--color_secondary);
-    transition: var(--animation_standard);
+  font-size: 2rem;
+  color: var(--color_secondary);
+  transition: var(--animation_standard);
 }
 p,
 a,
 label {
-    color: var(--color_secondary);
-    transition: var(--animation_standard);
+  color: var(--color_secondary);
+  transition: var(--animation_standard);
 }
-p > a{
-    transition: var(--animation_standard);
-    &:hover{
-        color: var(--color_accent);
-    }
+p > a {
+  transition: var(--animation_standard);
+  &:hover {
+    color: var(--color_accent);
+  }
 }
-.text_start{
-    width: 100%;
-    text-align: start;
-
+.text_start {
+  width: 100%;
+  text-align: start;
 }
-.text_center{
-    width: 100%;
-    text-align: center;
+.text_center {
+  width: 100%;
+  text-align: center;
 }
-.text_end{
-    width: 100%;
-    text-align: end;
+.text_end {
+  width: 100%;
+  text-align: end;
 }
 .text_big {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 @media screen and (width <= 1280px) {
-    h1{
-        font-size: 5rem;
-    }
-    h2{
-        font-size: 4rem;
-    }
-    h3{
-        font-size: 3rem;
-    }
-    h4{
-        font-size: 2.5rem;
-    }
-    h5{
-        font-size: 2rem;
-    }
-    h6{
-        font-size: 1.8rem;
-    }
-    p,
-    a,
-    label {
-        font-size: 1.5rem
-    }
-    .text_big {
-        font-size: 1.8rem;
-    }
+  h1 {
+    font-size: 5rem;
+  }
+  h2 {
+    font-size: 4rem;
+  }
+  h3 {
+    font-size: 3rem;
+  }
+  h4 {
+    font-size: 2.5rem;
+  }
+  h5 {
+    font-size: 2rem;
+  }
+  h6 {
+    font-size: 1.8rem;
+  }
+  p,
+  a,
+  label {
+    font-size: 1.5rem;
+  }
+  .text_big {
+    font-size: 1.8rem;
+  }
 }
 
 /* Inputs */
 input {
-    width: 100%;
-    background-color: transparent;
-    color: var(--color_secondary);
-    padding: 1rem;
-    border: none;
-    outline: none;
-    &[type='number'] {
-        &::-webkit-inner-spin-button {
-            display: none;
-        }
-        &::-webkit-outer-spin-button {
-            display: none;
-        }
+  width: 100%;
+  background-color: transparent;
+  color: var(--color_secondary);
+  padding: 1rem;
+  border: none;
+  outline: none;
+  &[type='number'] {
+    &::-webkit-inner-spin-button {
+      display: none;
     }
+    &::-webkit-outer-spin-button {
+      display: none;
+    }
+  }
 }
 textarea {
-    @extend input;
-    resize: none;
-    font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  @extend input;
+  resize: none;
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .input_decorator {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    @extend .gap_standard;
-    position: relative;
-    border-bottom: 0.2rem var(--color_secondary) solid;
-    transition: var(--animation_standard);
-    &:focus-within {
-        border-color: var(--color_accent);
-        .input_icon {
-            color: var(--color_accent);
-        }
-    }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @extend .gap_standard;
+  position: relative;
+  border-bottom: 0.2rem var(--color_secondary) solid;
+  transition: var(--animation_standard);
+  &:focus-within {
+    border-color: var(--color_accent);
     .input_icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 3rem;
-        aspect-ratio: 1/1;
-        color: var(--color_secondary);
+      color: var(--color_accent);
     }
+  }
+  .input_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    aspect-ratio: 1/1;
+    color: var(--color_secondary);
+  }
 }
 .customError {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 0;
-    font-size: 1.5rem;
-    color: var(--color_accent);
-    transition: var(--animation_standard);
-    opacity: 0;
-    &.active {
-        opacity: 1;
-    }
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  font-size: 1.5rem;
+  color: var(--color_accent);
+  transition: var(--animation_standard);
+  opacity: 0;
+  &.active {
+    opacity: 1;
+  }
 }
 @media screen and (width <= 1280px) {
-    .input_decorator{
-        input{
-            font-size: 1.5rem;
-        }
-        .input_icon{
-            height: 2rem;
-        }
+  .input_decorator {
+    input {
+      font-size: 1.5rem;
     }
-    .customError{
-        font-size: 1.2rem;
+    .input_icon {
+      height: 2rem;
     }
+  }
+  .customError {
+    font-size: 1.2rem;
+  }
 }
 
 /* Buttons */
 button {
-    border: 1px solid var(--color_secondary);
-    padding: 1rem 2rem;
-    background-color: transparent;
-    color: var(--color_secondary);
-    cursor: pointer;
-    transition: var(--animation_standard);
-    &:disabled {
-        cursor: default;
-        opacity: 0.5;
-    }
-    &:hover:not(:disabled) {
-        color: var(--color_accent);
-        border-color: var(--color_accent);
-    }
-    &:focus-visible:not(:disabled) {
-        border-color: var(--color_accent);
-        outline: none;
-    }
-    &:active:not(:disabled) {
-        color: var(--color_principal);
-        border-color: var(--color_principal);
-        background-color: var(--color_accent);
-    }
-    p {
-        color: currentColor !important;
-    }
+  border: 1px solid var(--color_secondary);
+  padding: 1rem 2rem;
+  background-color: transparent;
+  color: var(--color_secondary);
+  cursor: pointer;
+  transition: var(--animation_standard);
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+  &:hover:not(:disabled) {
+    color: var(--color_accent);
+    border-color: var(--color_accent);
+  }
+  &:focus-visible:not(:disabled) {
+    border-color: var(--color_accent);
+    outline: none;
+  }
+  &:active:not(:disabled) {
+    color: var(--color_principal);
+    border-color: var(--color_principal);
+    background-color: var(--color_accent);
+  }
+  p {
+    color: currentColor !important;
+  }
 }
 @media screen and (width <= 1280px) {
-    button {
-        font-size: 1.5rem;
-    }
+  button {
+    font-size: 1.5rem;
+  }
 }
 
 /* Images */
 picture {
-    overflow: hidden;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 /* Loader */
 .loading {
-    position: relative;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
     height: 100%;
-    width: 100%;
-    overflow: hidden;
-    &::after {
-        content: '';
-        position: absolute;
-        height: 100%;
-        width: 300%;
-        top: 0;
-        right: 0;
-        background-image: linear-gradient(100deg, #ececec 46%, #f4f4f4 50%, #ececec 54%);
-        animation: loading 3s forwards infinite;
-    }
+    width: 300%;
+    top: 0;
+    right: 0;
+    background-image: linear-gradient(100deg, #ececec 46%, #f4f4f4 50%, #ececec 54%);
+    animation: loading 3s forwards infinite;
+  }
 }
 @keyframes loading {
-    0% {
-        right: 0;
-    }
-    80%,
-    100% {
-        right: -200%;
-    }
+  0% {
+    right: 0;
+  }
+  80%,
+  100% {
+    right: -200%;
+  }
 }
 
 /* Layout flex */
 .f_row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .f_column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .centred {
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 .centred-v {
-    align-items: center;
+  align-items: center;
 }
 .centred-h {
-    justify-content: center;
+  justify-content: center;
 }
 .wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 /* Layout grid */
 .column_half {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .column_2-3 {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
 }
 .column_3-1 {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 }
 
 /* Spacing */
 .margin_big {
-    margin: 3rem;
+  margin: 3rem;
 }
 .margin_standard {
-    margin: 2rem;
+  margin: 2rem;
 }
 .margin_small {
-    margin: 1rem;
+  margin: 1rem;
 }
 .padding_big {
-    padding: 3rem;
+  padding: 3rem;
 }
 .padding_standard {
-    padding: 2rem;
+  padding: 2rem;
 }
 .padding_small {
-    padding: 1rem;
+  padding: 1rem;
 }
 .gap_big {
-    gap: 3rem;
+  gap: 3rem;
 }
 .gap_standard {
-    gap: 2rem;
+  gap: 2rem;
 }
 .gap_small {
-    gap: 1rem;
+  gap: 1rem;
 }
 @media screen and (width <= 1280px) {
-    .margin_big {
-        margin: 2rem;
-    }
-    .margin_standard {
-        margin: 1.5rem;
-    }
-    .margin_small {
-        margin: 1rem;
-    }
-    .padding_big {
-        padding: 2rem;
-    }
-    .padding_standard {
-        padding: 1.5rem;
-    }
-    .padding_small {
-        padding: 1rem;
-    }
-    .gap_big {
-        gap: 2rem;
-    }
-    .gap_standard {
-        gap: 1rem;
-    }
-    .gap_small {
-        gap: .5rem;
-    }
+  .margin_big {
+    margin: 2rem;
+  }
+  .margin_standard {
+    margin: 1.5rem;
+  }
+  .margin_small {
+    margin: 1rem;
+  }
+  .padding_big {
+    padding: 2rem;
+  }
+  .padding_standard {
+    padding: 1.5rem;
+  }
+  .padding_small {
+    padding: 1rem;
+  }
+  .gap_big {
+    gap: 2rem;
+  }
+  .gap_standard {
+    gap: 1rem;
+  }
+  .gap_small {
+    gap: 0.5rem;
+  }
 }
 
 /* Object size */
 .full {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .fit {
-    width: fit-content;
-    height: fit-content;
+  width: fit-content;
+  height: fit-content;
 }
 
 /* Shared elements */
 .card {
-    background-color: var(--color_mantel);
+  background-color: var(--color_mantel);
 }
-.return_container{
-    color: var(--color_secondary);
-    cursor: pointer;
-    user-select: none;
-    p{
-        color: currentColor;
-        transition: var(--animation_standard);
-    }
-    .return{
-        display: flex;
-        height: 1.5rem;
-        rotate: -90deg;
-        color: currentColor;
-        transition: var(--animation_standard);
-    }
-    &:hover{
-        color: var(--color_accent);
-    }
+.return_container {
+  color: var(--color_secondary);
+  cursor: pointer;
+  user-select: none;
+  p {
+    color: currentColor;
+    transition: var(--animation_standard);
+  }
+  .return {
+    display: flex;
+    height: 1.5rem;
+    rotate: -90deg;
+    color: currentColor;
+    transition: var(--animation_standard);
+  }
+  &:hover {
+    color: var(--color_accent);
+  }
 }
 .icon {
-    display: flex;
-    height: 3rem;
-    aspect-ratio: 1/1;
+  display: flex;
+  height: 3rem;
+  aspect-ratio: 1/1;
 }
 .window_active {
-    background-color: var(--color_mantel);
-    .icon {
-        color: var(--color_accent) !important;
-    }
+  background-color: var(--color_mantel);
+  .icon {
+    color: var(--color_accent) !important;
+  }
 }
 @media screen and (width <= 1280px) {
-    .icon{
-        height: 2rem;
-    }
+  .icon {
+    height: 2rem;
+  }
 }
 
 /* sending animation */
 .spinner {
-    &::after {
-        content: ' ';
-        display: block;
-        width: 2rem;
-        height: 2rem;
-        border-radius: 50%;
-        border: 0.4rem solid var(--color_accent);
-        border-color: var(--color_accent) transparent var(--color_accent) transparent;
-        animation: spinner 1.2s linear infinite;
-    }
+  &::after {
+    content: ' ';
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 0.4rem solid var(--color_accent);
+    border-color: var(--color_accent) transparent var(--color_accent) transparent;
+    animation: spinner 1.2s linear infinite;
+  }
 }
 @keyframes spinner {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* markdown */
 .md {
-    h1 {
-        font-size: 5rem;
-    }
-    h2 {
-        font-size: 3rem;
-    }
-    pre {
-        max-width: calc(100vw - 8rem);
-        overflow: auto;
-        border-radius: 0 !important;
-    }
-    img{
-        max-width: calc(100vw - 8rem);
-        width: 100%
-    }
-    ol{
-        color: var(--color_secondary);
-        padding-left: 2rem;
-    }
-    strong{
-        color: var(--color_accent);
-    }
+  h1 {
+    font-size: 5rem;
+  }
+  h2 {
+    font-size: 3rem;
+  }
+  pre {
+    max-width: calc(100vw - 8rem);
+    overflow: auto;
+    border-radius: 0 !important;
+  }
+  img {
+    max-width: calc(100vw - 8rem);
+    width: 100%;
+  }
+  ol {
+    color: var(--color_secondary);
+    padding-left: 2rem;
+  }
+  strong {
+    color: var(--color_accent);
+  }
 }
 @media screen and (width <= 768px) {
-    .md {
-        h1 {
-            font-size: 3rem;
-        }
-        h2 {
-            font-size: 2rem;
-        }
-        pre{
-            span{
-                font-size: 1.5rem;
-            }
-        }
+  .md {
+    h1 {
+      font-size: 3rem;
     }
+    h2 {
+      font-size: 2rem;
+    }
+    pre {
+      span {
+        font-size: 1.5rem;
+      }
+    }
+  }
 }
 
 /* overflow */
-.hide_overflow_y{
-    overflow-y: hidden;
+.hide_overflow_y {
+  overflow-y: hidden;
 }
-.hide_overflow_x{
-    overflow-x: hidden;
+.hide_overflow_x {
+  overflow-x: hidden;
 }
-.hide_overflow{
-    overflow: hidden;
+.hide_overflow {
+  overflow: hidden;
 }

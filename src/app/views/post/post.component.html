@@ -1,39 +1,39 @@
 <section class="padding_big f_column centred">
-    <br>
-    <article class="full post_wrapper actions_header">
-        <div class="f_row gap_small centred-v return_container fit" (click)="return()">
-            <svg-icon src="assets/icons/arrow.svg" class="return"/>
-            <p>Volver</p>
-        </div>
-        <div class="f_row gap_small centred-v">
-            <div class="f_row gap_small centred-v likes" [class.liked]="data?.liked" (click)="like(data!.id)" #likeButton>
-                <svg-icon [src]="data?.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg' " class="icon" />
-                <p>{{data?.likes}}</p>
-            </div>
-            <hr style="height: 100%;">
-            <p>{{data?.createdAt | date}}</p>
-        </div>
-    </article>
-    <br>
-    <article class="post_wrapper">
-        <markdown class="md f_column gap_big" [src]="data?.data"/>
-    </article>
-    <br><br><br>
+  <br />
+  <article class="full post_wrapper actions_header">
+    <div class="f_row gap_small centred-v return_container fit" (click)="return()">
+      <svg-icon src="assets/icons/arrow.svg" class="return" />
+      <p>Volver</p>
+    </div>
+    <div class="f_row gap_small centred-v">
+      <div class="f_row gap_small centred-v likes" [class.liked]="data?.liked" (click)="like(data!.id)" #likeButton>
+        <svg-icon [src]="data?.liked ? 'assets/icons/heart_fill.svg' : 'assets/icons/heart.svg'" class="icon" />
+        <p>{{ data?.likes }}</p>
+      </div>
+      <hr style="height: 100%" />
+      <p>{{ data?.createdAt | date }}</p>
+    </div>
+  </article>
+  <br />
+  <article class="post_wrapper">
+    <markdown class="md f_column gap_big" [src]="data?.data" />
+  </article>
+  <br /><br /><br />
 </section>
 <section class="share f_column gap_standard padding_small">
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{URL}}" target="_blank">
-        <article>
-            <svg-icon src="/assets/icons/facebook.svg"/>
-        </article>
-    </a>
-    <a href="https://twitter.com/intent/tweet?url={{URL}}&text=Mira%20este%20increible%20contenido!" target="_blank">
-        <article>
-            <svg-icon src="/assets/icons/twitter.svg"/>
-        </article>
-    </a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{URL}}" target="_blank">
-        <article>
-            <svg-icon src="/assets/icons/linkedin.svg"/>
-        </article>
-    </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ URL }}" target="_blank">
+    <article>
+      <svg-icon src="/assets/icons/facebook.svg" />
+    </article>
+  </a>
+  <a href="https://twitter.com/intent/tweet?url={{ URL }}&text=Mira%20este%20increible%20contenido!" target="_blank">
+    <article>
+      <svg-icon src="/assets/icons/twitter.svg" />
+    </article>
+  </a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ URL }}" target="_blank">
+    <article>
+      <svg-icon src="/assets/icons/linkedin.svg" />
+    </article>
+  </a>
 </section>

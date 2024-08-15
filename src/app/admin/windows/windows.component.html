@@ -1,75 +1,75 @@
 <section class="gap_standard padding_big windows" *ngIf="!openEditor" (click)="clickOut($event)" id="clicOut">
-    <article class="f_row gap_small">
-        <p>Main</p>
-        <ng-container *ngFor="let item of path">
-            <p>&gt;</p>
-            <p>{{item}}</p>
-        </ng-container>
-    </article>
-    <article class="actions_item">
-        <div class="f_row gap_small return_container centred-v fit" (click)="return()">
-            <svg-icon src="assets/icons/arrow.svg" class="return"/>
-            <p>Volver</p>
+  <article class="f_row gap_small">
+    <p>Main</p>
+    <ng-container *ngFor="let item of path">
+      <p>&gt;</p>
+      <p>{{ item }}</p>
+    </ng-container>
+  </article>
+  <article class="actions_item">
+    <div class="f_row gap_small return_container centred-v fit" (click)="return()">
+      <svg-icon src="assets/icons/arrow.svg" class="return" />
+      <p>Volver</p>
+    </div>
+    <div class="f_row gap_standard">
+      <button *ngIf="activeElement" (click)="isArchive(activeElement) ? deleteFile(activeElement) : deleteFolder(activeElement)">Eliminar</button>
+      <!-- <button *ngIf="isArchive(activeElement)">Descargar</button> -->
+      <button *ngIf="activeElement" (click)="isArchive(activeElement) ? openFile(activeElement) : open(activeElement)">Abrir</button>
+      <button *ngIf="!activeElement" (click)="folder()">Carpeta</button>
+      <button *ngIf="!activeElement" (click)="upload()">Subir</button>
+      <button *ngIf="!activeElement && path[0] === 'backup'" (click)="backup()">Backup</button>
+    </div>
+  </article>
+  <article class="f_row gap_small wrap fit">
+    <ng-container *ngFor="let item of folders">
+      <app-iconify iconType="folder" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="open(item)" />
+    </ng-container>
+    <ng-container *ngFor="let item of files">
+      <app-iconify iconType="archive" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="openFile(item)" />
+    </ng-container>
+  </article>
+  <article class="upload_file" *ngIf="uploadingFile">
+    <div class="file_container card padding_standard fit f_column gap_standard centred-v">
+      <p>{{ fileName }}</p>
+      <div class="f_row gap_standard">
+        <button (click)="cancelUpload()">Cancelar</button>
+        <button (click)="uploadFile()">Confirmar</button>
+      </div>
+    </div>
+    <input type="file" name="file" style="visibility: hidden; height: 0" [(ngModel)]="fileData" #fileInput />
+  </article>
+  <form [formGroup]="folderForm" (ngSubmit)="createFolder(folderForm)" class="upload_file" *ngIf="newFolder">
+    <div class="file_container card padding_standard fit f_column gap_standard centred-v">
+      <div class="input_decorator fit">
+        <label for="folder">Nombre de la carpeta</label>
+        <div class="f_row centred-v">
+          <svg-icon class="input_icon" src="assets/icons/folder.svg" />
+          <input type="text" class="full" id="folder" name="folder" formControlName="folderName" />
         </div>
-        <div class="f_row gap_standard">
-            <button *ngIf="activeElement" (click)="isArchive(activeElement)? deleteFile(activeElement) : deleteFolder(activeElement)">Eliminar</button>
-            <!-- <button *ngIf="isArchive(activeElement)">Descargar</button> -->
-            <button *ngIf="activeElement" (click)="isArchive(activeElement)? openFile(activeElement) : open(activeElement)">Abrir</button>
-            <button *ngIf="!activeElement" (click)="folder()">Carpeta</button>
-            <button *ngIf="!activeElement" (click)="upload()">Subir</button>
-            <button *ngIf="!activeElement && path[0] === 'backup'" (click)="backup()">Backup</button>
-        </div>
-    </article>
-    <article class="f_row gap_small wrap fit">
-        <ng-container *ngFor="let item of folders">
-            <app-iconify iconType="folder" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="open(item)"/>
-        </ng-container>
-        <ng-container *ngFor="let item of files">
-            <app-iconify iconType="archive" [name]="item" [class.window_active]="activeElement === item" (click)="active(item)" (dblclick)="openFile(item)"/>
-        </ng-container>
-    </article>
-    <article class="upload_file" *ngIf="uploadingFile">
-        <div class="file_container card padding_standard fit f_column gap_standard centred-v">
-            <p>{{fileName}}</p>
-            <div class="f_row gap_standard">
-                <button (click)="cancelUpload()">Cancelar</button>
-                <button (click)="uploadFile()">Confirmar</button>
-            </div>
-        </div>
-        <input type="file" name="file" style="visibility: hidden; height: 0;" [(ngModel)]="fileData" #fileInput>
-    </article>
-    <form [formGroup]="folderForm" (ngSubmit)="createFolder(folderForm)" class="upload_file" *ngIf="newFolder">
-        <div class="file_container card padding_standard fit f_column gap_standard centred-v">
-            <div class="input_decorator fit">
-                <label for="folder">Nombre de la carpeta</label>
-                <div class="f_row centred-v">
-                    <svg-icon class="input_icon" src="assets/icons/folder.svg"/>
-                    <input type="text" class="full" id="folder" name="folder" formControlName="folderName">
-                </div>
-                <p class="customError" [class.active]="folderName?.hasError('required') && folderName?.touched">Campo requerido</p>
-            </div>
-            <div class="f_row gap_standard">
-                <button type="button" (click)="cancelFolder()">Cancelar</button>
-                <button type="submit" [disabled]="folderForm.invalid">Confirmar</button>
-            </div>
-        </div>
-    </form>
+        <p class="customError" [class.active]="folderName?.hasError('required') && folderName?.touched">Campo requerido</p>
+      </div>
+      <div class="f_row gap_standard">
+        <button type="button" (click)="cancelFolder()">Cancelar</button>
+        <button type="submit" [disabled]="folderForm.invalid">Confirmar</button>
+      </div>
+    </div>
+  </form>
 </section>
 
 <section class="full padding_big" *ngIf="openEditor">
-    <article class="f_row gap_small">
-        <p>Main</p>
-        <ng-container *ngFor="let item of path">
-            <p>&gt;</p>
-            <p>{{item}}</p>
-        </ng-container>
-    </article>
-    <br>
-    <article class="actions gap_standard">
-        <button class="fit" (click)="cancel()" >Cancelar</button>
-        <button class="fit" (click)="deleteFile(null)" >Eliminar</button>
-        <button class="fit" (click)="update()">Guardar</button>
-    </article>
-    <br>
-    <textarea class="editor padding_standard" [(ngModel)]="editorData" #editor></textarea>
+  <article class="f_row gap_small">
+    <p>Main</p>
+    <ng-container *ngFor="let item of path">
+      <p>&gt;</p>
+      <p>{{ item }}</p>
+    </ng-container>
+  </article>
+  <br />
+  <article class="actions gap_standard">
+    <button class="fit" (click)="cancel()">Cancelar</button>
+    <button class="fit" (click)="deleteFile(null)">Eliminar</button>
+    <button class="fit" (click)="update()">Guardar</button>
+  </article>
+  <br />
+  <textarea class="editor padding_standard" [(ngModel)]="editorData" #editor></textarea>
 </section>

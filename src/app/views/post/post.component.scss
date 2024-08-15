@@ -1,47 +1,47 @@
-.post_wrapper{
-    max-width: 100rem;
+.post_wrapper {
+  max-width: 100rem;
 }
 
-.actions_header{
-    display: grid;
-    grid-template-columns: auto max-content;
+.actions_header {
+  display: grid;
+  grid-template-columns: auto max-content;
 }
 
-.likes{
+.likes {
+  cursor: pointer;
+  color: var(--color_secondary);
+  transition: var(--animation_standard);
+  &:hover {
+    color: var(--color_accent);
+    p {
+      color: var(--color_accent);
+    }
+  }
+  &.liked {
+    color: var(--color_accent);
+    p {
+      color: var(--color_accent);
+    }
+  }
+}
+
+.share {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: transparentize($color: #000000, $amount: 0.5);
+  backdrop-filter: blur(20px);
+  article {
     cursor: pointer;
     color: var(--color_secondary);
     transition: var(--animation_standard);
-    &:hover{
-        color: var(--color_accent);
-        p{
-            color: var(--color_accent);
-        }
+    &:hover {
+      color: var(--color_accent);
     }
-    &.liked {
-        color: var(--color_accent);
-        p{
-            color: var(--color_accent);
-        }
+    svg-icon {
+      display: flex;
+      height: 4rem;
+      aspect-ratio: 1/1;
     }
-}
-
-.share{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background-color: transparentize($color: #000000, $amount: 0.5);
-    backdrop-filter: blur(20px);
-    article{
-        cursor: pointer;
-        color: var(--color_secondary);
-        transition: var(--animation_standard);
-        &:hover{
-            color: var(--color_accent);
-        }
-        svg-icon{
-            display: flex;
-            height: 4rem;
-            aspect-ratio: 1/1;
-        }
-    }
+  }
 }

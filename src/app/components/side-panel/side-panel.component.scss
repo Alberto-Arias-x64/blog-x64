@@ -1,24 +1,24 @@
-.router_box{
-    border-bottom: .1rem solid var(--color_secondary);
-    p{
-        color: currentColor;
-    }
+.router_box {
+  border-bottom: 0.1rem solid var(--color_secondary);
+  p {
+    color: currentColor;
+  }
 }
 
-a{
-    text-decoration: none;
-    cursor: pointer;
-    transition: var(--animation_standard);
-    &:hover{
-        opacity: 0.6;
-    }
-    &.active{
-        color: var(--color_accent);
-    }
+a {
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--animation_standard);
+  &:hover {
+    opacity: 0.6;
+  }
+  &.active {
+    color: var(--color_accent);
+  }
 }
 
-aside{
-    padding-left: 0;
-    display: grid;
-    grid-template-rows: max-content auto max-content;
+aside {
+  padding-left: 0;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
 }

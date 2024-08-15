@@ -12,32 +12,32 @@ import { AngularSvgIconModule } from 'angular-svg-icon'
 registerLocaleData(localeEs, 'es')
 
 @Component({
-    selector: 'app-message-detail',
-    standalone: true,
-    imports: [CommonModule, RouterModule, RelativeDatePipe, AngularSvgIconModule],
-    templateUrl: './message-detail.component.html',
-    styleUrls: ['./message-detail.component.scss'],
-    providers: [{ provide: LOCALE_ID, useValue: 'es' }]
+  selector: 'app-message-detail',
+  standalone: true,
+  imports: [CommonModule, RouterModule, RelativeDatePipe, AngularSvgIconModule],
+  templateUrl: './message-detail.component.html',
+  styleUrls: ['./message-detail.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }]
 })
 export class MessageDetailComponent implements OnInit {
-    private readonly Route = inject(ActivatedRoute)
-    private readonly Http = inject(HttpClient)
-    private readonly Router = inject(Router)
-    message?: SingleMessageInterface
+  private readonly Route = inject(ActivatedRoute)
+  private readonly Http = inject(HttpClient)
+  private readonly Router = inject(Router)
+  message?: SingleMessageInterface
 
-    ngOnInit(): void {
-        const id = this.Route.snapshot.params['id']
-        this.Http.get<HttpResponse<SingleMessageInterface>>(`/api/admin/read_message/${id}`).subscribe({
-            next: (response) => {
-                this.message = response.data
-            },
-            error: (error: any) => {
-                this.Router.navigate(['/404'])
-            }
-        })
-    }
+  ngOnInit(): void {
+    const id = this.Route.snapshot.params['id']
+    this.Http.get<HttpResponse<SingleMessageInterface>>(`/api/admin/read_message/${id}`).subscribe({
+      next: (response) => {
+        this.message = response.data
+      },
+      error: (error: any) => {
+        this.Router.navigate(['/404'])
+      }
+    })
+  }
 
-    return() {
-        this.Router.navigate(['/admin/messages'])
-    }
+  return() {
+    this.Router.navigate(['/admin/messages'])
+  }
 }

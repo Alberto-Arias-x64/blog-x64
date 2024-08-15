@@ -1,43 +1,43 @@
-.editor{
-    width: 100%;
-    height: calc(100% - 10rem);
-    border: 1px solid var(--color_secondary);
-    overflow-y: auto;
-    overflow-x: hidden;
+.editor {
+  width: 100%;
+  height: calc(100% - 10rem);
+  border: 1px solid var(--color_secondary);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.windows{
-    height: 100%;
-    display: grid;
-    grid-template-rows: max-content max-content max-content auto;
-    position: relative;
+.windows {
+  height: 100%;
+  display: grid;
+  grid-template-rows: max-content max-content max-content auto;
+  position: relative;
 }
 
-.actions{
-    display: grid;
-    grid-template-columns: max-content max-content auto;
-    justify-items: end;
+.actions {
+  display: grid;
+  grid-template-columns: max-content max-content auto;
+  justify-items: end;
 }
 
-.actions_item{
-    height: 3rem;
-    display: grid;
-    grid-template-columns: max-content auto;
-    justify-items: flex-end;
+.actions_item {
+  height: 3rem;
+  display: grid;
+  grid-template-columns: max-content auto;
+  justify-items: flex-end;
 }
 
-.upload_file{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: transparentize($color: #000000, $amount: 0.5);
+.upload_file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparentize($color: #000000, $amount: 0.5);
 }
 
-.file_container{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.file_container {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

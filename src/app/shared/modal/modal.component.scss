@@ -1,29 +1,29 @@
 section {
-    position: fixed;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: transparentize($color: #000000, $amount: 0.5);
-    z-index: 99;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--animation_fast);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparentize($color: #000000, $amount: 0.5);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--animation_fast);
 }
 article {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: fit-content;
-    max-width: 30rem;
-    width: 100%;
-    text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  max-width: 30rem;
+  width: 100%;
+  text-align: center;
 }
 picture {
-    height: 10rem;
+  height: 10rem;
 }
 
-.show_modal{
-    opacity: 1;
-    visibility: visible;
+.show_modal {
+  opacity: 1;
+  visibility: visible;
 }

@@ -1,25 +1,25 @@
-header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: max-content;
-    width: 100vw;
-    z-index: 9;
-    transition: var(--animation_standard);
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: max-content;
+  width: 100vw;
+  z-index: 9;
+  transition: var(--animation_standard);
 }
 
-a{
-    text-decoration: none;
-    transition: var(--animation_standard);
-    &:hover{
-        opacity: 0.6;
-    }
-    &.active{
-        color: var(--color_accent);
-    }
+a {
+  text-decoration: none;
+  transition: var(--animation_standard);
+  &:hover {
+    opacity: 0.6;
+  }
+  &.active {
+    color: var(--color_accent);
+  }
 }
 
-.scroll{
-    background: transparentize($color: black, $amount: 0.4);
-    backdrop-filter: blur(2rem);
+.scroll {
+  background: transparentize($color: black, $amount: 0.4);
+  backdrop-filter: blur(2rem);
 }

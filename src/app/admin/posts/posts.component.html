@@ -1,12 +1,10 @@
 <section class="f_column centred-v padding_standard">
-    <ng-container *ngFor="let item of posts">
-        <div class="message padding_small gap_small full" [routerLink]="['/admin/edit_post/',convertTitle(item.title)]">
-            <div class="dot"></div>
-            <p>{{item.title}} - {{item.category}} - {{item.likes}} Likes</p>
-            <p>{{item.createdAt | relativeDate}}</p>
-        </div>
-    </ng-container>
-    <button routerLink="/admin/new_post" class="fit margin_big">
-        Nuevo post
-    </button>
+  <ng-container *ngFor="let item of posts">
+    <div class="message padding_small gap_small full" [routerLink]="['/admin/edit_post/', convertTitle(item.title)]">
+      <div class="dot"></div>
+      <p>{{ item.title }} - {{ item.category }} - {{ item.likes }} Likes</p>
+      <p>{{ item.createdAt | relativeDate }}</p>
+    </div>
+  </ng-container>
+  <button routerLink="/admin/new_post" class="fit margin_big">Nuevo post</button>
 </section>

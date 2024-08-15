@@ -1,21 +1,21 @@
 <section class="gap_small fit padding_small">
-    <button class="padding_small control">
-        <svg-icon src="/assets/icons/arrow.svg" class="return" />
-    </button>
-    <div class="f_row centred gap_standard contend">
-        <ng-container *ngFor="let item of list">
-            <article class="blog card" (click)="navigateTo(item.title)">
-                <picture >
-                    <img [src]="item.image" alt="blog" >
-                </picture>
-                <div class="f_column gap_small padding_small">
-                    <h6>{{item.title}}</h6>
-                    <p>{{item.description}}</p>
-                </div>
-            </article>
-        </ng-container>
-    </div>
-    <button class="padding_small control">
-        <svg-icon src="/assets/icons/arrow.svg" class="forward" />
-    </button>
+  <button class="padding_small control">
+    <svg-icon src="/assets/icons/arrow.svg" class="return" />
+  </button>
+  <div class="f_row centred gap_standard contend">
+    <ng-container *ngFor="let item of list">
+      <article class="blog card" (click)="navigateTo(item.title)">
+        <picture>
+          <img [src]="item.image" alt="blog" />
+        </picture>
+        <div class="f_column gap_small padding_small">
+          <h6>{{ item.title }}</h6>
+          <p>{{ item.description }}</p>
+        </div>
+      </article>
+    </ng-container>
+  </div>
+  <button class="padding_small control">
+    <svg-icon src="/assets/icons/arrow.svg" class="forward" />
+  </button>
 </section>

@@ -5,18 +5,18 @@ import { PostInterface } from 'src/app/interfaces/http.interface'
 import { Router } from '@angular/router'
 
 @Component({
-    selector: 'app-slider',
-    standalone: true,
-    imports: [CommonModule, AngularSvgIconModule],
-    templateUrl: './slider.component.html',
-    styleUrls: ['./slider.component.scss']
+  selector: 'app-slider',
+  standalone: true,
+  imports: [CommonModule, AngularSvgIconModule],
+  templateUrl: './slider.component.html',
+  styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent {
-    @Input() list!: PostInterface[]
-    private readonly Router = inject(Router)
+  @Input() list!: PostInterface[]
+  private readonly Router = inject(Router)
 
-    navigateTo(URL: string) {
-        const route = URL.replace(/\s/g, '_')
-        this.Router.navigate(['/post/', route])
-    }
+  navigateTo(URL: string) {
+    const route = URL.replace(/\s/g, '_')
+    this.Router.navigate(['/post/', route])
+  }
 }
