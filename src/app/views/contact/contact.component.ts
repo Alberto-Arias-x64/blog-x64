@@ -4,7 +4,7 @@ import type { HttpResponse } from 'src/app/core/interfaces/http.interface'
 import { PhoneDirective } from 'src/app/core/directives/phone.directive'
 import { ModalService } from 'src/app/core/services/modal.service'
 import { AngularSvgIconModule } from 'angular-svg-icon'
-import { Component, inject } from '@angular/core'
+import { Component, inject, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule } from '@angular/common'
 
@@ -20,7 +20,7 @@ export class ContactComponent {
   private readonly formBuilder = inject(FormBuilder)
   private readonly http = inject(HttpClient)
 
-  sendingFlag = false
+  sendingFlag = signal(false)
 
   form = this.formBuilder.group({
     name: new FormControl(null, [Validators.required]),
@@ -31,11 +31,11 @@ export class ContactComponent {
 
   sendForm(form: FormGroup) {
     if (form.invalid) return
-    this.sendingFlag = true
+    this.sendingFlag.set(true)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.http.post<HttpResponse<any>>('/api/send_message', form.value).subscribe({
       next: (res) => {
-        this.sendingFlag = false
+        this.sendingFlag.set(false)
         if (res.status === 'OK') {
           this.modalService.setData = copyMock(messageSendMock)
           this.modalService.setState = true
@@ -43,7 +43,7 @@ export class ContactComponent {
         }
       },
       error: () => {
-        this.sendingFlag = false
+        this.sendingFlag.set(false)
         this.modalService.setData = copyMock(ErrorMock)
         this.modalService.setState = true
       }

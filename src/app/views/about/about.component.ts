@@ -3,8 +3,8 @@ import { ZoomFilterDirective } from 'src/app/core/directives/zoom-filter.directi
 import { ShowBadgesDirective } from 'src/app/core/directives/show-badges.directive'
 import { ProjectsInterface } from 'src/app/core/interfaces/http.interface'
 import { ModalService } from 'src/app/core/services/modal.service'
+import { Component, OnInit, inject, signal } from '@angular/core'
 import { ErrorMock, copyMock } from 'src/app/mocks/modals.mock'
-import { Component, OnInit, inject } from '@angular/core'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule } from '@angular/common'
@@ -19,12 +19,12 @@ import { CommonModule } from '@angular/common'
 export class AboutComponent implements OnInit {
   private readonly modalService = inject(ModalService)
   private readonly http = inject(HttpClient)
-  Projects: ProjectsInterface[] = []
+  Projects = signal<ProjectsInterface[]>([])
 
   ngOnInit() {
     this.http.get<ProjectsInterface[]>('/uploads/documents/projects.json').subscribe({
       next: (res) => {
-        this.Projects = res
+        this.Projects.set(res)
       },
       error: () => {
         this.modalService.setData = copyMock(ErrorMock)

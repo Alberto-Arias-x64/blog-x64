@@ -4,7 +4,7 @@
     <h4>Web Developer</h4>
     <div class="f_row gap_standard info_container">
       <div class="f_column gap_standard centred-h">
-        <p>Desarrollador web para el Banco Finandina con enfoque en tecnologías <strong>Fronted como Angular y React,</strong> con un grado de ingeniera mecatronica, ubicado en Zipaquira, Colombia.</p>
+        <p>Desarrollador web para el Banco Finandina con enfoque en tecnologías <strong>Fronted como Angular y React,</strong> con un grado de ingeniera mecatronica, ubicado en Bogota, Colombia.</p>
         <p>Creo experiencias <strong>limpias y elegantes</strong> con un toque de <strong>creatividad</strong>, me apoyo en tecnologías a la vanguardia siempre estando al dia con mis conocimientos.</p>
         <p>Tengo experiencia trabajando tanto en proyectos desde la planificación hasta el despliegue y mantenimiento, como integrando y optimizando soluciones personalizadas.</p>
         <p>Me considero como una gran mente de pensamiento lógico y analítico, me gusta potenciar mis ideas y pensamientos con herramientas de <strong>inteligencia artificial.</strong></p>
@@ -22,7 +22,8 @@
     <p>Muestra de mi talento y esfuerzo, para ver mas en mi <a href="https://github.com/Alberto-Arias-x64">GitHub</a>, la mayoría son públicos.</p>
     <br />
     <div class="projects_container gap_big">
-      <section class="column_2-3 project card" *ngFor="let item of Projects">
+      @for (item of Projects(); track $index) {
+      <section class="column_2-3 project card">
         <article class="padding_standard info_card">
           <h5>{{ item.title }}</h5>
           <div>
@@ -41,12 +42,15 @@
           <img [src]="item.image.src" [alt]="item.image.alt" loading="lazy" decoding="async" appZoomFilter appBlackFilter />
         </picture>
         <div class="f_column gap_small badges_container full centred" appShowBadges>
-          <div class="badge f_row centred" *ngFor="let tech of item.tech">
+          @for (tech of item.tech; track $index) {
+          <div class="badge f_row centred">
             <img load="lazy" decoding="async" [src]="tech.src" [alt]="tech.alt" />
             <p class="badge_name">{{ tech.alt }}</p>
           </div>
+          }
         </div>
       </section>
+      }
     </div>
   </article>
   <!-- info -->
@@ -54,7 +58,7 @@
     <h3>Información de contacto</h3>
     <p>Por favor siéntase libre de enviarme un correo o contactarme directamente y le responderé lo mas pronto posible.</p>
     <div class="card padding_standard fit f_column gap_small">
-      <p>Email: <strong>alberto.arias.x64&#64;gmail.com</strong></p>
+      <p>Email: <strong>nicolas&#64;alberto-arias.com</strong></p>
       <p>Wp business: <strong>+57 321 498 6813</strong></p>
       <div class="f_row centred gap_standard fit">
         <svg-icon src="/assets/icons/linkedin.svg" class="icon" (click)="sendTo('https://www.linkedin.com/in/alberto-arias-629128211/')" />

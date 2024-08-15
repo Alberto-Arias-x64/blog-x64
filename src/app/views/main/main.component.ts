@@ -4,7 +4,7 @@ import { ErrorMock, copyMock, subscribedMock } from 'src/app/mocks/modals.mock'
 import { SliderComponent } from 'src/app/components/slider/slider.component'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ModalService } from 'src/app/core/services/modal.service'
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject, signal } from '@angular/core'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule } from '@angular/common'
@@ -23,14 +23,14 @@ export class MainComponent implements OnInit {
   private readonly http = inject(HttpClient)
   private readonly router = inject(Router)
 
-  categoriesList?: CategoriesInterface[]
+  categoriesList = signal<CategoriesInterface[]>([])
   posts: PostInterface[] = []
-  title: string | null = null
-  paginator = 1
-  pagine = 1
-  showMobile = false
-  sendingMail = false
-  sendedMail = false
+  title = signal<string | null>(null)
+  paginator = signal(1)
+  pagine = signal(1)
+  showMobile = signal(false)
+  sendingMail = signal(false)
+  sendedMail = signal(false)
 
   searchForm = this.formBuilder.group({
     search: new FormControl(null, [Validators.required])
@@ -50,13 +50,13 @@ export class MainComponent implements OnInit {
         this.title = params.id
         this.handleSubscription('/api/filter_posts', params.id)
       } else {
-        this.title = null
+        this.title.set(null)
         this.handleSubscription('/api/read_posts')
       }
     })
     this.http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
       next: (res) => {
-        if (res.data) this.categoriesList = res.data
+        if (res.data) this.categoriesList.set(res.data)
       },
       error: () => {
         this.modalService.setData = copyMock(ErrorMock)
@@ -87,7 +87,7 @@ export class MainComponent implements OnInit {
   }
 
   subscribe(form: FormGroup) {
-    this.sendingMail = true
+    this.sendingMail.set(true)
     this.http.post<HttpResponse<null>>('/api/register_mail', { mail: form.get('mail')?.value }).subscribe({
       next: (res) => {
         if (res.status === 'OK') {
@@ -95,14 +95,14 @@ export class MainComponent implements OnInit {
           this.modalService.setState = true
           this.subscribeForm.get('mail')?.setValue(null)
           this.subscribeForm.get('mail')?.disable()
-          this.sendedMail = true
-          this.sendingMail = false
+          this.sendedMail.set(true)
+          this.sendingMail.set(false)
         }
       },
       error: () => {
         this.modalService.setData = copyMock(ErrorMock)
         this.modalService.setState = true
-        this.sendingMail = false
+        this.sendingMail.set(false)
       }
     })
   }
@@ -110,7 +110,7 @@ export class MainComponent implements OnInit {
   handleSubscription(route: string, params: string | null = null) {
     this.activeRoute.queryParams.subscribe(({ page }) => {
       const pageData = page ?? 1
-      this.pagine = pageData
+      this.pagine.set(pageData)
       let URLRoute = ''
       if (params) URLRoute = `${route}/${params}/${pageData}`
       else URLRoute = `${route}/${pageData}`
@@ -118,7 +118,7 @@ export class MainComponent implements OnInit {
         next: (res) => {
           if (res.data) {
             window.scrollTo(0, 0)
-            this.paginator = Math.ceil(res.data.count / 5)
+            this.paginator.set(Math.ceil(res.data.count / 5))
             if (pageData < 1 || pageData > this.paginator) this.router.navigate(['/404'])
             this.posts = res.data.rows
             if (res.data && res.data.count > 0) {
@@ -144,7 +144,7 @@ export class MainComponent implements OnInit {
   }
 
   toggleMobile() {
-    this.showMobile = !this.showMobile
+    this.showMobile.set(!this.showMobile())
   }
 
   navigateTo(URL: string) {
@@ -155,10 +155,10 @@ export class MainComponent implements OnInit {
   changePage(action: boolean) {
     if (action) {
       if (this.pagine >= this.paginator) return
-      this.pagine++
+      this.pagine.update((value) => value + 1)
     } else {
-      if (this.pagine <= 1) return
-      this.pagine--
+      if (this.pagine() <= 1) return
+      this.pagine.update((value) => value - 1)
     }
     const route = this.router.url.replace(/\?.*/gm, '')
     this.router.navigate([route], { queryParams: { page: this.pagine } })

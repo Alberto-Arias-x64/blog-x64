@@ -1,5 +1,4 @@
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { tokenInterceptor } from './core/interceptors/token.interceptor'
 import { ModalComponent } from './shared/modal/modal.component'
 import { ServiceWorkerModule } from '@angular/service-worker'
@@ -17,7 +16,6 @@ import routes from './router'
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     ModalComponent,
     AngularSvgIconModule.forRoot(),
     MarkdownModule.forRoot({ loader: HttpClient }),

@@ -3,8 +3,8 @@ import type { HttpResponse } from 'src/app/core/interfaces/http.interface'
 import { ModalService } from 'src/app/core/services/modal.service'
 import { BlockIPMock, copyMock } from 'src/app/mocks/modals.mock'
 import { AuthService } from 'src/app/core/services/auth.service'
+import { Component, inject, signal } from '@angular/core'
 import { AngularSvgIconModule } from 'angular-svg-icon'
-import { Component, inject } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router'
@@ -23,7 +23,7 @@ export class LoginComponent {
   private readonly http = inject(HttpClient)
   private readonly router = inject(Router)
 
-  sendingFlag = false
+  sendingFlag = signal(false)
 
   form = this.formBuilder.group({
     mail: new FormControl(null, [Validators.required]),
@@ -32,7 +32,7 @@ export class LoginComponent {
 
   sendForm(form: FormGroup) {
     if (form.invalid) return
-    this.sendingFlag = true
+    this.sendingFlag.set(true)
     const modalTemplate = copyMock(BlockIPMock)
     modalTemplate.buttonPrincipal.action = () => {
       this.router.navigate(['/'])
@@ -41,7 +41,7 @@ export class LoginComponent {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.http.post<HttpResponse<any>>('/api/auth/login', form.value).subscribe({
       next: (res) => {
-        this.sendingFlag = false
+        this.sendingFlag.set(false)
         if (res.status === 'OK') {
           form.reset()
           this.authService.setToken = res.data.token
@@ -49,7 +49,7 @@ export class LoginComponent {
         } else this.modalService.setState = true
       },
       error: () => {
-        this.sendingFlag = false
+        this.sendingFlag.set(false)
         this.modalService.setState = true
       }
     })
