@@ -1,13 +1,15 @@
-<section [class.show_modal]="state">
+<section [class.show_modal]="state()">
   <article class="card padding_standard f_column centred gap_standard">
-    <h4>{{ data.title }}</h4>
+    <h4>{{ data().title }}</h4>
     <picture>
-      <img [src]="data.image.src" [alt]="data.image.alt" />
+      <img [src]="data().image.src" [alt]="data().image.alt" />
     </picture>
-    <p>{{ data.description }}</p>
+    <p>{{ data().description }}</p>
     <div class="f_row gap_small full">
-      <button class="full" (click)="principalAction()">{{ data.buttonPrincipal.text }}</button>
-      <button *ngIf="data.buttonSecondary" class="full" (click)="secondaryAction()">{{ data.buttonSecondary.text }}</button>
+      <button class="full" (click)="principalAction()">{{ data().buttonPrincipal.text }}</button>
+      @if(data().buttonSecondary){
+      <button class="full" (click)="secondaryAction()">{{ data().buttonSecondary?.text }}</button>
+      }
     </div>
   </article>
 </section>

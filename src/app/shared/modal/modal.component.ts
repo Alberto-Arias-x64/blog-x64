@@ -1,6 +1,6 @@
 import type { ModalInterface } from 'src/app/core/interfaces/modal.interface'
 import { ModalService } from 'src/app/core/services/modal.service'
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject, signal } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 @Component({
@@ -11,22 +11,35 @@ import { CommonModule } from '@angular/common'
   styleUrl: './modal.component.scss'
 })
 export class ModalComponent implements OnInit {
-  private Modal = inject(ModalService)
-  state = false
-  data!: ModalInterface
+  private modalService = inject(ModalService)
+  state = signal(false)
+  data = signal<ModalInterface>({
+    title: '',
+    image: {
+      src: '',
+      alt: ''
+    },
+    description: '',
+    buttonPrincipal: {
+      text: '',
+      action: () => null
+    }
+  })
 
   ngOnInit() {
-    this.Modal.getState.subscribe((value) => (this.state = value))
-    this.Modal.getData.subscribe((data) => (this.data = data))
+    this.modalService.getState.subscribe((value) => this.state.set(value))
+    this.modalService.getData.subscribe((data) => this.data.set(data))
   }
 
   principalAction() {
-    if (this.data.buttonPrincipal.action) this.data.buttonPrincipal.action()
-    this.Modal.setState = false
+    const action = this.data().buttonPrincipal.action
+    if (action) action()
+    this.modalService.setState = false
   }
 
   secondaryAction() {
-    if (this.data.buttonSecondary?.action) this.data.buttonSecondary?.action()
-    this.Modal.setState = false
+    const action = this.data().buttonSecondary?.action
+    if (action) action()
+    this.modalService.setState = false
   }
 }

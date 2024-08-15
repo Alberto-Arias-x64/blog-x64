@@ -7,6 +7,6 @@ import { Component } from '@angular/core'
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './error.component.html',
-  styleUrl: './error.component.scss'
+  styles: 'section { height: 100vh; }'
 })
 export class ErrorComponent {}
