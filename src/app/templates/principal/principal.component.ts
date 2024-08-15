@@ -1,8 +1,8 @@
-import { Component } from '@angular/core'
+import { HeaderComponent } from 'src/app/components/shared/header/header.component'
+import { FooterComponent } from 'src/app/components/shared/footer/footer.component'
 import { CommonModule } from '@angular/common'
-import { HeaderComponent } from 'src/app/shared/header/header.component'
-import { FooterComponent } from 'src/app/shared/footer/footer.component'
 import { RouterOutlet } from '@angular/router'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-principal',

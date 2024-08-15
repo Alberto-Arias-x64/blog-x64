@@ -1,5 +1,5 @@
 import { SidePanelComponent } from 'src/app/components/side-panel/side-panel.component'
-import { HeaderComponent } from 'src/app/shared/header/header.component'
+import { HeaderComponent } from 'src/app/components/shared/header/header.component'
 import { CommonModule } from '@angular/common'
 import { RouterOutlet } from '@angular/router'
 import { Component } from '@angular/core'

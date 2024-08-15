@@ -1,5 +1,5 @@
 @if(openEditor()){
-<section class="full padding_big">
+<section class="full padding_big router">
   <article class="f_row gap_small">
     <p>Main</p>
     @for (item of path; track $index) {
@@ -17,7 +17,7 @@
   <textarea class="editor padding_standard" [(ngModel)]="editorData" #editor></textarea>
 </section>
 } @else {
-<section class="gap_standard padding_big windows" (click)="clickOut($event)" id="clicOut">
+<section class="gap_standard padding_big windows router" (click)="clickOut($event)" id="clicOut">
   <article class="f_row gap_small">
     <p>Main</p>
     @for (item of path; track $index) {

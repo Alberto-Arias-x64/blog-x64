@@ -21,12 +21,12 @@ const routes: Routes = [
     canActivate: [authGuard],
     title: 'Admin',
     children: [
-      { path: 'messages/:id', loadComponent: () => import('./admin/message-detail/message-detail.component').then((c) => c.MessageDetailComponent) },
-      { path: 'messages', loadComponent: () => import('./admin/messages/messages.component').then((c) => c.MessagesComponent) },
-      { path: 'windows', loadComponent: () => import('./admin/windows/windows.component').then((c) => c.WindowsComponent) },
-      { path: 'edit_post/:id', loadComponent: () => import('./admin/post/post.component').then((c) => c.PostComponent) },
-      { path: 'new_post', loadComponent: () => import('./admin/post/post.component').then((c) => c.PostComponent) },
-      { path: 'posts', loadComponent: () => import('./admin/posts/posts.component').then((c) => c.PostsComponent) }
+      { path: 'messages/:id', loadComponent: () => import('./views/admin/message-detail/message-detail.component').then((c) => c.MessageDetailComponent) },
+      { path: 'messages', loadComponent: () => import('./views/admin/messages/messages.component').then((c) => c.MessagesComponent) },
+      { path: 'windows', loadComponent: () => import('./views/admin/windows/windows.component').then((c) => c.WindowsComponent) },
+      { path: 'edit_post/:id', loadComponent: () => import('./views/admin/post/post.component').then((c) => c.PostComponent) },
+      { path: 'new_post', loadComponent: () => import('./views/admin/post/post.component').then((c) => c.PostComponent) },
+      { path: 'posts', loadComponent: () => import('./views/admin/posts/posts.component').then((c) => c.PostsComponent) }
     ]
   },
   { path: '**', loadComponent: () => import('./templates/error/error.component').then((c) => c.ErrorComponent) }

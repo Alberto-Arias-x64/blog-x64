@@ -1,6 +1,6 @@
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http'
+import { ModalComponent } from './components/shared/modal/modal.component'
 import { tokenInterceptor } from './core/interceptors/token.interceptor'
-import { ModalComponent } from './shared/modal/modal.component'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { BrowserModule } from '@angular/platform-browser'
 import { AngularSvgIconModule } from 'angular-svg-icon'
@@ -15,6 +15,7 @@ import routes from './router'
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   imports: [
+    ModalComponent,
     BrowserModule,
     ModalComponent,
     AngularSvgIconModule.forRoot(),
