@@ -56,7 +56,7 @@ export class MainComponent implements OnInit {
     })
     this.http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
       next: (res) => {
-        this.categoriesList = res.data
+        if (res.data) this.categoriesList = res.data
       },
       error: () => {
         this.modalService.setData = copyMock(ErrorMock)
@@ -116,20 +116,22 @@ export class MainComponent implements OnInit {
       else URLRoute = `${route}/${pageData}`
       this.http.get<HttpResponse<PostPaginatorInterface>>(URLRoute).subscribe({
         next: (res) => {
-          window.scrollTo(0, 0)
-          this.paginator = Math.ceil(res.data.count / 5)
-          if (pageData < 1 || pageData > this.paginator) this.router.navigate(['/404'])
-          this.posts = res.data.rows
-          if (res.data && res.data.count > 0) {
-            this.posts = res.data.rows.map((element: PostInterface) => {
-              if (window.localStorage.getItem(JSON.stringify(element.id))) {
-                element.liked = true
-              } else element.liked = false
-              return element
-            })
-          } else {
-            this.posts = []
-            this.router.navigate(['/404'])
+          if (res.data) {
+            window.scrollTo(0, 0)
+            this.paginator = Math.ceil(res.data.count / 5)
+            if (pageData < 1 || pageData > this.paginator) this.router.navigate(['/404'])
+            this.posts = res.data.rows
+            if (res.data && res.data.count > 0) {
+              this.posts = res.data.rows.map((element: PostInterface) => {
+                if (window.localStorage.getItem(JSON.stringify(element.id))) {
+                  element.liked = true
+                } else element.liked = false
+                return element
+              })
+            } else {
+              this.posts = []
+              this.router.navigate(['/404'])
+            }
           }
         },
         error: () => {

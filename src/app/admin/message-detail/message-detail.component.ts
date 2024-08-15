@@ -1,7 +1,7 @@
 import type { HttpResponse, SingleMessageInterface } from 'src/app/core/interfaces/http.interface'
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router'
 import { RelativeDatePipe } from 'src/app/core/pipes/relative-date.pipe'
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject, signal } from '@angular/core'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { registerLocaleData } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
@@ -23,12 +23,23 @@ export class MessageDetailComponent implements OnInit {
   private readonly activeRoute = inject(ActivatedRoute)
   private readonly http = inject(HttpClient)
   private readonly router = inject(Router)
-  message?: SingleMessageInterface
+  message = signal<SingleMessageInterface>({
+    id: 0,
+    name: '',
+    mail: '',
+    phone: '',
+    read: false,
+    message: '',
+    updatedAt: new Date(),
+    createdAt: new Date()
+  })
 
   ngOnInit() {
     const id = this.activeRoute.snapshot.params['id']
     this.http.get<HttpResponse<SingleMessageInterface>>(`/api/admin/read_message/${id}`).subscribe({
-      next: (response) => (this.message = response.data),
+      next: (response) => {
+        if (response.data) this.message.set(response.data)
+      },
       error: () => this.router.navigate(['/404'])
     })
   }

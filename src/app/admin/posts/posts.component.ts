@@ -2,7 +2,7 @@ import type { HttpResponse, PostInterface } from 'src/app/core/interfaces/http.i
 import { ErrorMock, NoDataMock, copyMock } from 'src/app/mocks/modals.mock'
 import { RelativeDatePipe } from 'src/app/core/pipes/relative-date.pipe'
 import { ModalService } from 'src/app/core/services/modal.service'
-import { Component, inject, OnInit } from '@angular/core'
+import { Component, inject, OnInit, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule } from '@angular/common'
 import { RouterLink } from '@angular/router'
@@ -18,13 +18,12 @@ export class PostsComponent implements OnInit{
   private readonly modalService = inject(ModalService)
   private readonly http = inject(HttpClient)
 
-  posts: PostInterface[] = []
+  posts = signal<PostInterface[]>([])
 
   ngOnInit() {
     this.http.get<HttpResponse<PostInterface[]>>('/api/admin/read_posts').subscribe({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      next: (res: any) => {
-        if (res && res.data.length > 0) this.posts = res.data
+      next: (res) => {
+        if (res && res.data && res.data.length > 0) this.posts.set(res.data)
         else {
           this.modalService.setData = copyMock(NoDataMock)
           this.modalService.setState = true

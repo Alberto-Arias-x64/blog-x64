@@ -3,7 +3,7 @@ import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock, pos
 import type { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/core/interfaces/http.interface'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ModalService } from 'src/app/core/services/modal.service'
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject, signal } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { AngularSvgIconModule } from 'angular-svg-icon'
 import { HttpClient } from '@angular/common/http'
@@ -24,10 +24,10 @@ export class PostComponent implements OnInit {
   private readonly router = inject(Router)
   private idPost: string | null = null
 
-  categoriesList?: CategoriesInterface[] | null
-  selectedImage: string | null = null
-  sendingFlag = false
-  editFlag = false
+  categoriesList = signal<CategoriesInterface[] | null>(null)
+  selectedImage = signal<string | null>(null)
+  sendingFlag = signal(false)
+  editFlag = signal(false)
 
   form = this.formBuilder.group({
     title: new FormControl(null, [Validators.required]),
@@ -40,7 +40,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     if (this.router.url.includes('edit_post')) {
-      this.editFlag = true
+      this.editFlag.set(true)
       const { id } = this.activeRoute.snapshot.params
       this.http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
         next: (response: any) => {
@@ -67,7 +67,7 @@ export class PostComponent implements OnInit {
 
   sendForm(form: FormGroup) {
     if (form.invalid) return
-    this.sendingFlag = true
+    this.sendingFlag.set(true)
     this.modalService.setData = copyMock(messageSendMock)
 
     const formData = new FormData()
@@ -79,7 +79,7 @@ export class PostComponent implements OnInit {
       formData.append('id', this.idPost as string)
       this.http.put<HttpResponse<any>>('/api/admin/update_post', formData).subscribe({
         next: (res) => {
-          this.sendingFlag = false
+          this.sendingFlag.set(false)
           if (res.status === 'OK') {
             this.modalService.setData = copyMock(postUpdatedMock)
             this.modalService.setState = true
@@ -88,7 +88,7 @@ export class PostComponent implements OnInit {
           }
         },
         error: () => {
-          this.sendingFlag = false
+          this.sendingFlag.set(false)
           this.modalService.setData = copyMock(ErrorMock)
           this.modalService.setState = true
         }
@@ -96,7 +96,7 @@ export class PostComponent implements OnInit {
     } else {
       this.http.post<HttpResponse<any>>('/api/admin/send_post', formData).subscribe({
         next: (res) => {
-          this.sendingFlag = false
+          this.sendingFlag.set(false)
           if (res.status === 'OK') {
             this.modalService.setData = copyMock(postCreatedMock)
             this.modalService.setState = true
@@ -105,7 +105,7 @@ export class PostComponent implements OnInit {
           }
         },
         error: () => {
-          this.sendingFlag = false
+          this.sendingFlag.set(false)
           this.modalService.setData = copyMock(ErrorMock)
           this.modalService.setState = true
         }
@@ -120,7 +120,7 @@ export class PostComponent implements OnInit {
 
   selectImage(event: any) {
     const file = event.target.files && event.target.files.length > 0 ? event.target.files[0] : null
-    this.selectedImage = URL.createObjectURL(file)
+    this.selectedImage.set(URL.createObjectURL(file))
   }
 
   touchField(control: string) {

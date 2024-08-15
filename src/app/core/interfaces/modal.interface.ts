@@ -6,10 +6,10 @@ export interface ModalInterface {
   description: string
   buttonPrincipal: {
     text: string
-    action: () => void | null
+    action: (() => void) | null
   }
   buttonSecondary?: {
     text: string
-    action: () => void | null
+    action: (() => void) | null
   }
 }

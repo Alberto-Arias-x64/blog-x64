@@ -1,16 +1,16 @@
 <section class="padding_standard">
-  <article class="f_row gap_small return_container centred-v" RouterLink="/admin/messages">
-    <svg-icon src="assets/icons/arrow.svg" class="return" />
+  <article class="f_row gap_small return_container centred-v" routerLink="/admin/messages">
+    <svg-icon src="/assets/icons/arrow.svg" class="return" />
     <p>Volver</p>
   </article>
   <br />
   <article class="title f_row gap_small">
-    <h3>{{ message?.name }}</h3>
+    <h3>{{ message().name }}</h3>
     <span class="time f_row gap_small fit">
-      <p>{{ message?.createdAt | date }}</p>
-      <p>({{ message?.createdAt | relativeDate }})</p>
+      <p>{{ message().createdAt | date }}</p>
+      <p>({{ message().createdAt | relativeDate }})</p>
     </span>
   </article>
   <br />
-  <p>{{ message?.message }}</p>
+  <p>{{ message().message }}</p>
 </section>

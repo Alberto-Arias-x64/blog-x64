@@ -30,7 +30,7 @@ export class PostComponent implements OnInit {
     this.http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
       next: (response) => {
         this.data = response.data
-        this.metaTags(response.data)
+        this.metaTags(response.data as PostInterface)
         if (this.data) {
           if (window.localStorage.getItem(JSON.stringify(this.data.id))) this.data.liked = true
           else this.data.liked = false

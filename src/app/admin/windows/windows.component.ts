@@ -1,7 +1,7 @@
 import { ErrorMock, ErrorOpenMock, backupMock, confirmCancelMock, confirmDeleteMock, confirmUpdateMock, copyMock, windowFolderMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
 import type { HttpResponse, WindowsInterface } from 'src/app/core/interfaces/http.interface'
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core'
 import { IconifyComponent } from 'src/app/components/iconify/iconify.component'
 import type { ModalInterface } from 'src/app/core/interfaces/modal.interface'
 import { ModalService } from 'src/app/core/services/modal.service'
@@ -28,9 +28,9 @@ export class WindowsComponent implements OnInit {
   folders: string[] = []
   files: string[] = []
   activeElement: string | null = null
-  newFolder = false
-  openEditor = false
-  uploadingFile = false
+  newFolder = signal(false)
+  openEditor = signal(false)
+  uploadingFile = signal(false)
   editorData: string | null = null
   fileName: string | null = null
   fileData: string | null = null
@@ -68,21 +68,21 @@ export class WindowsComponent implements OnInit {
     confirmModal.buttonSecondary!.action = () => {
       this.path.pop()
       this.editorData = null
-      this.openEditor = false
+      this.openEditor.set(false)
     }
     this.modalService.setData = confirmModal
     this.modalService.setState = true
   }
 
   upload() {
-    this.uploadingFile = true
+    this.uploadingFile.set(true)
     setTimeout(() => {
       const file = this.fileInput.nativeElement as HTMLInputElement
       file.click()
       file.addEventListener('change', () => {
         if (this.fileData) {
           this.fileName = file.files?.item(0)?.name ?? null
-        } else this.uploadingFile = false
+        } else this.uploadingFile.set(false)
       })
     }, 100)
   }
@@ -97,7 +97,7 @@ export class WindowsComponent implements OnInit {
   }
 
   cancelUpload() {
-    this.uploadingFile = false
+    this.uploadingFile.set(false)
   }
 
   getPath() {
@@ -131,7 +131,7 @@ export class WindowsComponent implements OnInit {
     this.http.get<HttpResponse<string>>(`/api/admin/windows/read_file?path=${route}`).subscribe({
       next: (res) => {
         if (res.status === 'OK') {
-          this.openEditor = true
+          this.openEditor.set(true)
           setTimeout(() => {
             this.editorData = res.data ?? ''
             this.path.push(fileName as string)
@@ -149,11 +149,11 @@ export class WindowsComponent implements OnInit {
   }
 
   folder() {
-    this.newFolder = true
+    this.newFolder.set(true)
   }
 
   cancelFolder() {
-    this.newFolder = false
+    this.newFolder.set(false)
   }
 
   createFolder(form: FormGroup) {
@@ -182,7 +182,7 @@ export class WindowsComponent implements OnInit {
         this.modalService.setState = true
       },
       complete: () => {
-        this.newFolder = false
+        this.newFolder.set(false)
         form.reset()
       }
     })
@@ -220,7 +220,7 @@ export class WindowsComponent implements OnInit {
       this.http.post<HttpResponse<string>>('/api/admin/windows/upload_file', form).subscribe({
         next: () => {
           this.getPath()
-          this.uploadingFile = false
+          this.uploadingFile.set(false)
           this.modalService.setData = copyMock(windowUploadedMock)
           this.modalService.setState = true
         },
@@ -245,7 +245,7 @@ export class WindowsComponent implements OnInit {
       next: () => {
         this.modalService.setData = copyMock(windowUploadedMock)
         this.modalService.setState = true
-        this.openEditor = false
+        this.openEditor.set(false)
       },
       error: () => {
         this.modalService.setData = copyMock(ErrorMock)
@@ -266,7 +266,7 @@ export class WindowsComponent implements OnInit {
         if (fileName) this.getPath()
         else {
           this.editorData = ''
-          this.openEditor = false
+          this.openEditor.set(false)
           this.return()
         }
       })
@@ -287,7 +287,7 @@ export class WindowsComponent implements OnInit {
         if (fileName) this.getPath()
         else {
           this.editorData = ''
-          this.openEditor = false
+          this.openEditor.set(false)
           this.return()
         }
       })

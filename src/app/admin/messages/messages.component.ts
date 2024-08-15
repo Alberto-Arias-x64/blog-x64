@@ -2,7 +2,7 @@ import type { HttpResponse, MessagesInterface } from 'src/app/core/interfaces/ht
 import { ErrorMock, NoDataMock, copyMock } from 'src/app/mocks/modals.mock'
 import { RelativeDatePipe } from 'src/app/core/pipes/relative-date.pipe'
 import { ModalService } from 'src/app/core/services/modal.service'
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
@@ -18,12 +18,12 @@ export class MessagesComponent implements OnInit {
   private readonly modalService = inject(ModalService)
   private readonly http = inject(HttpClient)
 
-  messages: MessagesInterface[] = []
+  messages = signal<MessagesInterface[]>([])
 
   ngOnInit() {
     this.http.get<HttpResponse<MessagesInterface[]>>('api/admin/read_messages').subscribe({
       next: (res) => {
-        if (res && res.data?.length > 0) this.messages = res.data
+        if (res && res.data && res.data.length > 0) this.messages.set(res.data)
         else {
           this.modalService.setData = copyMock(NoDataMock)
           this.modalService.setState = true

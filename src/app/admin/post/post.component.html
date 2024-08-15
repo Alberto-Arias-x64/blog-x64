@@ -1,9 +1,8 @@
 <section>
-  <h1 *ngIf="!editFlag">Publica un nuevo post</h1>
-  <h1 *ngIf="editFlag">Edita tu post</h1>
+  <h1>{{ editFlag() ? 'Edita tu post' : 'Publica un nuevo post' }}</h1>
   <br />
   <article class="f_row gap_small return_container centred-v" (click)="return()">
-    <svg-icon src="assets/icons/arrow.svg" class="return" />
+    <svg-icon src="/assets/icons/arrow.svg" class="return" />
     <p>Volver</p>
   </article>
   <form [formGroup]="form" (ngSubmit)="sendForm(form)" class="f_column gap_big padding_standard centred-v">
@@ -19,7 +18,7 @@
       <div class="input_decorator">
         <label for="keywords">Palabras clave</label>
         <div class="f_row gap_small centred-v">
-          <svg-icon class="input_icon" src="assets/icons/magnifier.svg" />
+          <svg-icon class="input_icon" src="/assets/icons/magnifier.svg" />
           <input type="text" id="keywords" name="keywords" formControlName="keywords" placeholder="Key, Word, For, SEO" autocomplete="off" />
         </div>
         <p class="customError" [class.active]="keywords?.hasError('required') && keywords?.touched">Campo requerido</p>
@@ -27,10 +26,12 @@
       <div class="input_decorator">
         <label for="category">Categoría</label>
         <div class="f_row centred-v">
-          <svg-icon class="input_icon" src="assets/icons/categories.svg" />
+          <svg-icon class="input_icon" src="/assets/icons/categories.svg" />
           <input type="text" list="categories" id="category" name="category" formControlName="category" placeholder="" autocomplete="off" />
           <datalist id="categories">
-            <ng-container *ngFor="let item of categoriesList"> <option [value]="item.category"></option></ng-container>
+            @for (item of categoriesList(); track $index) {
+            <option>{{ item.category }}</option>
+            }
           </datalist>
         </div>
         <p class="customError" [class.active]="category?.hasError('required') && category?.touched">Campo requerido</p>
@@ -39,7 +40,7 @@
     <div class="input_decorator">
       <label for="description">Descripción</label>
       <div class="f_row gap_small">
-        <svg-icon class="input_icon" src="assets/icons/message.svg" />
+        <svg-icon class="input_icon" src="/assets/icons/message.svg" />
         <textarea formControlName="description" id="description" name="description" cols="30" rows="5" maxlength="2000" autocomplete="off"></textarea>
       </div>
       <p class="customError" [class.active]="description?.hasError('required') && description?.touched">Campo requerido</p>
@@ -49,7 +50,7 @@
         <div class="input_decorator fit">
           <label for="image" class="text_start">Imagen</label>
           <div class="f_row centred-v">
-            <svg-icon class="input_icon" src="assets/icons/image.svg" />
+            <svg-icon class="input_icon" src="/assets/icons/image.svg" />
             <input type="file" id="image" name="image" accept=".webp" (change)="selectFile($event, 'image')" (change)="selectImage($event)" (click)="touchField('image')" />
           </div>
           <p class="customError" [class.active]="image?.hasError('required') && image?.touched">Campo requerido</p>
@@ -57,20 +58,37 @@
         <div class="input_decorator fit">
           <label for="document">Post (.md)</label>
           <div class="f_row centred-v">
-            <svg-icon class="input_icon" src="assets/icons/file.svg" />
+            <svg-icon class="input_icon" src="/assets/icons/file.svg" />
             <input type="file" class="full" id="document" name="document" accept=".md" (change)="selectFile($event, 'document')" (click)="touchField('document')" />
           </div>
           <p class="customError" [class.active]="document?.hasError('required') && document?.touched">Campo requerido</p>
         </div>
       </div>
-      <picture class="preview" *ngIf="selectedImage">
-        <img [src]="selectedImage" alt="preview" />
+      @if(selectedImage()){
+      <picture class="preview">
+        <img [src]="selectedImage()" alt="preview" />
       </picture>
+      }
     </div>
-    <button *ngIf="!editFlag" type="submit" class="fit" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Publicar</p></button>
-    <div class="column_half gap_standard" *ngIf="editFlag">
-      <button type="button" class="fit" (click)="deleteBlog()" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Eliminar</p></button>
-      <button type="submit" class="fit" [disabled]="form.invalid || sendingFlag" [class.spinner]="sendingFlag"><p *ngIf="!sendingFlag">Actualizar</p></button>
+    @if(editFlag()){
+    <div class="column_half gap_standard">
+      <button type="button" class="fit" (click)="deleteBlog()" [disabled]="form.invalid || sendingFlag()" [class.spinner]="sendingFlag()">
+        @if(!sendingFlag()){
+        <p>Eliminar</p>
+        }
+      </button>
+      <button type="submit" class="fit" [disabled]="form.invalid || sendingFlag()" [class.spinner]="sendingFlag()">
+        @if(!sendingFlag){
+        <p>Actualizar</p>
+        }
+      </button>
     </div>
+    } @else {
+    <button type="submit" class="fit" [disabled]="form.invalid || sendingFlag()" [class.spinner]="sendingFlag()">
+      @if (!sendingFlag()){
+      <p>Publicar</p>
+      }
+    </button>
+    }
   </form>
 </section>
