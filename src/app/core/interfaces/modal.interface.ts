@@ -1,4 +1,4 @@
-import { ImageInterface } from './http.interface'
+import type { ImageInterface } from './http.interface'
 
 export interface ModalInterface {
   title: string

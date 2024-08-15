@@ -1,28 +1,28 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { HttpResponse, WindowsInterface } from 'src/app/interfaces/http.interface'
-import { IconifyComponent } from 'src/app/components/iconify/iconify.component'
-import { AngularSvgIconModule } from 'angular-svg-icon'
-import { ModalService } from 'src/app/services/modal.service'
 import { ErrorMock, ErrorOpenMock, backupMock, confirmCancelMock, confirmDeleteMock, confirmUpdateMock, copyMock, windowFolderMock, windowUploadedMock } from 'src/app/mocks/modals.mock'
-import { ModalInterface } from 'src/app/interfaces/modal.interface'
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
+import type { HttpResponse, WindowsInterface } from 'src/app/core/interfaces/http.interface'
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core'
+import { IconifyComponent } from 'src/app/components/iconify/iconify.component'
+import type { ModalInterface } from 'src/app/core/interfaces/modal.interface'
+import { ModalService } from 'src/app/core/services/modal.service'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { AngularSvgIconModule } from 'angular-svg-icon'
+import { CommonModule } from '@angular/common'
 import { saveAs } from 'file-saver'
 @Component({
   selector: 'app-windows',
   standalone: true,
   imports: [CommonModule, FormsModule, IconifyComponent, AngularSvgIconModule, ReactiveFormsModule],
   templateUrl: './windows.component.html',
-  styleUrls: ['./windows.component.scss']
+  styleUrl: './windows.component.scss'
 })
 export class WindowsComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef
   @ViewChild('editor') editor!: ElementRef
 
-  private readonly Builder = inject(FormBuilder)
-  private readonly Http = inject(HttpClient)
-  private Modal = inject(ModalService)
+  private readonly modalService = inject(ModalService)
+  private readonly formBuilder = inject(FormBuilder)
+  private readonly http = inject(HttpClient)
 
   path: string[] = []
   folders = []
@@ -35,11 +35,11 @@ export class WindowsComponent implements OnInit {
   fileName: string | any = null
   fileData: string | any = null
 
-  folderForm = this.Builder.group({
+  folderForm = this.formBuilder.group({
     folderName: new FormControl(null, [Validators.required])
   })
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getPath()
   }
 
@@ -70,8 +70,8 @@ export class WindowsComponent implements OnInit {
       this.editorData = null
       this.openEditor = false
     }
-    this.Modal.setData = confirmModal
-    this.Modal.setState = true
+    this.modalService.setData = confirmModal
+    this.modalService.setState = true
   }
 
   upload() {
@@ -92,8 +92,8 @@ export class WindowsComponent implements OnInit {
     confirmModal.buttonSecondary!.action = () => {
       this.updateText()
     }
-    this.Modal.setData = confirmModal
-    this.Modal.setState = true
+    this.modalService.setData = confirmModal
+    this.modalService.setState = true
   }
 
   cancelUpload() {
@@ -105,7 +105,7 @@ export class WindowsComponent implements OnInit {
     if (this.path.length === 0) route = ''
     else if (this.path.length === 1) route = this.path[0]
     else this.path.forEach((item) => (route += `/${item}`))
-    this.Http.get<HttpResponse<WindowsInterface>>(`/api/admin/windows?path=${route}`).subscribe({
+    this.http.get<HttpResponse<WindowsInterface>>(`/api/admin/windows?path=${route}`).subscribe({
       next: (res) => {
         if (res.data) {
           this.folders = res.data.folders
@@ -116,8 +116,8 @@ export class WindowsComponent implements OnInit {
         }
       },
       error: () => {
-        this.Modal.setData = copyMock(ErrorMock)
-        this.Modal.setState = true
+        this.modalService.setData = copyMock(ErrorMock)
+        this.modalService.setState = true
       }
     })
   }
@@ -128,7 +128,7 @@ export class WindowsComponent implements OnInit {
     else if (this.path.length === 1) route = this.path[0]
     else this.path.forEach((item) => (route += `/${item}`))
     route += `/${fileName}`
-    this.Http.get<HttpResponse<string>>(`/api/admin/windows/read_file?path=${route}`).subscribe({
+    this.http.get<HttpResponse<string>>(`/api/admin/windows/read_file?path=${route}`).subscribe({
       next: (res) => {
         if (res.status === 'OK') {
           this.openEditor = true
@@ -137,13 +137,13 @@ export class WindowsComponent implements OnInit {
             this.path.push(fileName as string)
           }, 100)
         } else {
-          this.Modal.setData = copyMock(ErrorOpenMock)
-          this.Modal.setState = true
+          this.modalService.setData = copyMock(ErrorOpenMock)
+          this.modalService.setState = true
         }
       },
       error: () => {
-        this.Modal.setData = copyMock(ErrorMock)
-        this.Modal.setState = true
+        this.modalService.setData = copyMock(ErrorMock)
+        this.modalService.setState = true
       }
     })
   }
@@ -165,20 +165,20 @@ export class WindowsComponent implements OnInit {
     const newPath = {
       path: route
     }
-    this.Http.post<HttpResponse<any>>('/api/admin/windows/create_folder', newPath).subscribe({
+    this.http.post<HttpResponse<any>>('/api/admin/windows/create_folder', newPath).subscribe({
       next: (res) => {
         if (res.status === 'OK') {
-          this.Modal.setData = copyMock(windowFolderMock)
-          this.Modal.setState = true
+          this.modalService.setData = copyMock(windowFolderMock)
+          this.modalService.setState = true
           this.getPath()
         } else {
-          this.Modal.setData = copyMock(ErrorMock)
-          this.Modal.setState = true
+          this.modalService.setData = copyMock(ErrorMock)
+          this.modalService.setState = true
         }
       },
       error: () => {
-        this.Modal.setData = copyMock(ErrorMock)
-        this.Modal.setState = true
+        this.modalService.setData = copyMock(ErrorMock)
+        this.modalService.setState = true
       },
       complete: () => {
         this.newFolder = false
@@ -189,20 +189,19 @@ export class WindowsComponent implements OnInit {
 
   backup() {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
-    this.Http.get<Blob>('/api/admin/windows/backup', { headers, responseType: 'blob' as 'json' }).subscribe({
+    this.http.get<Blob>('/api/admin/windows/backup', { headers, responseType: 'blob' as 'json' }).subscribe({
       next: (res) => {
         const backupModal = copyMock(backupMock)
         backupModal.buttonPrincipal!.action = () => {
           const date = new Date()
           saveAs(res, `backup_${date.getDate()}_${date.getMonth()}_${date.getFullYear()}`)
         }
-        this.Modal.setData = backupModal
-        this.Modal.setState = true
+        this.modalService.setData = backupModal
+        this.modalService.setState = true
       },
-      error: (err) => {
-        console.log(err)
-        this.Modal.setData = copyMock(ErrorMock)
-        this.Modal.setState = true
+      error: () => {
+        this.modalService.setData = copyMock(ErrorMock)
+        this.modalService.setState = true
       }
     })
   }
@@ -217,16 +216,16 @@ export class WindowsComponent implements OnInit {
       const form = new FormData()
       form.append('file', file)
       form.append('route', route)
-      this.Http.post<HttpResponse<string>>('/api/admin/windows/upload_file', form).subscribe({
+      this.http.post<HttpResponse<string>>('/api/admin/windows/upload_file', form).subscribe({
         next: () => {
           this.getPath()
           this.uploadingFile = false
-          this.Modal.setData = copyMock(windowUploadedMock)
-          this.Modal.setState = true
+          this.modalService.setData = copyMock(windowUploadedMock)
+          this.modalService.setState = true
         },
         error: () => {
-          this.Modal.setData = copyMock(ErrorMock)
-          this.Modal.setState = true
+          this.modalService.setData = copyMock(ErrorMock)
+          this.modalService.setState = true
         }
       })
     }
@@ -241,15 +240,15 @@ export class WindowsComponent implements OnInit {
       text: this.editorData,
       route: route
     }
-    this.Http.put<HttpResponse<string>>('api/admin/windows/update_file', form).subscribe({
+    this.http.put<HttpResponse<string>>('api/admin/windows/update_file', form).subscribe({
       next: () => {
-        this.Modal.setData = copyMock(windowUploadedMock)
-        this.Modal.setState = true
+        this.modalService.setData = copyMock(windowUploadedMock)
+        this.modalService.setState = true
         this.openEditor = false
       },
       error: () => {
-        this.Modal.setData = copyMock(ErrorMock)
-        this.Modal.setState = true
+        this.modalService.setData = copyMock(ErrorMock)
+        this.modalService.setState = true
       }
     })
   }
@@ -262,7 +261,7 @@ export class WindowsComponent implements OnInit {
       else if (this.path.length === 1) route = this.path[0]
       else this.path.forEach((item) => (route += `/${item}`))
       if (fileName) route += `/${fileName}`
-      this.Http.delete<HttpResponse<string>>(`/api/admin/windows/delete_file`, { body: { path: route } }).subscribe(() => {
+      this.http.delete<HttpResponse<string>>(`/api/admin/windows/delete_file`, { body: { path: route } }).subscribe(() => {
         if (fileName) this.getPath()
         else {
           this.editorData = ''
@@ -271,8 +270,8 @@ export class WindowsComponent implements OnInit {
         }
       })
     }
-    this.Modal.setData = confirmModal
-    this.Modal.setState = true
+    this.modalService.setData = confirmModal
+    this.modalService.setState = true
   }
 
   deleteFolder(fileName: string | null) {
@@ -283,7 +282,7 @@ export class WindowsComponent implements OnInit {
       else if (this.path.length === 1) route = this.path[0]
       else this.path.forEach((item) => (route += `/${item}`))
       if (fileName) route += `/${fileName}`
-      this.Http.delete<HttpResponse<string>>(`/api/admin/windows/delete_folder`, { body: { path: route } }).subscribe(() => {
+      this.http.delete<HttpResponse<string>>(`/api/admin/windows/delete_folder`, { body: { path: route } }).subscribe(() => {
         if (fileName) this.getPath()
         else {
           this.editorData = ''
@@ -292,8 +291,8 @@ export class WindowsComponent implements OnInit {
         }
       })
     }
-    this.Modal.setData = confirmModal
-    this.Modal.setState = true
+    this.modalService.setData = confirmModal
+    this.modalService.setState = true
   }
 
   clickOut(event: MouseEvent) {

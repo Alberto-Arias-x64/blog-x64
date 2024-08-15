@@ -1,26 +1,26 @@
-import { Component, OnInit, inject } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { HttpClient } from '@angular/common/http'
-import { Router, ActivatedRoute } from '@angular/router'
-import { ModalService } from 'src/app/services/modal.service'
-import { AngularSvgIconModule } from 'angular-svg-icon'
-import { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/interfaces/http.interface'
 import { ErrorMock, confirmMock, copyMock, messageSendMock, postCreatedMock, postUpdatedMock } from 'src/app/mocks/modals.mock'
+import type { CategoriesInterface, HttpResponse, PostInterface } from 'src/app/core/interfaces/http.interface'
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { ModalService } from 'src/app/core/services/modal.service'
+import { Component, OnInit, inject } from '@angular/core'
+import { Router, ActivatedRoute } from '@angular/router'
+import { AngularSvgIconModule } from 'angular-svg-icon'
+import { HttpClient } from '@angular/common/http'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-post',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, AngularSvgIconModule],
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  styleUrl: './post.component.scss'
 })
 export class PostComponent implements OnInit {
-  private readonly Route = inject(ActivatedRoute)
-  private readonly Builder = inject(FormBuilder)
-  private readonly Http = inject(HttpClient)
-  private readonly Router = inject(Router)
-  private Modal = inject(ModalService)
+  private readonly activeRoute = inject(ActivatedRoute)
+  private readonly modalService = inject(ModalService)
+  private readonly formBuilder = inject(FormBuilder)
+  private readonly http = inject(HttpClient)
+  private readonly router = inject(Router)
   private idPost: string | null = null
 
   categoriesList?: CategoriesInterface[] | null
@@ -28,7 +28,7 @@ export class PostComponent implements OnInit {
   sendingFlag = false
   editFlag = false
 
-  form = this.Builder.group({
+  form = this.formBuilder.group({
     title: new FormControl(null, [Validators.required]),
     keywords: new FormControl(null, [Validators.required]),
     category: new FormControl(null, [Validators.required]),
@@ -37,11 +37,11 @@ export class PostComponent implements OnInit {
     document: new FormControl(null, [Validators.required])
   })
 
-  ngOnInit(): void {
-    if (this.Router.url.includes('edit_post')) {
+  ngOnInit() {
+    if (this.router.url.includes('edit_post')) {
       this.editFlag = true
-      const { id } = this.Route.snapshot.params
-      this.Http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
+      const { id } = this.activeRoute.snapshot.params
+      this.http.get<HttpResponse<PostInterface>>(`/api/read_post/${id}`).subscribe({
         next: (response) => {
           this.form.get('title')?.setValue(response.data.title)
           this.form.get('keywords')?.setValue(response.data.keywords)
@@ -54,10 +54,10 @@ export class PostComponent implements OnInit {
           this.form.get('document')?.updateValueAndValidity()
           this.idPost = response.data.id
         },
-        error: () => this.Router.navigate(['/404'])
+        error: () => this.router.navigate(['/404'])
       })
     }
-    this.Http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
+    this.http.get<HttpResponse<CategoriesInterface[] | null>>('/api/categories').subscribe({
       next: (res) => {
         if (res.data.length > 0) this.categoriesList = res.data
       }
@@ -67,47 +67,46 @@ export class PostComponent implements OnInit {
   sendForm(form: FormGroup) {
     if (form.invalid) return
     this.sendingFlag = true
-    this.Modal.setData = copyMock(messageSendMock)
+    this.modalService.setData = copyMock(messageSendMock)
 
     const formData = new FormData()
     Object.entries(form.value).forEach(([clave, valor]: [string, any]) => {
       formData.append(clave, valor)
     })
 
-    if (this.Router.url.includes('edit_post')) {
+    if (this.router.url.includes('edit_post')) {
       formData.append('id', this.idPost as string)
-      this.Http.put<HttpResponse<any>>('/api/admin/update_post', formData).subscribe({
+      this.http.put<HttpResponse<any>>('/api/admin/update_post', formData).subscribe({
         next: (res) => {
           this.sendingFlag = false
           if (res.status === 'OK') {
-            this.Modal.setData = copyMock(postUpdatedMock)
-            this.Modal.setState = true
+            this.modalService.setData = copyMock(postUpdatedMock)
+            this.modalService.setState = true
             form.reset()
-            this.Router.navigate(['/admin/posts'])
+            this.router.navigate(['/admin/posts'])
           }
         },
-        error: (err) => {
+        error: () => {
           this.sendingFlag = false
-          this.Modal.setData = copyMock(ErrorMock)
-          this.Modal.setState = true
+          this.modalService.setData = copyMock(ErrorMock)
+          this.modalService.setState = true
         }
       })
     } else {
-      this.Http.post<HttpResponse<any>>('/api/admin/send_post', formData).subscribe({
+      this.http.post<HttpResponse<any>>('/api/admin/send_post', formData).subscribe({
         next: (res) => {
           this.sendingFlag = false
           if (res.status === 'OK') {
-            this.Modal.setData = copyMock(postCreatedMock)
-            this.Modal.setState = true
+            this.modalService.setData = copyMock(postCreatedMock)
+            this.modalService.setState = true
             form.reset()
-            this.Router.navigate(['/admin/posts'])
+            this.router.navigate(['/admin/posts'])
           }
         },
-        error: (err) => {
+        error: () => {
           this.sendingFlag = false
-          this.Modal.setData = copyMock(ErrorMock)
-          this.Modal.setState = true
-          console.log(err)
+          this.modalService.setData = copyMock(ErrorMock)
+          this.modalService.setState = true
         }
       })
     }
@@ -130,25 +129,21 @@ export class PostComponent implements OnInit {
   deleteBlog() {
     const confirm = copyMock(confirmMock)
     confirm.buttonSecondary.action = () => {
-      this.Http.delete('/api/admin/delete_post', {
-        body: {
-          id: this.idPost
-        }
-      }).subscribe(() => {
-        this.Router.navigate(['/admin/posts'])
+      this.http.delete('/api/admin/delete_post', { body: { id: this.idPost } }).subscribe(() => {
+        this.router.navigate(['/admin/posts'])
       })
     }
-    this.Modal.setData = confirm
-    this.Modal.setState = true
+    this.modalService.setData = confirm
+    this.modalService.setState = true
   }
 
   return() {
     const confirm = copyMock(confirmMock)
     confirm.buttonSecondary.action = () => {
-      this.Router.navigate(['/admin/posts'])
+      this.router.navigate(['/admin/posts'])
     }
-    this.Modal.setData = confirm
-    this.Modal.setState = true
+    this.modalService.setData = confirm
+    this.modalService.setState = true
   }
 
   get title() {

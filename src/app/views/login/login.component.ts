@@ -1,32 +1,31 @@
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { HttpResponse } from 'src/app/interfaces/http.interface'
-import { ModalService } from 'src/app/services/modal.service'
+import type { HttpResponse } from 'src/app/core/interfaces/http.interface'
+import { ModalService } from 'src/app/core/services/modal.service'
+import { BlockIPMock, copyMock } from 'src/app/mocks/modals.mock'
+import { AuthService } from 'src/app/core/services/auth.service'
+import { AngularSvgIconModule } from 'angular-svg-icon'
 import { Component, inject } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { CommonModule } from '@angular/common'
-
-import { BlockIPMock, copyMock } from 'src/app/mocks/modals.mock'
-import { AngularSvgIconModule } from 'angular-svg-icon'
 import { Router } from '@angular/router'
-import { AuthService } from 'src/app/services/auth.service'
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, AngularSvgIconModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  private readonly Builder = inject(FormBuilder)
-  private readonly Http = inject(HttpClient)
-  private readonly Router = inject(Router)
-  private readonly Auth = inject(AuthService)
-  private Modal = inject(ModalService)
+  private readonly modalService = inject(ModalService)
+  private readonly formBuilder = inject(FormBuilder)
+  private readonly authService = inject(AuthService)
+  private readonly http = inject(HttpClient)
+  private readonly router = inject(Router)
 
   sendingFlag = false
 
-  form = this.Builder.group({
+  form = this.formBuilder.group({
     mail: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required])
   })
@@ -36,23 +35,21 @@ export class LoginComponent {
     this.sendingFlag = true
     const modalTemplate = copyMock(BlockIPMock)
     modalTemplate.buttonPrincipal.action = () => {
-      this.Router.navigate(['/'])
+      this.router.navigate(['/'])
     }
-    this.Modal.setData = modalTemplate
-    this.Http.post<HttpResponse<any>>('/api/auth/login', form.value).subscribe({
+    this.modalService.setData = modalTemplate
+    this.http.post<HttpResponse<any>>('/api/auth/login', form.value).subscribe({
       next: (res) => {
         this.sendingFlag = false
         if (res.status === 'OK') {
           form.reset()
-          this.Auth.setToken = res.data.token
-          this.Router.navigate(['admin'])
-        } else {
-          this.Modal.setState = true
-        }
+          this.authService.setToken = res.data.token
+          this.router.navigate(['admin'])
+        } else this.modalService.setState = true
       },
-      error: (err) => {
+      error: () => {
         this.sendingFlag = false
-        this.Modal.setState = true
+        this.modalService.setState = true
       }
     })
   }

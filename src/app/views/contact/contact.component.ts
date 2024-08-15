@@ -1,28 +1,28 @@
-import { Component, inject } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { ReactiveFormsModule, FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
-import { PhoneDirective } from 'src/app/directives/phone.directive'
-import { AngularSvgIconModule } from 'angular-svg-icon'
-import { HttpClient } from '@angular/common/http'
-import { HttpResponse } from 'src/app/interfaces/http.interface'
-import { ModalService } from 'src/app/services/modal.service'
 import { ErrorMock, copyMock, messageSendMock } from 'src/app/mocks/modals.mock'
+import type { HttpResponse } from 'src/app/core/interfaces/http.interface'
+import { PhoneDirective } from 'src/app/core/directives/phone.directive'
+import { ModalService } from 'src/app/core/services/modal.service'
+import { AngularSvgIconModule } from 'angular-svg-icon'
+import { Component, inject } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, PhoneDirective, AngularSvgIconModule],
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-  private readonly Builder = inject(FormBuilder)
-  private readonly Http = inject(HttpClient)
-  private Modal = inject(ModalService)
+  private readonly modalService = inject(ModalService)
+  private readonly formBuilder = inject(FormBuilder)
+  private readonly http = inject(HttpClient)
 
   sendingFlag = false
 
-  form = this.Builder.group({
+  form = this.formBuilder.group({
     name: new FormControl(null, [Validators.required]),
     phone: new FormControl(null, [Validators.required]),
     mail: new FormControl(null, [Validators.required, Validators.email]),
@@ -32,19 +32,19 @@ export class ContactComponent {
   sendForm(form: FormGroup) {
     if (form.invalid) return
     this.sendingFlag = true
-    this.Http.post<HttpResponse<any>>('/api/send_message', form.value).subscribe({
+    this.http.post<HttpResponse<any>>('/api/send_message', form.value).subscribe({
       next: (res) => {
         this.sendingFlag = false
         if (res.status === 'OK') {
-          this.Modal.setData = copyMock(messageSendMock)
-          this.Modal.setState = true
+          this.modalService.setData = copyMock(messageSendMock)
+          this.modalService.setState = true
           form.reset()
         }
       },
       error: () => {
         this.sendingFlag = false
-        this.Modal.setData = copyMock(ErrorMock)
-        this.Modal.setState = true
+        this.modalService.setData = copyMock(ErrorMock)
+        this.modalService.setState = true
       }
     })
   }

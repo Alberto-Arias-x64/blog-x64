@@ -9,7 +9,7 @@ import { RouterOutlet } from '@angular/router'
   standalone: true,
   imports: [CommonModule, HeaderComponent, FooterComponent, RouterOutlet],
   templateUrl: './principal.component.html',
-  styleUrls: ['./principal.component.scss']
+  styleUrl: './principal.component.scss'
 })
 export class PrincipalComponent {
   scrollToTop() {

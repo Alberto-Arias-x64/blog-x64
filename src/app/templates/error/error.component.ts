@@ -1,12 +1,12 @@
-import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RouterModule } from '@angular/router'
+import { RouterLink } from '@angular/router'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-error',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './error.component.html',
-  styleUrls: ['./error.component.scss']
+  styleUrl: './error.component.scss'
 })
 export class ErrorComponent {}

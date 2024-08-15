@@ -1,17 +1,17 @@
-import { NgModule, isDevMode } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import routes from './router'
-
-import { AngularSvgIconModule } from 'angular-svg-icon'
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { TokenInterceptor } from './core/interceptors/token.interceptor'
+import { ModalComponent } from './shared/modal/modal.component'
+import { ServiceWorkerModule } from '@angular/service-worker'
+import { BrowserModule } from '@angular/platform-browser'
+import { AngularSvgIconModule } from 'angular-svg-icon'
+import { NgModule, isDevMode } from '@angular/core'
+import { QuicklinkStrategy } from 'ngx-quicklink'
 import { AppComponent } from './app.component'
 import { RouterModule } from '@angular/router'
-import { QuicklinkStrategy } from 'ngx-quicklink'
 import { MarkdownModule } from 'ngx-markdown'
-import { ModalComponent } from './shared/modal/modal.component'
-import { TokenInterceptor } from './interceptors/token.interceptor'
-import { ServiceWorkerModule } from '@angular/service-worker'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import routes from './router'
+
 @NgModule({
   declarations: [AppComponent],
   bootstrap: [AppComponent],
@@ -24,8 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     RouterModule.forRoot(routes, { preloadingStrategy: QuicklinkStrategy }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],

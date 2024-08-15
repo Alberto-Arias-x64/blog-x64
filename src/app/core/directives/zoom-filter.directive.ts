@@ -5,8 +5,8 @@ import { Directive, ElementRef, HostListener, Renderer2, inject } from '@angular
   standalone: true
 })
 export class ZoomFilterDirective {
-  private elementRef = inject(ElementRef)
-  private renderer = inject(Renderer2)
+  private readonly elementRef = inject(ElementRef)
+  private readonly renderer = inject(Renderer2)
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
@@ -18,12 +18,12 @@ export class ZoomFilterDirective {
     this.zoomOut()
   }
 
-  private zoomIn(): void {
+  private zoomIn() {
     this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'scale(1.1)')
     this.renderer.setStyle(this.elementRef.nativeElement, 'transition', 'transform 0.3s')
   }
 
-  private zoomOut(): void {
+  private zoomOut() {
     this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'scale(1)')
   }
 }

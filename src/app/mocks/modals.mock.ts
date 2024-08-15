@@ -1,4 +1,18 @@
-import { ModalInterface } from '../interfaces/modal.interface'
+import type { ModalInterface } from '../core/interfaces/modal.interface'
+
+/* Util */
+export const cleanMock: ModalInterface = {
+  title: '',
+  description: '',
+  image: {
+    src: '',
+    alt: ''
+  },
+  buttonPrincipal: {
+    text: '',
+    action: null
+  }
+}
 
 /* Info */
 export const messageSendMock: ModalInterface = {

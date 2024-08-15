@@ -1,23 +1,13 @@
-import { Injectable } from '@angular/core'
+import type { ModalInterface } from '../interfaces/modal.interface'
+import { cleanMock, copyMock } from 'src/app/mocks/modals.mock'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { ModalInterface } from '../interfaces/modal.interface'
+import { Injectable } from '@angular/core'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-  private readonly ClearData: ModalInterface = {
-    title: '',
-    description: '',
-    image: {
-      src: '',
-      alt: ''
-    },
-    buttonPrincipal: {
-      text: '',
-      action: () => {}
-    }
-  }
+  private readonly ClearData: ModalInterface = copyMock(cleanMock)
   private ModalState = new BehaviorSubject(false)
   private ModalData = new BehaviorSubject(this.ClearData)
 

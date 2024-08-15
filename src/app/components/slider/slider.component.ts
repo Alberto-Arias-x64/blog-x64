@@ -1,7 +1,7 @@
+import { PostInterface } from 'src/app/core/interfaces/http.interface'
 import { Component, Input, inject } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { AngularSvgIconModule } from 'angular-svg-icon'
-import { PostInterface } from 'src/app/interfaces/http.interface'
+import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router'
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router'
   standalone: true,
   imports: [CommonModule, AngularSvgIconModule],
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  styleUrl: './slider.component.scss'
 })
 export class SliderComponent {
   @Input() list!: PostInterface[]
