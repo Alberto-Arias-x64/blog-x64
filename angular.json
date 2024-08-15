@@ -17,7 +17,7 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:browser-esbuild",
                     "options": {
                         "outputPath": "dist/",
                         "index": "src/index.html",
@@ -83,10 +83,10 @@
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "blog-x64:build:production"
+                          "buildTarget": "blog-x64:build:production"
                         },
                         "development": {
-                            "browserTarget": "blog-x64:build:development"
+                          "buildTarget": "blog-x64:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -94,7 +94,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "blog-x64:build"
+                      "buildTarget": "blog-x64:build"
                     }
                 },
                 "test": {
